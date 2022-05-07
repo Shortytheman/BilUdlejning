@@ -2,13 +2,20 @@ package com.example.biludlejning.repository;
 
 
 import com.example.biludlejning.model.Bil;
+import com.example.biludlejning.utilities.ConnectionManager;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 
 @Repository
 public class BilRepository {
 
+  Connection connection;
+
+  public BilRepository(){
+    connection = ConnectionManager.connectToSql();
+  }
 
   public ArrayList<Bil> visAlleBiler(){
     ArrayList<Bil> biler = new ArrayList<>();
@@ -27,7 +34,7 @@ public class BilRepository {
   }
 
   public void opdaterBil(Bil bil){
-    // DB kald som opdaterer bil fra DB.
+    // DB kald som opdaterer bil i DB. evt. fra udlejet = false, til udlejet = true.
   }
 
 }

@@ -2,14 +2,15 @@ package com.example.biludlejning.model;
 
 public class Bruger {
 
-  String rolle;
   String brugernavn;
+  String rolle;
   String kodeord;
 
-  public Bruger(String rolle, String brugernavn, String kodeord){
+  public Bruger(String brugernavn,String rolle, String kodeord){
 
-  if (!rolle.equalsIgnoreCase("dataregistrering") ||
-      !rolle.equalsIgnoreCase("forretningsudvikler") ||
+  if (!rolle.equalsIgnoreCase("admin") &&
+      !rolle.equalsIgnoreCase("dataregistrering") &&
+      !rolle.equalsIgnoreCase("forretningsudvikler") &&
       !rolle.equalsIgnoreCase("skadeogudbedring")){
     rolle = "ugyldig";
   } else {
@@ -19,4 +20,27 @@ public class Bruger {
   this.kodeord = kodeord;
   }
 
+  public String getRolle() {
+    return rolle;
+  }
+
+  public void setRolle(String rolle) {
+    this.rolle = rolle;
+  }
+
+  public String getBrugernavn() {
+    return brugernavn;
+  }
+
+  public void setBrugernavn(String brugernavn) {
+    this.brugernavn = brugernavn;
+  }
+
+  public String getKodeord() {
+    return kodeord;
+  }
+
+  public void setKodeord(String kodeord) {
+    this.kodeord = kodeord;
+  }
 }

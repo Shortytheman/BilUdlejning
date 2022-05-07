@@ -7,7 +7,7 @@ public class LejeAftale {
 
   private Kunde kunde;
   private Bil bil;
-  private String dato; // måske i formatet ddmmåå (f.eks. 070522)
+  private String dato; // Formatet ddmmåå (f.eks. 070522)
   private int forskudsBetaling;
   private int månedligBetaling;
   private int førsteBetalingsDato;
@@ -21,6 +21,7 @@ public class LejeAftale {
     this.kunde = kunde;
     this.bil = bil;
     //Sørger for at "dato" altid er dagen kontrakten er lavet.
+    // dataformatter fundet her: https://www.javatpoint.com/java-get-current-date
     DateTimeFormatter datoenIdag = DateTimeFormatter.ofPattern("ddMMyy");
     LocalDateTime nu = LocalDateTime.now();
     this.dato = datoenIdag.format(nu);
