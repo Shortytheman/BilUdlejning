@@ -1,7 +1,9 @@
 package com.example.biludlejning.service;
 
 import com.example.biludlejning.repository.BilRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class BilService {
 
   BilRepository bilRepository;
@@ -12,6 +14,8 @@ public class BilService {
   public BilService(BilRepository bilRepository){
     this.bilRepository = bilRepository;
   }
+
+
 
 
 

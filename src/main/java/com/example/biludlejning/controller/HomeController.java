@@ -34,23 +34,15 @@ public class HomeController {
     String fejlmeddelse = "";
     Bruger bruger = brugerservice.findBruger(brugernavn);
     String returnStatement = "";
-
     //Tjekker om brugernavn og kodeord hører sammen, derefter smider den brugeren ind på en side alt efter deres rolle.
     //Session bliver også oprettet med brugeren som logger på.
     if (brugerservice.korrektLogin(brugernavn,kodeord,bruger)){
-     returnStatement = "redirect:/" + bruger.getRolle();
-    httpSession.setAttribute("bruger",bruger);
-    }
+      returnStatement = "redirect:/" + bruger.getRolle();
+      httpSession.setAttribute("bruger",bruger);
+    } else returnStatement = "redirect:/";
     //Hvis brugeren ikke findes, bliver der redirected, og her kan vi tilgå en model attribute "fejlmeddelse" der viser hvorfor.
-    else returnStatement = "redirect:/";
-    if (brugernavn.length() < 1 || kodeord.length() < 1){
-      fejlmeddelse = "Brugernavn eller kodeord er for kort.";
-    }
-    if (!brugerservice.findBruger(brugernavn).getKodeord().equalsIgnoreCase(kodeord)){
-      fejlmeddelse = "Forkert brugernavn og/eller kodeord";
-    }
+    fejlmeddelse = brugerservice.loginFejl(bruger, kodeord);
     model.addAttribute("fejlmeddelse", fejlmeddelse);
-
     return returnStatement;
   }
 }

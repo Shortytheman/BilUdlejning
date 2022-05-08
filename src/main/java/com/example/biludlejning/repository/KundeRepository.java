@@ -73,7 +73,7 @@ public class KundeRepository {
   public void opdaterKunde(Kunde kunde){
     // DB kald som opdaterer kunde i DB. - evetuelt opdaterer rolle eller kode.
     try {
-      String query = "UPDATE kunder set navn=?, email=?, adresse=?, postnummer=?, by=? WHERE kunde_id=?";
+      String query = "UPDATE kunder SET navn=?, email=?, adresse=?, postnummer=?, by=? WHERE kunde_id=?";
       PreparedStatement preparedStatement = connection.prepareStatement(query);
       preparedStatement.setString(1, kunde.getNavn());
       preparedStatement.setString(2, kunde.getEmail());
