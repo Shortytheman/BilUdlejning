@@ -35,4 +35,9 @@ public class BrugerService {
     }
     return fejlmeddelse;
   }
+
+  public void opretBruger(Bruger bruger){
+    brugerRepository.opretBruger(bruger);
+  }
+
 }

@@ -17,6 +17,10 @@ public class KundeRepository {
 
   //CRUD!
 
+  public void opretKunde(){
+    //Lav en metode der opretter en kunde!
+  }
+
   public Kunde findKundeMedIt(int id){
     Kunde kunde = null;
     try {

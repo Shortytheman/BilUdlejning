@@ -2,9 +2,9 @@ package com.example.biludlejning.model;
 
 public class Bruger {
 
-  String brugernavn;
-  String rolle;
-  String kodeord;
+  private String brugernavn;
+  private String rolle;
+  private String kodeord;
 
   public Bruger(String brugernavn,String rolle, String kodeord){
 

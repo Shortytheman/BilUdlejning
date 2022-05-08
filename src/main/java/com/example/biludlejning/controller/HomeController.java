@@ -19,12 +19,29 @@ public class HomeController {
   }
 
   @GetMapping("/")
-  public String index() {
+  public String index(HttpSession httpSession, Model model) {
+    model.addAttribute("brugerRolle", httpSession.getAttribute("brugerRolle"));
     return "index";
   }
 
+  @PostMapping("/")
+  public String indexLogin(){
+    return "redirect:/opretbruger";
+  }
+
+  @GetMapping("/opretbruger")
+  public String visBrugerOprettelse(){
+    return "opretbruger";
+  }
+
+  @PostMapping("/opretbruger")
+  public String opretBruger(@RequestParam String brugernavn, @RequestParam String rolle, @RequestParam String kodeord){
+  brugerservice.opretBruger(new Bruger(brugernavn,rolle,kodeord));
+  return "redirect:/login";
+  }
+
   @GetMapping("/login")
-  public String visLogin(HttpSession httpSession) {
+  public String visLogin() {
   return "login";
   }
 
@@ -38,7 +55,8 @@ public class HomeController {
     //Session bliver også oprettet med brugeren som logger på.
     if (brugerservice.korrektLogin(brugernavn,kodeord,bruger)){
       returnStatement = "redirect:/" + bruger.getRolle();
-      httpSession.setAttribute("bruger",bruger);
+      httpSession.setAttribute("brugerRolle",bruger.getRolle());
+      httpSession.setAttribute("brugerNavn", bruger.getBrugernavn());
     } else returnStatement = "redirect:/";
     //Hvis brugeren ikke findes, bliver der redirected, og her kan vi tilgå en model attribute "fejlmeddelse" der viser hvorfor.
     fejlmeddelse = brugerservice.loginFejl(bruger, kodeord);

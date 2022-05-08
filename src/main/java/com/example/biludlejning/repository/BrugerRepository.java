@@ -5,10 +5,7 @@ import com.example.biludlejning.model.Bruger;
 import com.example.biludlejning.utilities.ConnectionManager;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 @Repository
@@ -20,7 +17,18 @@ public class BrugerRepository {
     connection = ConnectionManager.connectToSql();
   }
 
-  //CRUD!!
+  public void opretBruger(Bruger bruger){
+    try {
+      String query = "INSERT INTO brugere(brugernavn, rolle, kodeord) values (?,?,?)";
+      PreparedStatement preparedStatement = connection.prepareStatement(query);
+      preparedStatement.setString(1, bruger.getBrugernavn());
+      preparedStatement.setString(2, bruger.getRolle());
+      preparedStatement.setString(3, bruger.getKodeord());
+      preparedStatement.executeUpdate();
+    } catch (SQLException e){
+      System.out.println("Fejl ved oprettelse af bruger" + e);
+    }
+  }
 
   public Bruger findBruger(String brugerNavn){
     Bruger bruger = null;

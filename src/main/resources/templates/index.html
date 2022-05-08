@@ -6,5 +6,31 @@
 </head>
 <body>
 
+<div th:switch="${brugerRolle}">
+    <div th:case="'admin'">
+        Hvis man er logget ind som admin
+    </div>
+    <div th:case="'dataregistrering'">
+        Hvis man er logget ind som dataregistrering
+    </div>
+    <div th:case="'forretningsudvikler'">
+        Hvis man er logget ind som forretningsudvikler
+    </div>
+    <div th:case="'skadeogudbedring'">
+        Hvis man er logget ind som skadeogudbedring
+    </div>
+    <div th:case="null" >
+        Hvis man ikke er logget ind
+
+        <form method="post">
+            <div>
+                                    <h3 class="mb-5">Log på</h3>
+                                    <button class="btn btn-primary btn-lg btn-block" type="submit">Log på</button>
+                                    <hr class="my-4">
+            </div>
+        </form>
+    </div>
+</div>
+
 </body>
 </html>
