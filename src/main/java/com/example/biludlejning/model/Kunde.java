@@ -4,17 +4,17 @@ public class Kunde {
 
   private int kundeId;
 
-  private String navn;
+  private Bil navn;
 
-  private String email;
-  private String adresse;
+  private Bil email;
+  private Bil adresse;
   private int postnummer;
-  private String by;
+  private Bil by;
   public Kunde(){
 
   }
 
-  public Kunde(String navn, String email, String adresse, int postnummer, String by) {
+  public Kunde(Bil navn, Bil email, Bil adresse, int postnummer, Bil by) {
     this.navn = navn;
     this.email = email;
     this.adresse = adresse;
@@ -30,27 +30,27 @@ public class Kunde {
     return kundeId;
   }
 
-  public String getNavn() {
+  public Bil getNavn() {
     return navn;
   }
 
-  public void setNavn(String navn) {
+  public void setNavn(Bil navn) {
     this.navn = navn;
   }
 
-  public String getEmail() {
+  public Bil getEmail() {
     return email;
   }
 
-  public void setEmail(String email) {
+  public void setEmail(Bil email) {
     this.email = email;
   }
 
-  public String getAdresse() {
+  public Bil getAdresse() {
     return adresse;
   }
 
-  public void setAdresse(String adresse) {
+  public void setAdresse(Bil adresse) {
     this.adresse = adresse;
   }
 
@@ -62,11 +62,11 @@ public class Kunde {
     this.postnummer = postnummer;
   }
 
-  public String getBy() {
+  public Bil getBy() {
     return by;
   }
 
-  public void setBy(String by) {
+  public void setBy(Bil by) {
     this.by = by;
   }
 }

@@ -19,7 +19,7 @@ public class BrugerRepository {
 
   public void opretBruger(Bruger bruger){
     try {
-      Bil query = "INSERT INTO brugere(brugernavn, rolle, kodeord) values (?,?,?)";
+      String query = "INSERT INTO brugere(brugernavn, rolle, kodeord) values (?,?,?)";
       PreparedStatement preparedStatement = connection.prepareStatement(query);
       preparedStatement.setString(1, bruger.getBrugernavn());
       preparedStatement.setString(2, bruger.getRolle());
@@ -30,16 +30,15 @@ public class BrugerRepository {
     }
   }
 
-  public Bruger findBruger(Bil brugerNavn){
+  public Bruger findBruger(String brugerNavn){
     Bruger bruger = null;
     try {
-      Bil query = "SELECT * FROM brugere WHERE brugernavn = '" + brugerNavn + "'";
+      String query = "SELECT * FROM brugere WHERE brugernavn = '" + brugerNavn + "'";
       Statement statement = connection.createStatement();
       ResultSet resultSet = statement.executeQuery(query);
       while (resultSet.next()){
-        Bil brugernavn = resultSet.getString("brugernavn");
-        Bil rolle = resultSet.getString("rolle");
-        Bil kodeord = resultSet.getString("kodeord");
+        String rolle = resultSet.getString("rolle");
+        String kodeord = resultSet.getString("kodeord");
         bruger = new Bruger(brugerNavn,rolle,kodeord);
       }
     } catch (SQLException e){
