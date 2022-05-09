@@ -6,7 +6,7 @@ public class Bruger {
   private String rolle;
   private String kodeord;
 
-  public Bruger(String brugernavn,String rolle, String kodeord){
+  public Bruger(String brugernavn, String rolle, String kodeord){
 
   if (!rolle.equalsIgnoreCase("admin") &&
       !rolle.equalsIgnoreCase("dataregistrering") &&

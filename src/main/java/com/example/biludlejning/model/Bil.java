@@ -1,6 +1,6 @@
 package com.example.biludlejning.model;
 
-public class String {
+public class Bil {
 
   private int vognnummer;
   private int stelnummer;
@@ -14,12 +14,12 @@ public class String {
   private java.lang.String udlejningsdato;
   private boolean erDS;
 
-  public String(){
+  public Bil(){
 
   }
 
-  public String(int vognnummer, int stelnummer, java.lang.String mærke, java.lang.String model, java.lang.String udstyrsNiveau, int stålpris,
-                int regAfgift, int co2Udledning, boolean udlejet, java.lang.String udlejningsdato, boolean erDS) {
+  public Bil(int vognnummer, int stelnummer, java.lang.String mærke, java.lang.String model, java.lang.String udstyrsNiveau, int stålpris,
+             int regAfgift, int co2Udledning, boolean udlejet, java.lang.String udlejningsdato, boolean erDS) {
     this.vognnummer = vognnummer;
     this.stelnummer = stelnummer;
     this.mærke = mærke;
