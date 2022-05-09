@@ -21,7 +21,7 @@ public class KundeRepository {
     //Lav en metode der opretter en kunde!
   }
 
-  public Kunde findKundeMedIt(int id){
+  public Kunde findKundeMedId(int id){
     Kunde kunde = null;
     try {
       String query = "SELECT * FROM kunder WHERE kunde_id = " + id;
