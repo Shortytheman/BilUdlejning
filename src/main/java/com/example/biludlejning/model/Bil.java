@@ -4,22 +4,22 @@ public class Bil {
 
   private int vognnummer;
   private int stelnummer;
-  private java.lang.String mærke;
-  private java.lang.String model;
-  private java.lang.String udstyrsNiveau;
+  private String mærke;
+  private String model;
+  private String udstyrsNiveau;
   private int stålpris;
   private int regAfgift;
   private int co2Udledning;
   private boolean udlejet;
-  private java.lang.String udlejningsdato;
+  private String udlejningsdato;
   private boolean erDS;
 
   public Bil(){
 
   }
 
-  public Bil(int vognnummer, int stelnummer, java.lang.String mærke, java.lang.String model, java.lang.String udstyrsNiveau, int stålpris,
-             int regAfgift, int co2Udledning, boolean udlejet, java.lang.String udlejningsdato, boolean erDS) {
+  public Bil(int vognnummer, int stelnummer, String mærke, String model, String udstyrsNiveau, int stålpris,
+             int regAfgift, int co2Udledning, boolean udlejet, String udlejningsdato, boolean erDS) {
     this.vognnummer = vognnummer;
     this.stelnummer = stelnummer;
     this.mærke = mærke;
@@ -53,23 +53,23 @@ public class Bil {
     return mærke;
   }
 
-  public void setMærke(java.lang.String mærke) {
+  public void setMærke(String mærke) {
     this.mærke = mærke;
   }
 
-  public java.lang.String getModel() {
+  public String getModel() {
     return model;
   }
 
-  public void setModel(java.lang.String model) {
+  public void setModel(String model) {
     this.model = model;
   }
 
-  public java.lang.String getUdstyrsNiveau() {
+  public String getUdstyrsNiveau() {
     return udstyrsNiveau;
   }
 
-  public void setUdstyrsNiveau(java.lang.String udstyrsNiveau) {
+  public void setUdstyrsNiveau(String udstyrsNiveau) {
     this.udstyrsNiveau = udstyrsNiveau;
   }
 
@@ -105,11 +105,11 @@ public class Bil {
     this.udlejet = udlejet;
   }
 
-  public java.lang.String getUdlejningsdato() {
+  public String getUdlejningsdato() {
     return udlejningsdato;
   }
 
-  public void setUdlejningsdato(java.lang.String udlejningsdato) {
+  public void setUdlejningsdatoString (String udlejningsdato) {
     this.udlejningsdato = udlejningsdato;
   }
 
