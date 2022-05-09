@@ -3,12 +3,13 @@ package com.example.biludlejning.model;
 public class Kunde {
 
   private int kundeId;
+
   private String navn;
+
   private String email;
   private String adresse;
   private int postnummer;
   private String by;
-
   public Kunde(){
 
   }
@@ -19,6 +20,10 @@ public class Kunde {
     this.adresse = adresse;
     this.postnummer = postnummer;
     this.by = by;
+  }
+
+  public void setKundeId(int kundeId) {
+    this.kundeId = kundeId;
   }
 
   public int getKundeId() {

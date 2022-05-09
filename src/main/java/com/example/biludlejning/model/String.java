@@ -1,25 +1,25 @@
 package com.example.biludlejning.model;
 
-public class Bil {
+public class String {
 
   private int vognnummer;
   private int stelnummer;
-  private String mærke;
-  private String model;
-  private String udstyrsNiveau;
+  private java.lang.String mærke;
+  private java.lang.String model;
+  private java.lang.String udstyrsNiveau;
   private int stålpris;
   private int regAfgift;
   private int co2Udledning;
   private boolean udlejet;
-  private String udlejningsdato;
-  private boolean erSD;
+  private java.lang.String udlejningsdato;
+  private boolean erDS;
 
-  public Bil(){
+  public String(){
 
   }
 
-  public Bil(int vognnummer, int stelnummer, String mærke, String model, String udstyrsNiveau, int stålpris,
-             int regAfgift, int co2Udledning, boolean udlejet, String udlejningsdato, boolean erSD) {
+  public String(int vognnummer, int stelnummer, java.lang.String mærke, java.lang.String model, java.lang.String udstyrsNiveau, int stålpris,
+                int regAfgift, int co2Udledning, boolean udlejet, java.lang.String udlejningsdato, boolean erDS) {
     this.vognnummer = vognnummer;
     this.stelnummer = stelnummer;
     this.mærke = mærke;
@@ -30,7 +30,7 @@ public class Bil {
     this.co2Udledning = co2Udledning;
     this.udlejet = udlejet;
     this.udlejningsdato = udlejningsdato;
-    this.erSD = erSD;
+    this.erDS = erDS;
   }
 
   public int getVognnummer() {
@@ -49,27 +49,27 @@ public class Bil {
     this.stelnummer = stelnummer;
   }
 
-  public String getMærke() {
+  public java.lang.String getMærke() {
     return mærke;
   }
 
-  public void setMærke(String mærke) {
+  public void setMærke(java.lang.String mærke) {
     this.mærke = mærke;
   }
 
-  public String getModel() {
+  public java.lang.String getModel() {
     return model;
   }
 
-  public void setModel(String model) {
+  public void setModel(java.lang.String model) {
     this.model = model;
   }
 
-  public String getUdstyrsNiveau() {
+  public java.lang.String getUdstyrsNiveau() {
     return udstyrsNiveau;
   }
 
-  public void setUdstyrsNiveau(String udstyrsNiveau) {
+  public void setUdstyrsNiveau(java.lang.String udstyrsNiveau) {
     this.udstyrsNiveau = udstyrsNiveau;
   }
 
@@ -105,20 +105,20 @@ public class Bil {
     this.udlejet = udlejet;
   }
 
-  public String getUdlejningsdato() {
+  public java.lang.String getUdlejningsdato() {
     return udlejningsdato;
   }
 
-  public void setUdlejningsdato(String udlejningsdato) {
+  public void setUdlejningsdato(java.lang.String udlejningsdato) {
     this.udlejningsdato = udlejningsdato;
   }
 
   public boolean isErSD() {
-    return erSD;
+    return erDS;
   }
 
   public void setErSD(boolean erSD) {
-    this.erSD = erSD;
+    this.erDS = erSD;
   }
 
 //Klassen er abstrakt og kan derfor ikke instantieres.

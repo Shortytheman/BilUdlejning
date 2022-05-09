@@ -1,6 +1,6 @@
 package com.example.biludlejning.repository;
 
-import com.example.biludlejning.model.Bil;
+import com.example.biludlejning.model.String;
 import com.example.biludlejning.model.Bruger;
 import com.example.biludlejning.utilities.ConnectionManager;
 import org.springframework.stereotype.Repository;
