@@ -8,7 +8,7 @@ public class LejeAftale {
   private int lejeaftaleID;
   private int kundeID;
   private int vognnummer;
-  private java.lang.String dato; // Formatet ddmmåå (f.eks. 070522)
+  private String dato; // Formatet ddmmåå (f.eks. 070522)
   private double forskudsBetaling;
   private double månedligBetaling;
   private int førsteBetalingsDato; // JOS LAV METODE TIL AT SÆTTE DEN TIL NÆSTKOMMENDE 1. DATO
@@ -26,7 +26,6 @@ public class LejeAftale {
     DateTimeFormatter datoenIdag = DateTimeFormatter.ofPattern("ddMMyy");
     LocalDateTime nu = LocalDateTime.now();
     this.dato = datoenIdag.format(nu);
-
     this.forskudsBetaling = forskudsBetaling;
     this.månedligBetaling = månedligBetaling;
     this.førsteBetalingsDato = førsteBetalingsDato;

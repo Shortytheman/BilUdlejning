@@ -22,15 +22,13 @@
                                 <input type="text" id="brugernavn" name="brugernavn" class="form-control form-control-lg" placeholder="Brugernavn"/>
                             </div>
                             <div class="form-outline mb-4">
-                                <input type="text" id="kodeord" name="kodeord" class="form-control form-control-lg" placeholder="Kodeord" />
+                                <input type="password" id="kodeord" name="kodeord" class="form-control form-control-lg" placeholder="Kodeord" />
                             </div>
                             <div>
-                                <button class="btn btn-primary btn-lg btn-block" onclick="myFynction()" type="submit">Log på</button>
-                                <script th:inline="javascript" >
-                                    function myFynction() {
-                                        alert("lklkl"/*[[${session.fejlmeddelse}]]*/)
-                                    }
-                                </script>
+                                <a th:text="${session.fejlmeddelse}" ></a>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary btn-lg btn-block" type="submit" >Log på</button>
                             </div>
                         </div>
                     </div>

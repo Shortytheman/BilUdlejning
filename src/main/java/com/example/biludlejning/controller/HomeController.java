@@ -5,7 +5,6 @@ import com.example.biludlejning.service.BrugerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpSession;
@@ -44,7 +43,7 @@ public class HomeController {
 
   @GetMapping("/login")
   public String visLogin(HttpSession httpSession) {
-    httpSession.setAttribute("fejlmeddelse", fejlmeddelse);
+    httpSession.getAttribute("fejlmeddelse");
     return "login";
   }
 
@@ -61,8 +60,7 @@ public class HomeController {
       httpSession.setAttribute("brugerNavn", bruger.getBrugernavn());
     } else returnStatement = "redirect:/login";
     //Hvis brugeren ikke findes, bliver der redirected, og her kan vi tilgå en model attribute "fejlmeddelse" der viser hvorfor.
-    fejlmeddelse = brugerservice.loginFejl(bruger, kodeord);
+    httpSession.setAttribute("fejlmeddelse",fejlmeddelse = brugerservice.loginFejl(bruger, kodeord));
     return returnStatement;
   }
 }
-
