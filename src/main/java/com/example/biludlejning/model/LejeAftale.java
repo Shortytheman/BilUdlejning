@@ -25,6 +25,7 @@ public class LejeAftale {
     DateTimeFormatter datoenIdag = DateTimeFormatter.ofPattern("ddMMyy");
     LocalDateTime nu = LocalDateTime.now();
     this.dato = datoenIdag.format(nu);
+
     this.forskudsBetaling = forskudsBetaling;
     this.månedligBetaling = månedligBetaling;
     this.førsteBetalingsDato = førsteBetalingsDato;

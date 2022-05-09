@@ -32,7 +32,7 @@ public class BrugerService {
       fejlmeddelse = "Brugernavn eller kodeord er for kort.";
     } else if (!findBruger(bruger.getBrugernavn()).getKodeord().equalsIgnoreCase(kodeord)){
       fejlmeddelse = "Forkert brugernavn og/eller kodeord";
-    }
+    } else fejlmeddelse = "Du er nu logget ind";
     return fejlmeddelse;
   }
 

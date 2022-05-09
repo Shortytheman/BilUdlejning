@@ -10,7 +10,7 @@
 
 <div>
     <!-- Hentet fra: https://mdbootstrap.com/docs/standard/extended/login/ -->
-    <form method="post">
+    <form method="post" >
     <section class="vh-100" style="background-color: #508bfc;">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -19,13 +19,19 @@
                         <div class="card-body p-5 text-center">
                             <h3 class="mb-5">Log på</h3>
                             <div class="form-outline mb-4">
-                                <input type="brugernavn" id="brugernavn" class="form-control form-control-lg" placeholder="Brugernavn"/>
+                                <input type="text" id="brugernavn" name="brugernavn" class="form-control form-control-lg" placeholder="Brugernavn"/>
                             </div>
                             <div class="form-outline mb-4">
-                                <input type="kodeord" id="kodeord" class="form-control form-control-lg" placeholder="Kodeord" />
+                                <input type="text" id="kodeord" name="kodeord" class="form-control form-control-lg" placeholder="Kodeord" />
                             </div>
-                            <button class="btn btn-primary btn-lg btn-block" type="submit">Log på</button>
-                            <hr class="my-4">
+                            <div>
+                                <button class="btn btn-primary btn-lg btn-block" onclick="myFynction()" type="submit">Log på</button>
+                                <script th:inline="javascript" >
+                                    function myFynction() {
+                                        alert("lklkl"/*[[${session.fejlmeddelse}]]*/)
+                                    }
+                                </script>
+                            </div>
                         </div>
                     </div>
                 </div>

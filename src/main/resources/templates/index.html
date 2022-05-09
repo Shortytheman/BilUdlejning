@@ -19,17 +19,25 @@
     <div th:case="'skadeogudbedring'">
         Hvis man er logget ind som skadeogudbedring
     </div>
+
     <div th:case="null" >
         Hvis man ikke er logget ind
-
         <form method="post">
             <div>
-                                    <h3 class="mb-5">Log på</h3>
-                                    <button class="btn btn-primary btn-lg btn-block" type="submit">Log på</button>
-                                    <hr class="my-4">
+                <h3 class="mb-5">Opret bruger</h3>
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Opret bruger</button>
+                <hr class="my-4">
+            </div>
+        </form>
+        <form action="login">
+            <div>
+                <h3 class="mb-5">Log på</h3>
+                <button class="btn btn-primary btn-lg btn-block">Log på</button>
+                <hr class="my-4">
             </div>
         </form>
     </div>
+
 </div>
 
 </body>

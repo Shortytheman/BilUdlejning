@@ -5,6 +5,7 @@ import com.example.biludlejning.service.BrugerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpSession;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpSession;
 public class HomeController {
 
   BrugerService brugerservice;
+  String fejlmeddelse = "";
 
   public HomeController(BrugerService brugerservice){
     this.brugerservice = brugerservice;
@@ -25,7 +27,7 @@ public class HomeController {
   }
 
   @PostMapping("/")
-  public String indexLogin(){
+  public String indexOpretBruger(){
     return "redirect:/opretbruger";
   }
 
@@ -41,26 +43,25 @@ public class HomeController {
   }
 
   @GetMapping("/login")
-  public String visLogin() {
-  return "login";
+  public String visLogin(HttpSession httpSession) {
+    httpSession.setAttribute("fejlmeddelse", fejlmeddelse);
+    return "login";
   }
 
   @PostMapping("/login")
   public String login(@RequestParam String brugernavn, @RequestParam String kodeord,
-                      HttpSession httpSession, Model model){
-    String fejlmeddelse = "";
+                      HttpSession httpSession){
     Bruger bruger = brugerservice.findBruger(brugernavn);
     String returnStatement = "";
-    //Tjekker om brugernavn og kodeord hører sammen, derefter smider den brugeren ind på en side alt efter deres rolle.
+    //Tjekker om brugernavn og kodeord hører sammen, derefter smider den brugeren ind på indexsiden til den tilhørende rolle.
     //Session bliver også oprettet med brugeren som logger på.
     if (brugerservice.korrektLogin(brugernavn,kodeord,bruger)){
-      returnStatement = "redirect:/" + bruger.getRolle();
+      returnStatement = "redirect:/";
       httpSession.setAttribute("brugerRolle",bruger.getRolle());
       httpSession.setAttribute("brugerNavn", bruger.getBrugernavn());
-    } else returnStatement = "redirect:/";
+    } else returnStatement = "redirect:/login";
     //Hvis brugeren ikke findes, bliver der redirected, og her kan vi tilgå en model attribute "fejlmeddelse" der viser hvorfor.
     fejlmeddelse = brugerservice.loginFejl(bruger, kodeord);
-    model.addAttribute("fejlmeddelse", fejlmeddelse);
     return returnStatement;
   }
 }
