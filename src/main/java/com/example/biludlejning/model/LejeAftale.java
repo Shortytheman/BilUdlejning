@@ -5,21 +5,22 @@ import java.time.format.DateTimeFormatter;
 
 public class LejeAftale {
 
-  private Kunde kunde;
-  private Bil bil;
-  private String dato; // Formatet ddmmåå (f.eks. 070522)
-  private int forskudsBetaling;
-  private int månedligBetaling;
-  private int førsteBetalingsDato;
+  private int lejeaftaleID;
+  private int kundeID;
+  private int vognnummer;
+  private java.lang.String dato; // Formatet ddmmåå (f.eks. 070522)
+  private double forskudsBetaling;
+  private double månedligBetaling;
+  private int førsteBetalingsDato; // JOS LAV METODE TIL AT SÆTTE DEN TIL NÆSTKOMMENDE 1. DATO
   private int antalBetalinger;
-  private int totalAfbetaling;
-  private int betalesIalt;
+  private double totalAfbetaling;
+  private double betalesIalt;
 
 
-  public LejeAftale(Kunde kunde, Bil bil, int forskudsBetaling, int månedligBetaling, int førsteBetalingsDato,
+  public LejeAftale(int kundeID, int vognnummer, int forskudsBetaling, int månedligBetaling, int førsteBetalingsDato,
                     int antalBetalinger){
-    this.kunde = kunde;
-    this.bil = bil;
+    this.kundeID = kundeID;
+    this.vognnummer = vognnummer;
     //Sørger for at "dato" altid er dagen kontrakten er lavet.
     // dataformatter fundet her: https://www.javatpoint.com/java-get-current-date
     DateTimeFormatter datoenIdag = DateTimeFormatter.ofPattern("ddMMyy");
@@ -33,43 +34,51 @@ public class LejeAftale {
     this.betalesIalt = (antalBetalinger * månedligBetaling) + forskudsBetaling;
   }
 
-  public Kunde getKunde() {
-    return kunde;
+  public int getLejeaftaleID() {
+    return lejeaftaleID;
   }
 
-  public void setKunde(Kunde kunde) {
-    this.kunde = kunde;
+  public void setLejeaftaleID(int lejeaftaleID) {
+    this.lejeaftaleID = lejeaftaleID;
   }
 
-  public Bil getBil() {
-    return bil;
+  public int getKunde() {
+    return kundeID;
   }
 
-  public void setBil(Bil bil) {
-    this.bil = bil;
+  public void setKunde(int kundeID) {
+    this.kundeID = kundeID;
   }
 
-  public String getDato() {
+  public int getVognnummer() {
+    return vognnummer;
+  }
+
+  public void setVognnummer(int vognnummer) {
+    this.vognnummer = vognnummer;
+  }
+
+  public java.lang.String getDato() {
     return dato;
   }
 
-  public void setDato(String dato) {
+  public void setDato(java.lang.String dato) {
     this.dato = dato;
   }
 
-  public int getForskudsBetaling() {
+  public double getForskudsBetaling() {
     return forskudsBetaling;
   }
 
-  public void setForskudsBetaling(int forskudsBetaling) {
+  public void setForskudsBetaling(double forskudsBetaling) {
     this.forskudsBetaling = forskudsBetaling;
   }
 
-  public int getMånedligBetaling() {
+  public double getMånedligBetaling() {
     return månedligBetaling;
   }
 
-  public void setMånedligBetaling(int månedligBetaling) {
+  public void setMånedligBetaling(double månedligBetaling) {
     this.månedligBetaling = månedligBetaling;
   }
 
@@ -89,19 +98,19 @@ public class LejeAftale {
     this.antalBetalinger = antalBetalinger;
   }
 
-  public int getTotalAfbetaling() {
+  public double getTotalAfbetaling() {
     return totalAfbetaling;
   }
 
-  public void setTotalAfbetaling(int totalAfbetaling) {
+  public void setTotalAfbetaling(double totalAfbetaling) {
     this.totalAfbetaling = totalAfbetaling;
   }
 
-  public int getBetalesIalt() {
+  public double getBetalesIalt() {
     return betalesIalt;
   }
 
-  public void setBetalesIalt(int betalesIalt) {
+  public void setBetalesIalt(double betalesIalt) {
     this.betalesIalt = betalesIalt;
   }
 

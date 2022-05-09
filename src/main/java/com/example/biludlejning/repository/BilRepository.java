@@ -1,7 +1,7 @@
 package com.example.biludlejning.repository;
 
 
-import com.example.biludlejning.model.Bil;
+import com.example.biludlejning.model.String;
 import com.example.biludlejning.utilities.ConnectionManager;
 import org.springframework.stereotype.Repository;
 
@@ -17,14 +17,14 @@ public class BilRepository {
     connection = ConnectionManager.connectToSql();
   }
 
-  public ArrayList<Bil> visAlleBiler(){
-    ArrayList<Bil> biler = new ArrayList<>();
+  public ArrayList<String> visAlleBiler(){
+    ArrayList<String> biler = new ArrayList<>();
     // Her skal metoden til at vise alle biler være.
     return biler;
   }
 
-  public Bil findBilmedStelnummer(int stelnummer){
-    Bil bil = new Bil();
+  public String findBilmedStelnummer(int stelnummer){
+    String bil = new String();
     //DB kald som returnerer bil med bestemt stelnummer og returnerer den.
     return bil;
   }
@@ -33,7 +33,7 @@ public class BilRepository {
     // DB kald som sletter bil fra DB.
   }
 
-  public void opdaterBil(Bil bil){
+  public void opdaterBil(String bil){
     // DB kald som opdaterer bil i DB. evt. fra udlejet = false, til udlejet = true.
   }
 
