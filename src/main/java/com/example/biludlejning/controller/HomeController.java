@@ -5,6 +5,7 @@ import com.example.biludlejning.service.BrugerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,13 +24,15 @@ public class HomeController {
   @GetMapping("/")
   public String index(HttpSession httpSession, Model model) {
     model.addAttribute("brugerRolle", httpSession.getAttribute("brugerRolle"));
+    model.addAttribute("brugere",brugerservice.seBrugere());
     return "index";
   }
 
-  @PostMapping("/")
-  public String indexOpretBruger() {
-    return "redirect:/opretbruger";
-  }
+@GetMapping("/slet/{brugernavn}")
+public String sletBruger(@PathVariable("brugernavn") String brugernavn){
+    brugerservice.sletBruger(brugernavn);
+  return "redirect:/";
+}
 
   @GetMapping("/opretbruger")
   public String visBrugerOprettelse() {
@@ -53,7 +56,7 @@ public class HomeController {
                       HttpSession httpSession) {
     String returnStatement = "redirect:/";
     if (brugernavn.equalsIgnoreCase("admin") && kodeord.equalsIgnoreCase("admin")) {
-      Bruger admin = new Bruger(brugernavn, "admin", kodeord);
+      Bruger admin = new Bruger(brugernavn,"admin", kodeord);
       httpSession.setAttribute("brugerRolle", admin.getRolle());
       httpSession.setAttribute("brugerNavn", admin.getBrugernavn());
     } else {
