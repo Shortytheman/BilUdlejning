@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 @Repository
@@ -34,9 +35,9 @@ public class BilRepository {
             preparedStatement.setString(8, bil.getUdlejningsdato());
             preparedStatement.setBoolean(9, bil.isErDS());
             preparedStatement.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("ERROR 404: "+ e);
+            System.out.println("Fejl i oprettelse af bil: "+ e);
         }
     }
 
@@ -45,7 +46,7 @@ public class BilRepository {
         String query = "SELECT * FROM biler";
 
         try {
-            PreparedStatement preparedStatement = ConnectionManager.connectToSql().prepareStatement(query);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int vognnummer = resultSet.getInt("vognnummer");
@@ -74,9 +75,9 @@ public class BilRepository {
                 bil.setErDS(erDS);
                 biler.add(bil);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("ERROR 404: " + e);
+            System.out.println("Fejl i visning af biler: " + e);
         }
         return biler;
     }
@@ -85,7 +86,7 @@ public class BilRepository {
         String query = "UPDATE biler SET stelnummer=?, mærke=?, model=?, udstyrsniveau=?, stålpris=?, regafgift=?, co2udledning=?, udlejet=?, udlejningsdato=?, erDS=? WHERE vognnummer=?";
 
         try {
-            PreparedStatement preparedStatement = ConnectionManager.connectToSql().prepareStatement(query);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, bil.getStelnummer());
             preparedStatement.setString(2, bil.getMærke());
             preparedStatement.setString(3, bil.getModel());
@@ -98,9 +99,9 @@ public class BilRepository {
             preparedStatement.setBoolean(10, bil.isErDS());
             preparedStatement.setInt(11, bil.getVognnummer());
             preparedStatement.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("ERROR 404: " + e);
+            System.out.println("Fejl i opdatering af bil: " + e);
         }
     }
 
@@ -108,21 +109,21 @@ public class BilRepository {
         String query = "DELETE FROM biler WHERE vognnummer=?";
 
         try {
-            PreparedStatement preparedStatement = ConnectionManager.connectToSql().prepareStatement(query);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, vognnummer);
             preparedStatement.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("ERROR 404: " + e);
+            System.out.println("Fejl i sletning af bil: " + e);
         }
     }
 
     public Bil findBilmedStelnummer(int vognnumer) {
-        Bil bil = new Bil();
+        Bil bil = null;
         String query = "SELECT stelnummer, mærke, model, udstyrsniveau, stålpris, regafgift, co2udledning, udlejet, udlejningsdato, erDS FROM biler WHERE vognnummer= " + vognnumer;
 
         try {
-            PreparedStatement preparedStatement = ConnectionManager.connectToSql().prepareStatement(query);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int vognnummer = resultSet.getInt("vognnummer");
@@ -149,10 +150,11 @@ public class BilRepository {
                 bil.setUdlejet(udlejet);
                 bil.setUdlejningsdato(udlejningsdato);
                 bil.setErDS(erDS);
+
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("ERROR 404: " + e);
+            System.out.println("Bil kunne ikke findes. Prøv igen: " + e);
         }
         return bil;
     }

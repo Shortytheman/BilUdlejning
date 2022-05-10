@@ -35,7 +35,7 @@ public class BrugerRepository {
         String query = "SELECT * FROM brugere";
 
         try {
-            PreparedStatement preparedStatement = ConnectionManager.connectToSql().prepareStatement(query);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 String brugernavn = resultSet.getString("brugernavn");
@@ -46,10 +46,12 @@ public class BrugerRepository {
                 bruger.setBrugernavn(brugernavn);
                 bruger.setRolle(rolle);
                 bruger.setKodeord(kodeord);
+                brugere.add(bruger);
+
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("ERROR 404: " + e);
+            System.out.println("Fejl i visning af alle brugere: " + e);
         }
         return brugere;
     }
@@ -58,15 +60,15 @@ public class BrugerRepository {
         String query = "UPDATE brugere SET brugernavn=?, rolle=?, kodeord=? WHERE brugernavn=?";
 
         try {
-            PreparedStatement preparedStatement = ConnectionManager.connectToSql().prepareStatement(query);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, bruger.getBrugernavn());
             preparedStatement.setString(2, bruger.getRolle());
             preparedStatement.setString(3, bruger.getKodeord());
             preparedStatement.setString(4, bruger.getBrugernavn());
             preparedStatement.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("ERROR 404: " + e);
+            System.out.println("Fejl i opdatering af bruger: " + e);
         }
     }
 
@@ -74,12 +76,12 @@ public class BrugerRepository {
         String query = "DELETE FROM brugere WHERE brugernavn=?";
 
         try {
-            PreparedStatement preparedStatement = ConnectionManager.connectToSql().prepareStatement(query);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, brugernavn);
             preparedStatement.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("ERROR 404: " + e);
+            System.out.println("Fejl i sletning af bruger: " + e);
         }
     }
 
@@ -96,7 +98,7 @@ public class BrugerRepository {
                 bruger = new Bruger(brugerNavn, rolle, kodeord);
             }
         } catch (SQLException e) {
-            System.out.println("Kan ikke finde bruger." + e);
+            System.out.println("Fejl. Kan ikke finde bruger." + e);
         }
         return bruger;
     }

@@ -21,7 +21,7 @@ public class KundeRepository {
         String query = "INSERT INTO kunder(navn, email, adresse, postnummer, by) VALUES (?, ?, ?, ?, ?)";
 
         try {
-            PreparedStatement preparedStatement = ConnectionManager.connectToSql().prepareStatement(query);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, kunde.getNavn());
             preparedStatement.setString(2, kunde.getEmail());
             preparedStatement.setString(3, kunde.getAdresse());
@@ -30,7 +30,7 @@ public class KundeRepository {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("ERROR 404: " + e);
+            System.out.println("Fejl i oprettelse af kunde: " + e);
         }
 
     }
@@ -47,7 +47,14 @@ public class KundeRepository {
                 String adresse = resultSet.getString("adresse");
                 int postnummer = resultSet.getInt("postnummer");
                 String by = resultSet.getString("by");
-                kunder.add(new Kunde(navn, email, adresse, postnummer, by));
+
+                Kunde kunde = new Kunde();
+                kunde.getNavn();
+                kunde.getEmail();
+                kunde.getAdresse();
+                kunde.getPostnummer();
+                kunde.getBy();
+                kunder.add(kunde);
             }
         } catch (SQLException e) {
             System.out.println("Fejl ved visning af alle kunder" + e);
@@ -96,7 +103,14 @@ public class KundeRepository {
                 String adresse = resultSet.getString("adresse");
                 int postnummer = resultSet.getInt("postnummer");
                 String by = resultSet.getString("by");
-                kunde = new Kunde(navn, email, adresse, postnummer, by);
+
+                kunde = new Kunde();
+                kunde.getNavn();
+                kunde.getEmail();
+                kunde.getAdresse();
+                kunde.getPostnummer();
+                kunde.getBy();
+
             }
         } catch (SQLException e) {
             System.out.println("Kan ikke finde kunde." + e);
