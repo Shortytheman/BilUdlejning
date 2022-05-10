@@ -1,6 +1,6 @@
 package com.example.biludlejning.model;
 
-public class Bil {
+public class  Bil {
 
   private int vognnummer;
   private int stelnummer;
