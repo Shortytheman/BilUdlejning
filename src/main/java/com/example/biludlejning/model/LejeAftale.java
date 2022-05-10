@@ -32,6 +32,8 @@ public class LejeAftale {
     this.totalAfbetaling = antalBetalinger * månedligBetaling;
     this.betalesIalt = (antalBetalinger * månedligBetaling) + forskudsBetaling;
   }
+  public LejeAftale() {
+  }
 
   //Sætter første betalingsdato til første dag i næstkommende måned fra dato;
   public String findFørsteBetalingsdato () {
