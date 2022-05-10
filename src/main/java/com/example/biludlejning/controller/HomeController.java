@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 public class HomeController {
 
   BrugerService brugerservice;
-  String fejlmeddelse = "";
+  String fejlmeddelse = "abemand";
 
   public HomeController(BrugerService brugerservice) {
     this.brugerservice = brugerservice;
@@ -77,5 +77,13 @@ public String sletBruger(@PathVariable("brugernavn") String brugernavn){
       httpSession.setAttribute("fejlmeddelse", fejlmeddelse = brugerservice.loginFejl(bruger, kodeord));
     }
     return returnStatement;
+  }
+  @GetMapping("/unlimitedBiltyper")
+  public String unlimitedBiltyper() {
+    return "unlimitedBiltyper";
+  }
+  @GetMapping("/limitedBiltyper")
+  public String limitedBiltyper() {
+    return "limitedBiltyper";
   }
 }

@@ -47,7 +47,17 @@
             Hvis man er logget ind som dataregistrering
         </div>
         <div th:case="'forretningsudvikler'">
-            Hvis man er logget ind som forretningsudvikler
+            <div class="container">
+                <h3>Indenfor hvilken abonnementstype kunne du tænke dig at se biltyper?</h3>
+                <div class="d-grid gap-2">
+                    <a href="/unlimitedBiltyper">
+                    <button class="btn btn-primary" type="button">Unlimited</button>
+                    </a>
+                    <a href="/limitedBiltyper">
+                    <button class="btn btn-primary" type="button">Limited</button>
+                    </a>
+                </div>
+            </div>
         </div>
         <div th:case="'skadeogudbedring'">
             Hvis man er logget ind som skadeogudbedring
