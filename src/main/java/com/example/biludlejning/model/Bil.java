@@ -11,7 +11,7 @@ public class Bil {
   private int regAfgift;
   private int co2Udledning;
   private boolean udlejet;
-  private java.lang.String udlejningsdato;
+  private String udlejningsdato;
   private boolean erDS;
 
   public Bil(){
@@ -113,12 +113,12 @@ public class Bil {
     this.udlejningsdato = udlejningsdato;
   }
 
-  public boolean isErSD() {
+  public boolean isErDS() {
     return erDS;
   }
 
-  public void setErSD(boolean erSD) {
-    this.erDS = erSD;
+  public void setErDS(boolean erDS) {
+    this.erDS = erDS;
   }
 
 //Klassen er abstrakt og kan derfor ikke instantieres.
