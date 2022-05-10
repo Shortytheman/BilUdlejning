@@ -6,18 +6,10 @@ public class Bruger {
   private String rolle;
   private String kodeord;
 
-  public Bruger(String brugernavn, String rolle, String kodeord){
-
-  if (!rolle.equalsIgnoreCase("admin") &&
-      !rolle.equalsIgnoreCase("dataregistrering") &&
-      !rolle.equalsIgnoreCase("forretningsudvikler") &&
-      !rolle.equalsIgnoreCase("skadeogudbedring")){
-    rolle = "ugyldig";
-  } else {
+  public Bruger(String brugernavn, String rolle, String kodeord) {
     this.rolle = rolle;
-  }
-  this.brugernavn = brugernavn;
-  this.kodeord = kodeord;
+    this.brugernavn = brugernavn;
+    this.kodeord = kodeord;
   }
 
   public String getRolle() {
