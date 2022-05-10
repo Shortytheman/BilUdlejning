@@ -4,6 +4,8 @@ import com.example.biludlejning.model.Bruger;
 import com.example.biludlejning.repository.BrugerRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class BrugerService {
 
@@ -42,6 +44,14 @@ public class BrugerService {
 
   public void opretBruger(Bruger bruger){
     brugerRepository.opretBruger(bruger);
+  }
+
+  public ArrayList<Bruger> seBrugere(){
+    return brugerRepository.seBrugere();
+  }
+
+  public void sletBruger(String brugernavn){
+    brugerRepository.sletBruger(brugernavn);
   }
 
 }
