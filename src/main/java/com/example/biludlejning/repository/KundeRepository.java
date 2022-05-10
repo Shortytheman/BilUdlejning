@@ -30,10 +30,10 @@ public class KundeRepository {
       while (resultSet.next()){
         String navn = resultSet.getString("navn");
         String email = resultSet.getString("email");
-        String addresse = resultSet.getString("addresse");
+        String adresse = resultSet.getString("adresse");
         int postnummer = resultSet.getInt("postnummer");
         String by = resultSet.getString("by");
-        kunde = new Kunde(navn,email,addresse,postnummer,by);
+        kunde = new Kunde(navn,email,adresse,postnummer,by);
       }
     } catch (SQLException e){
       System.out.println("Kan ikke finde kunde." + e);
