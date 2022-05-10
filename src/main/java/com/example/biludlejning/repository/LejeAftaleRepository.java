@@ -34,7 +34,7 @@ public class LejeAftaleRepository {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Oprettelse af lejeaftale fejlede: " + e);
+            System.out.println("Fejl i oprettelse af lejeaftale: " + e);
         }
     }
 

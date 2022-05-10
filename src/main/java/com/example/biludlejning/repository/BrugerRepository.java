@@ -33,6 +33,7 @@ public class BrugerRepository {
     public ArrayList<Bruger> seBrugere() {
         ArrayList<Bruger> brugere = new ArrayList<>();
         String query = "SELECT * FROM brugere";
+
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -40,15 +41,17 @@ public class BrugerRepository {
                 String brugernavn = resultSet.getString("brugernavn");
                 String rolle = resultSet.getString("rolle");
                 String kodeord = resultSet.getString("kodeord");
+
                 Bruger bruger = new Bruger();
                 bruger.setBrugernavn(brugernavn);
                 bruger.setRolle(rolle);
                 bruger.setKodeord(kodeord);
                 brugere.add(bruger);
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Fejl ved visning af brugere" + e);
+            System.out.println("Fejl i visning af alle brugere: " + e);
         }
         return brugere;
     }
@@ -65,7 +68,7 @@ public class BrugerRepository {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Fejl i opdatering af bruger" + e);
+            System.out.println("Fejl i opdatering af bruger: " + e);
         }
     }
 
@@ -78,7 +81,7 @@ public class BrugerRepository {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Fejl i sletning af bruger " + e);
+            System.out.println("Fejl i sletning af bruger: " + e);
         }
     }
 
@@ -95,7 +98,7 @@ public class BrugerRepository {
                 bruger = new Bruger(brugerNavn, rolle, kodeord);
             }
         } catch (SQLException e) {
-            System.out.println("Kan ikke finde bruger." + e);
+            System.out.println("Fejl. Kan ikke finde bruger." + e);
         }
         return bruger;
     }
