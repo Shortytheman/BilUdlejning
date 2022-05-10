@@ -20,7 +20,7 @@ public class BilRepository {
     }
 
     public void tilføjBil(Bil bil) {
-        String query = "INSERT INTO bil (vognnummer, stelnummer, mærke, model, udstyrsNiveau, stålpris, regAfgift, co2Udledning, udlejet, udlejningsdato, erDS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO biler (vognnummer, stelnummer, mærke, model, udstyrsNiveau, stålpris, regAfgift, co2Udledning, udlejet, udlejningsdato, erDS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement preparedStatement = ConnectionManager.connectToSql().prepareStatement(query);
@@ -42,7 +42,7 @@ public class BilRepository {
 
     public ArrayList<Bil> seBiler() {
         ArrayList<Bil> biler = new ArrayList<>();
-        String query = "SELECT * FROM bil";
+        String query = "SELECT * FROM biler";
 
         try {
             PreparedStatement preparedStatement = ConnectionManager.connectToSql().prepareStatement(query);
@@ -82,7 +82,7 @@ public class BilRepository {
     }
 
     public void opdaterBil(Bil bil) {
-        String query = "UPDATE bil SET vognnummer=?, stelnummer=?, mærke=?, model=?, udstyrsniveau=?, stålpris=?, regafgift=?, co2udledning=?, udlejet=?, udlejningsdato=?, erDS=?";
+        String query = "UPDATE biler SET vognnummer=?, stelnummer=?, mærke=?, model=?, udstyrsniveau=?, stålpris=?, regafgift=?, co2udledning=?, udlejet=?, udlejningsdato=?, erDS=?";
 
         try {
             PreparedStatement preparedStatement = ConnectionManager.connectToSql().prepareStatement(query);
@@ -105,7 +105,7 @@ public class BilRepository {
     }
 
     public void sletBil(int vognnummer) {
-        String query = "DELETE FROM bil WHERE vognnummer=?";
+        String query = "DELETE FROM biler WHERE vognnummer=?";
 
         try {
             PreparedStatement preparedStatement = ConnectionManager.connectToSql().prepareStatement(query);
