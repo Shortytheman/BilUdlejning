@@ -20,7 +20,7 @@ public class BilRepository {
     }
 
     public void tilføjBil(Bil bil) {
-        String query = "INSERT INTO bil (vognnummer, stelnummer, mærke, model, udstyrsNiveau, stålpris, regAfgift, co2Udledning, udlejet, udlejningsdato, erDS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO biler (vognnummer, stelnummer, mærke, model, udstyrsNiveau, stålpris, regAfgift, co2Udledning, udlejet, udlejningsdato, erDS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
             PreparedStatement preparedStatement = ConnectionManager.connectToSql().prepareStatement(query);
@@ -42,7 +42,7 @@ public class BilRepository {
 
     public ArrayList<Bil> seBiler() {
         ArrayList<Bil> biler = new ArrayList<>();
-        String query = "SELECT * FROM bil";
+        String query = "SELECT * FROM biler";
 
         try {
             PreparedStatement preparedStatement = ConnectionManager.connectToSql().prepareStatement(query);
@@ -82,21 +82,21 @@ public class BilRepository {
     }
 
     public void opdaterBil(Bil bil) {
-        String query = "UPDATE bil SET vognnummer=?, stelnummer=?, mærke=?, model=?, udstyrsniveau=?, stålpris=?, regafgift=?, co2udledning=?, udlejet=?, udlejningsdato=?, erDS=?";
+        String query = "UPDATE biler SET stelnummer=?, mærke=?, model=?, udstyrsniveau=?, stålpris=?, regafgift=?, co2udledning=?, udlejet=?, udlejningsdato=?, erDS=? WHERE vognnummer=?";
 
         try {
             PreparedStatement preparedStatement = ConnectionManager.connectToSql().prepareStatement(query);
-            preparedStatement.setInt(1, bil.getVognnummer());
-            preparedStatement.setInt(2, bil.getStelnummer());
-            preparedStatement.setString(3, bil.getMærke());
-            preparedStatement.setString(4, bil.getModel());
-            preparedStatement.setString(5, bil.getUdstyrsNiveau());
-            preparedStatement.setInt(6, bil.getStålpris());
-            preparedStatement.setInt(7, bil.getRegAfgift());
-            preparedStatement.setInt(8, bil.getCo2Udledning());
-            preparedStatement.setBoolean(9, bil.isUdlejet());
-            preparedStatement.setString(10, bil.getUdlejningsdato());
-            preparedStatement.setBoolean(11, bil.isErDS());
+            preparedStatement.setInt(1, bil.getStelnummer());
+            preparedStatement.setString(2, bil.getMærke());
+            preparedStatement.setString(3, bil.getModel());
+            preparedStatement.setString(4, bil.getUdstyrsNiveau());
+            preparedStatement.setInt(5, bil.getStålpris());
+            preparedStatement.setInt(6, bil.getRegAfgift());
+            preparedStatement.setInt(7, bil.getCo2Udledning());
+            preparedStatement.setBoolean(8, bil.isUdlejet());
+            preparedStatement.setString(9, bil.getUdlejningsdato());
+            preparedStatement.setBoolean(10, bil.isErDS());
+            preparedStatement.setInt(11, bil.getVognnummer());
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -105,7 +105,7 @@ public class BilRepository {
     }
 
     public void sletBil(int vognnummer) {
-        String query = "DELETE FROM bil WHERE vognnummer=?";
+        String query = "DELETE FROM biler WHERE vognnummer=?";
 
         try {
             PreparedStatement preparedStatement = ConnectionManager.connectToSql().prepareStatement(query);
