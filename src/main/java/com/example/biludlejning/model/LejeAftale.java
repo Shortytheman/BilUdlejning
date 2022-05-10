@@ -78,11 +78,11 @@ public class LejeAftale {
     this.vognnummer = vognnummer;
   }
 
-  public java.lang.String getDato() {
+  public String getDato() {
     return dato;
   }
 
-  public void setDato(java.lang.String dato) {
+  public void setDato(String dato) {
     this.dato = dato;
   }
 

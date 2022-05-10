@@ -19,20 +19,24 @@ public class BrugerService {
 
   public boolean korrektLogin(String brugernavn, String kodeord, Bruger bruger){
     boolean kanLoggeInd = false;
-    if (brugernavn.length() > 0 && kodeord.length() > 0 &&
-        kodeord.equalsIgnoreCase(bruger.getKodeord())){
-      kanLoggeInd = true;
+    if (bruger != null) {
+      if (brugernavn.length() > 0 && kodeord.length() > 0 &&
+          kodeord.equalsIgnoreCase(bruger.getKodeord())) {
+        kanLoggeInd = true;
+      }
     }
     return kanLoggeInd;
   }
 
   public String loginFejl(Bruger bruger, String kodeord){
     String fejlmeddelse = "";
-    if (bruger.getBrugernavn().length() < 1 || bruger.getKodeord().length() < 1){
-      fejlmeddelse = "Brugernavn eller kodeord er for kort.";
-    } else if (!findBruger(bruger.getBrugernavn()).getKodeord().equalsIgnoreCase(kodeord)){
-      fejlmeddelse = "Forkert brugernavn og/eller kodeord";
-    } else fejlmeddelse = "Du er nu logget ind";
+    if (bruger != null) {
+      if (bruger.getBrugernavn().length() < 1 || bruger.getKodeord().length() < 1) {
+        fejlmeddelse = "Brugernavn eller kodeord er for kort.";
+      } else if (!findBruger(bruger.getBrugernavn()).getKodeord().equalsIgnoreCase(kodeord)) {
+        fejlmeddelse = "Fejl i adgangskoden";
+      }
+    } else fejlmeddelse = "brugernavnet tilhører ikke en oprettet bruger";
     return fejlmeddelse;
   }
 
