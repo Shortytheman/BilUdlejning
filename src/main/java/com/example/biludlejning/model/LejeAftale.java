@@ -17,8 +17,7 @@ public class LejeAftale {
   private double betalesIalt;
 
 
-  public LejeAftale(int kundeID, int vognnummer, int forskudsBetaling, int månedligBetaling,
-                    int antalBetalinger){
+  public LejeAftale(int kundeID, int vognnummer, int forskudsBetaling, int månedligBetaling, int antalBetalinger){
     this.kundeID = kundeID;
     this.vognnummer = vognnummer;
     //Sørger for at "dato" altid er dagen kontrakten er lavet.
@@ -26,7 +25,6 @@ public class LejeAftale {
     DateTimeFormatter datoenIdag = DateTimeFormatter.ofPattern("ddMMyy");
     LocalDateTime nu = LocalDateTime.now();
     this.dato = datoenIdag.format(nu);
-
     this.forskudsBetaling = forskudsBetaling;
     this.månedligBetaling = månedligBetaling;
     this.førsteBetalingsDato = findFørsteBetalingsdato();
@@ -34,6 +32,7 @@ public class LejeAftale {
     this.totalAfbetaling = antalBetalinger * månedligBetaling;
     this.betalesIalt = (antalBetalinger * månedligBetaling) + forskudsBetaling;
   }
+
   //Sætter første betalingsdato til første dag i næstkommende måned fra dato;
   public String findFørsteBetalingsdato () {
     String måned = dato.substring(2,4);
