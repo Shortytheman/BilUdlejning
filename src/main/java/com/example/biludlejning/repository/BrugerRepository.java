@@ -55,13 +55,14 @@ public class BrugerRepository {
     }
 
     public void opdaterBruger(Bruger bruger) {
-        String query = "UPDATE brugere SET brugernavn=?, rolle=?, kodeord=?";
+        String query = "UPDATE brugere SET brugernavn=?, rolle=?, kodeord=? WHERE brugernavn=?";
 
         try {
             PreparedStatement preparedStatement = ConnectionManager.connectToSql().prepareStatement(query);
             preparedStatement.setString(1, bruger.getBrugernavn());
             preparedStatement.setString(2, bruger.getRolle());
             preparedStatement.setString(3, bruger.getKodeord());
+            preparedStatement.setString(4, bruger.getBrugernavn());
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
