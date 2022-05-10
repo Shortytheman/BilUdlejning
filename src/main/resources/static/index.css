@@ -1,0 +1,29 @@
+body, html {
+    height: 100%;
+    width: 100%;
+    background-color: #b1d4e0;
+}
+button1 {
+    height: 50px;
+    width: 150px;
+    font-family: tahoma;
+    color: black;
+    margin-top: 2%;
+    margin-left: 80%;
+    border-bottom: black;
+    position: absolute;
+}
+button2 {
+    height: 50px;
+    width: 150px;
+    cursor: pointer;
+    font-family: tahoma;
+    margin-top: 2%;
+    margin-left: 90%;
+    position: absolute;
+}
+.billede1 {
+    margin-top: 20%;
+    margin-left: 25%;
+    position: absolute;
+}
