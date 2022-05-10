@@ -23,7 +23,8 @@ button2 {
     position: absolute;
 }
 .billede1 {
-    margin-top: 20%;
-    margin-left: 25%;
+    top: 50%;
+    left: 50%;
     position: absolute;
+    transform: translate(-50%, -50%);
 }
