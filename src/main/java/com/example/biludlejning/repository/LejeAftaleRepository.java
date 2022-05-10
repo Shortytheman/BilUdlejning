@@ -68,6 +68,7 @@ public class LejeAftaleRepository {
             e.printStackTrace();
             System.out.println("Fejl i fremvisning af lejeaftaler");
         }
+        return lejeAftaler;
     }
 
     public void opdaterLejeAftale(LejeAftale lejeAftale) {
