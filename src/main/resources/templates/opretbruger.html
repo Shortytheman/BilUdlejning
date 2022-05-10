@@ -5,25 +5,27 @@
     <title>brugeroprettelse</title>
 </head>
 <body>
-<form method="post" >
-<div>
-    <h3 class="mb-5">Opret bruger</h3>
-    <div class="form-outline mb-4">
-        <input type="text" id="brugernavn" name="brugernavn" class="form-control form-control-lg" placeholder="Brugernavn"/>
+<form method="post">
+    <div>
+        <h3 class="mb-5">Opret bruger</h3>
+        <div class="form-outline mb-4">
+            <input type="text" id="brugernavn" name="brugernavn" class="form-control form-control-lg"
+                   placeholder="Brugernavn"/>
+        </div>
+        <div class="form-outline mb-4">
+            <input type="password" id="kodeord" name="kodeord" class="form-control form-control-lg"
+                   placeholder="Kodeord"/>
+        </div>
+        <div>Rolle:
+            <select id="rolle" name="rolle">
+                <option value="dataregistrering">dataregistrering</option>
+                <option value="forretningsudvikler">forretningsudvikler</option>
+                <option value="skadeogudbedring">skadeogudbedring</option>
+            </select>
+        </div>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Log på</button>
+        <hr class="my-4">
     </div>
-    <div class="form-outline mb-4">
-        <input type="password" id="kodeord" name="kodeord" class="form-control form-control-lg" placeholder="Kodeord" />
-    </div>
-    <div>Rolle:
-    <select id="rolle" name="rolle">
-        <option value="dataregistrering">dataregistrering</option>
-        <option value="forretningsudvikler">forretningsudvikler</option>
-        <option value="skadeogudbedring">skadeogudbedring</option>
-    </select>
-    </div>
-    <button class="btn btn-primary btn-lg btn-block" type="submit">Log på</button>
-    <hr class="my-4">
-</div>
 </form>
 </body>
 </html>
