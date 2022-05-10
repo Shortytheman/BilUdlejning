@@ -1,0 +1,15 @@
+body, html {
+    height: 100%;
+    width: 100%;
+    background-color: #b1d4e0;
+}
+button1 {
+    height: 50px;
+    width: 150px;
+    font-family: tahoma;
+    color: black;
+    margin-top: 2%;
+    margin-left: 80%;
+    border-bottom: black;
+    position: absolute;
+}
