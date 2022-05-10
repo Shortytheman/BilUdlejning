@@ -22,6 +22,15 @@ button2 {
     margin-left: 90%;
     position: absolute;
 }
+button3 {
+    height: 50px;
+    width: 150px;
+    cursor: pointer;
+    font-family: tahoma;
+    margin-top: 2%;
+    margin-left: 90%;
+    position: absolute;
+}
 .billede1 {
     top: 50%;
     left: 50%;

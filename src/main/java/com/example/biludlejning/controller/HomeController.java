@@ -51,9 +51,9 @@ public String sletBruger(@PathVariable("brugernavn") String brugernavn){
     return "login";
   }
 
-  @PostMapping("/logud")
+  @GetMapping("/logud")
   public String logud(HttpSession httpSession){
-    httpSession.setAttribute("brugerRolle","null");
+    httpSession.setAttribute("brugerRolle",null);
     return "redirect:/";
   }
 
