@@ -84,7 +84,7 @@ public String sletBruger(@PathVariable("brugernavn") String brugernavn){
   @GetMapping("/unlimitedBiltyper")
   public String unlimitedBiltyper(Model model) {
     model.addAttribute("biler", bilservice.seBiler());
-    model.addAttribute("antalBilAfHverModel", bilservice.antalBilAfModel());
+    model.addAttribute("modelAntal", bilservice.modelAntal());
     model.addAttribute("enAfHverModel", bilservice.enAfHverModel());
     return "unlimitedBiltyper";
   }

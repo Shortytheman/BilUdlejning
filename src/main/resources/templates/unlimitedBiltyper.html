@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>RWD List to Table</h1>
+    <h1>Oversigt over unlimited-biler</h1>
     <table class="rwd-table">
         <tr>
             <th>Mærke</th>
@@ -19,25 +19,13 @@
             <th>Antal leasede</th>
             <th>Pris på leasede biler i alt</th>
         </tr>
-        <tr th:each="bil : ${biler}">
-            <td data-th="Mærke" th:text="${bil.getMaerke()}"></td>
-            <td data-th="Model" th:text="${bil.getModel()}"></td>
-            <td data-th="Antal i alt" th:text="${antalBilAfHverModel}"></td>
-            <td data-th="Antal ikke leasede">10</td>
+        <tr th:each="bil : ${modelAntal}">
+            <td data-th="Mærke" th:text="${bil.key.getMaerke()}"></td>
+            <td data-th="Model" th:text="${bil.key.getModel()}"></td>
+            <td data-th="Antal i alt" th:text="${bil.value.intValue()}"></td>
+            <td data-th="Antal ikke leasede" th:if="${bil.key.isUdlejet()}">10</td>
             <td data-th="Antal leasede">10</td>
             <td data-th="Pris på leasede biler i alt">460,935,665 dkk</td>
-        </tr>
-        <tr>
-            <td data-th="Movie Title">Howard The Duck</td>
-            <td data-th="Genre">"Comedy"</td>
-            <td data-th="Year">1986</td>
-            <td data-th="Gross">$16,295,774</td>
-        </tr>
-        <tr>
-            <td data-th="Movie Title">American Graffiti</td>
-            <td data-th="Genre">Comedy, Drama</td>
-            <td data-th="Year">1973</td>
-            <td data-th="Gross">$115,000,000</td>
         </tr>
     </table>
 
