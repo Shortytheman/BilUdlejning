@@ -1,9 +1,8 @@
 package com.example.biludlejning.controller;
 
 import com.example.biludlejning.model.Bruger;
-import com.example.biludlejning.model.LejeAftale;
+import com.example.biludlejning.service.BilService;
 import com.example.biludlejning.service.BrugerService;
-import com.example.biludlejning.service.KundeOgLejeaftaleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,10 +18,12 @@ public class HomeController {
   BrugerService brugerservice;
   KundeOgLejeaftaleService kundeOgLejeaftaleService;
   String fejlmeddelse = "";
+  BilService bilservice;
 
-  public HomeController(BrugerService brugerservice, KundeOgLejeaftaleService kundeOgLejeaftaleService) {
+  public HomeController(BrugerService brugerservice, KundeOgLejeaftaleService kundeOgLejeaftaleService,  BilService bilservice) {
     this.brugerservice = brugerservice;
     this.kundeOgLejeaftaleService = kundeOgLejeaftaleService;
+    this.bilservice = bilservice;
   }
 
   @GetMapping("/")
@@ -58,7 +59,6 @@ public String sletBruger(@PathVariable("brugernavn") String brugernavn){
   @GetMapping("/logud")
   public String logud(HttpSession httpSession){
     httpSession.setAttribute("brugerRolle",null);
-    httpSession.setAttribute("bruger",null);
     return "redirect:/";
   }
 
@@ -85,7 +85,10 @@ public String sletBruger(@PathVariable("brugernavn") String brugernavn){
   }
 
   @GetMapping("/unlimitedBiltyper")
-  public String unlimitedBiltyper() {
+  public String unlimitedBiltyper(Model model) {
+    model.addAttribute("biler", bilservice.seBiler());
+    model.addAttribute("modelAntal", bilservice.modelAntal());
+    model.addAttribute("enAfHverModel", bilservice.enAfHverModel());
     return "unlimitedBiltyper";
   }
   @GetMapping("/limitedBiltyper")

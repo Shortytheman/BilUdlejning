@@ -49,7 +49,7 @@ public class  Bil {
     this.stelnummer = stelnummer;
   }
 
-  public String getMærke() {
+  public String getMaerke() {
     return mærke;
   }
 
