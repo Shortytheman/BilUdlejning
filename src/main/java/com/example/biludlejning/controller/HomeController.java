@@ -1,6 +1,7 @@
 package com.example.biludlejning.controller;
 
 import com.example.biludlejning.model.Bruger;
+import com.example.biludlejning.model.Kunde;
 import com.example.biludlejning.model.LejeAftale;
 import com.example.biludlejning.service.BilService;
 import com.example.biludlejning.service.BrugerService;
@@ -103,13 +104,28 @@ public String sletBruger(@PathVariable("brugernavn") String brugernavn){
     return "opretkunde";
   }
 
+  @PostMapping("/opretkunde")
+  public String opretkunde(@RequestParam String navn, @RequestParam String email,
+                           @RequestParam String adresse, @RequestParam int postnummer, @RequestParam String by){
+  Kunde kunde = new Kunde(navn,email,adresse,postnummer,by);
+  kundeOgLejeaftaleService.opretKunde(kunde);
+  return "redirect:/";
+  }
+
   @GetMapping("/opretlejeaftale")
-  public String opretLejeaftale(@RequestParam int kundeid, @RequestParam int vognnummer, @RequestParam double forskudsbetaling,
-                                 @RequestParam double månedligbetaling, @RequestParam int antalbetalinger, Model model){
-    LejeAftale lejeAftale = new LejeAftale(kundeid,vognnummer,forskudsbetaling,månedligbetaling,antalbetalinger);
-    kundeOgLejeaftaleService.lavLejeKontrakt(lejeAftale);
-    model.addAttribute("lejekontrakt",kundeOgLejeaftaleService.lavLejeKontrakt(lejeAftale));
+  public String opretLejeaftale(HttpSession httpSession){
+    httpSession.getAttribute("lejekontrakt");
     return "opretlejeaftale";
+  }
+
+  @PostMapping("/opretlejeaftale")
+  public String opretLejekontrakt(@RequestParam int kundeid, @RequestParam int vognnummer, @RequestParam double forskudsbetaling,
+                                  @RequestParam double månedligbetaling, @RequestParam int antalbetalinger, HttpSession httpSession){
+    LejeAftale lejeAftale = new LejeAftale(kundeid,vognnummer,forskudsbetaling,månedligbetaling,antalbetalinger);
+    String lejekontrakt = kundeOgLejeaftaleService.lavLejeKontrakt(lejeAftale);
+    kundeOgLejeaftaleService.lavLejeaftale(lejeAftale);
+    httpSession.setAttribute("lejekontrakt", lejekontrakt);
+    return "redirect:/opretlejeaftale";
   }
 
 }

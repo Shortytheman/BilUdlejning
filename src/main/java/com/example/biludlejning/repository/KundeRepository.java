@@ -20,7 +20,7 @@ public class KundeRepository {
     //CRUD!
 
     public void opretKunde(Kunde kunde) {
-        String query = "INSERT INTO kunder(navn, email, adresse, postnummer, by) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO kunder(navn, email, adresse, postnummer, byen) VALUES (?, ?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, kunde.getNavn());
@@ -47,7 +47,7 @@ public class KundeRepository {
                 String email = resultSet.getString("email");
                 String adresse = resultSet.getString("adresse");
                 int postnummer = resultSet.getInt("postnummer");
-                String by = resultSet.getString("by");
+                String by = resultSet.getString("byen");
 
                 Kunde kunde = new Kunde();
                 kunde.getNavn();
@@ -78,7 +78,7 @@ public class KundeRepository {
     public void opdaterKunde(Kunde kunde) {
         // DB kald som opdaterer kunde i DB. - evetuelt opdaterer rolle eller kode.
         try {
-            String query = "UPDATE kunder SET navn=?, email=?, adresse=?, postnummer=?, by=? WHERE kunde_id=?";
+            String query = "UPDATE kunder SET navn=?, email=?, adresse=?, postnummer=?, byen=? WHERE kunde_id=?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, kunde.getNavn());
             preparedStatement.setString(2, kunde.getEmail());
@@ -103,7 +103,7 @@ public class KundeRepository {
                 String email = resultSet.getString("email");
                 String adresse = resultSet.getString("adresse");
                 int postnummer = resultSet.getInt("postnummer");
-                String by = resultSet.getString("by");
+                String by = resultSet.getString("byen");
 
                 kunde = new Kunde();
                 kunde.getNavn();
