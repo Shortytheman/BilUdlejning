@@ -24,10 +24,10 @@ public class BilRepository {
         String query = "INSERT INTO biler (vognnummer, stelnummer, mærke, model, udstyrsNiveau, stålpris, regAfgift, co2Udledning, udlejet, udlejningsdato, erDS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
-            PreparedStatement preparedStatement = ConnectionManager.connectToSql().prepareStatement(query);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, bil.getVognnummer());
             preparedStatement.setInt(2, bil.getStelnummer());
-            preparedStatement.setString(3, bil.getMærke());
+            preparedStatement.setString(3, bil.getMaerke());
             preparedStatement.setString(4, bil.getModel());
             preparedStatement.setInt(5, bil.getStålpris());
             preparedStatement.setInt(6, bil.getCo2Udledning());
@@ -88,7 +88,7 @@ public class BilRepository {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, bil.getStelnummer());
-            preparedStatement.setString(2, bil.getMærke());
+            preparedStatement.setString(2, bil.getMaerke());
             preparedStatement.setString(3, bil.getModel());
             preparedStatement.setString(4, bil.getUdstyrsNiveau());
             preparedStatement.setInt(5, bil.getStålpris());
@@ -157,5 +157,41 @@ public class BilRepository {
             System.out.println("Bil kunne ikke findes. Prøv igen: " + e);
         }
         return bil;
+    }
+    public ArrayList<Bil> retunerBilEfterModel(String model) {
+        ArrayList<Bil> biler = seBiler();
+        ArrayList<Bil> bilerEfterModel = new ArrayList<>();
+        for (int i=0; i < biler.size(); i++) {
+            if (biler.get(i).getModel().equalsIgnoreCase(model)) {
+                bilerEfterModel.add(biler.get(i));
+            }
+        }
+        return bilerEfterModel;
+    }
+    public ArrayList<Integer> antalBilAfModel(String model) {
+        ArrayList<Integer> antalPerModel = new ArrayList<>();
+        int counter = 0;
+        for (int i = 0; i < seBiler().size(); i++) {
+            counter = 0;
+            for (int j = i + 1; j < seBiler().size(); j++) {
+                if (enAfHverModel().get(i).getModel().equalsIgnoreCase(seBiler().get(j).getModel())) {
+                    counter++;
+                }
+            }
+            antalPerModel.add(counter);
+        }
+        return antalPerModel;
+    }
+    public ArrayList<Bil> enAfHverModel() {
+        ArrayList<Bil> enAfHverModel = seBiler();
+        for (int i = 0; i < seBiler().size(); i++) {
+            for (int j = i + 1; j < seBiler().size(); j++) {
+                if (seBiler().get(i).getModel().equalsIgnoreCase(seBiler().get(j).getModel())) {
+                    enAfHverModel.remove(j);
+                    j--;
+                }
+            }
+        }
+        return enAfHverModel;
     }
 }

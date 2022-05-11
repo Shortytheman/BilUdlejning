@@ -1,6 +1,7 @@
 package com.example.biludlejning.controller;
 
 import com.example.biludlejning.model.Bruger;
+import com.example.biludlejning.service.BilService;
 import com.example.biludlejning.service.BrugerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,10 +16,12 @@ import javax.servlet.http.HttpSession;
 public class HomeController {
 
   BrugerService brugerservice;
+  BilService bilservice;
   String fejlmeddelse = "abemand";
 
-  public HomeController(BrugerService brugerservice) {
+  public HomeController(BrugerService brugerservice, BilService bilservice) {
     this.brugerservice = brugerservice;
+    this.bilservice = bilservice;
   }
 
   @GetMapping("/")
@@ -79,7 +82,10 @@ public String sletBruger(@PathVariable("brugernavn") String brugernavn){
     return returnStatement;
   }
   @GetMapping("/unlimitedBiltyper")
-  public String unlimitedBiltyper() {
+  public String unlimitedBiltyper(Model model) {
+    model.addAttribute("biler", bilservice.seBiler());
+    model.addAttribute("antalBilAfHverModel", bilservice.antalBilAfModel());
+    model.addAttribute("enAfHverModel", bilservice.enAfHverModel());
     return "unlimitedBiltyper";
   }
   @GetMapping("/limitedBiltyper")
