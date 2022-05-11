@@ -24,7 +24,7 @@ public class BilRepository {
         String query = "INSERT INTO biler (vognnummer, stelnummer, mærke, model, udstyrsNiveau, stålpris, regAfgift, co2Udledning, udlejet, udlejningsdato, erDS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try {
-            PreparedStatement preparedStatement = ConnectionManager.connectToSql().prepareStatement(query);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, bil.getVognnummer());
             preparedStatement.setInt(2, bil.getStelnummer());
             preparedStatement.setString(3, bil.getMærke());

@@ -1,7 +1,9 @@
 package com.example.biludlejning.controller;
 
 import com.example.biludlejning.model.Bruger;
+import com.example.biludlejning.model.LejeAftale;
 import com.example.biludlejning.service.BrugerService;
+import com.example.biludlejning.service.KundeOgLejeaftaleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +17,12 @@ import javax.servlet.http.HttpSession;
 public class HomeController {
 
   BrugerService brugerservice;
-  String fejlmeddelse = "abemand";
+  KundeOgLejeaftaleService kundeOgLejeaftaleService;
+  String fejlmeddelse = "";
 
-  public HomeController(BrugerService brugerservice) {
+  public HomeController(BrugerService brugerservice, KundeOgLejeaftaleService kundeOgLejeaftaleService) {
     this.brugerservice = brugerservice;
+    this.kundeOgLejeaftaleService = kundeOgLejeaftaleService;
   }
 
   @GetMapping("/")
@@ -54,6 +58,7 @@ public String sletBruger(@PathVariable("brugernavn") String brugernavn){
   @GetMapping("/logud")
   public String logud(HttpSession httpSession){
     httpSession.setAttribute("brugerRolle",null);
+    httpSession.setAttribute("bruger",null);
     return "redirect:/";
   }
 
@@ -64,20 +69,21 @@ public String sletBruger(@PathVariable("brugernavn") String brugernavn){
     if (brugernavn.equalsIgnoreCase("admin") && kodeord.equalsIgnoreCase("admin")) {
       Bruger admin = new Bruger(brugernavn,"admin", kodeord);
       httpSession.setAttribute("brugerRolle", admin.getRolle());
-      httpSession.setAttribute("brugerNavn", admin.getBrugernavn());
+      httpSession.setAttribute("bruger", admin);
     } else {
       Bruger bruger = brugerservice.findBruger(brugernavn);
       //Tjekker om brugernavn og kodeord hører sammen, derefter smider den brugeren ind på indexsiden til den tilhørende rolle.
       //Session bliver også oprettet med brugeren som logger på.
       if (brugerservice.korrektLogin(brugernavn, kodeord, bruger)) {
         httpSession.setAttribute("brugerRolle", bruger.getRolle());
-        httpSession.setAttribute("brugerNavn", bruger.getBrugernavn());
+        httpSession.setAttribute("bruger", bruger);
       } else returnStatement = "redirect:/login";
       //Hvis brugeren ikke findes, bliver der redirected, og her kan vi tilgå en model attribute "fejlmeddelse" der viser hvorfor.
       httpSession.setAttribute("fejlmeddelse", fejlmeddelse = brugerservice.loginFejl(bruger, kodeord));
     }
     return returnStatement;
   }
+
   @GetMapping("/unlimitedBiltyper")
   public String unlimitedBiltyper() {
     return "unlimitedBiltyper";
@@ -86,4 +92,19 @@ public String sletBruger(@PathVariable("brugernavn") String brugernavn){
   public String limitedBiltyper() {
     return "limitedBiltyper";
   }
+
+  @GetMapping("/opretkunde")
+  public String opretKunde(){
+    return "opretkunde";
+  }
+
+  @GetMapping("/opretlejeaftale")
+  public String opretLejeaftale(@RequestParam int kundeid, @RequestParam int vognnummer, @RequestParam double forskudsbetaling,
+                                 @RequestParam double månedligbetaling, @RequestParam int antalbetalinger, Model model){
+    LejeAftale lejeAftale = new LejeAftale(kundeid,vognnummer,forskudsbetaling,månedligbetaling,antalbetalinger);
+    kundeOgLejeaftaleService.lavLejeKontrakt(lejeAftale);
+    model.addAttribute("lejekontrakt",kundeOgLejeaftaleService.lavLejeKontrakt(lejeAftale));
+    return "opretlejeaftale";
+  }
+
 }

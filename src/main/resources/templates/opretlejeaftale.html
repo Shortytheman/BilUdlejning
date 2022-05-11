@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Opret lejeaftale</title>
+</head>
+<body>
+
+<div>
+
+</div>
+
+<div>
+    <a href="" id="a">Tryk for at oprette og sende lejekontrakt</a>
+    <!-- INDEN IDE OM DET HER VIRKER ENDNU FØR VI KAN OPRETTE KUNDER -->
+    <button th:attr="onclick=${'download('+lejekontrakt+', ''lejekontrakt.txt'', ''text/plain'')'}">Create file</button>
+</div>
+<script>
+    // Hentet fra: https://stackoverflow.com/questions/13405129/create-and-save-a-file-with-javascript
+    function download(data, filename, type) {
+        var file = new Blob([data], {type: type});
+        if (window.navigator.msSaveOrOpenBlob)
+            window.navigator.msSaveOrOpenBlob(file, filename);
+        else {
+            var a = document.createElement("a"),
+                url = URL.createObjectURL(file);
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function() {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            }, 0);
+        }
+    }
+</script>
+
+</body>
+</html>

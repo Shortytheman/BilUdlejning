@@ -44,7 +44,19 @@
            </div>
         </div>
         <div th:case="'dataregistrering'">
-            Hvis man er logget ind som dataregistrering
+            <div>
+                <a th:href="@{'/logud'}">
+                    <button3 class="btn btn-primary btn-lg btn-block">Log ud</button3>
+                </a>
+            </div>
+            <div class="d-grid gap-2">
+                <a href="/opretkunde">
+                    <button class="btn btn-primary" type="button">Opret kunde</button>
+                </a>
+                <a href="/opretlejeaftale">
+                    <button class="btn btn-primary" type="button">Opret Lejeaftale</button>
+                </a>
+            </div>
         </div>
         <div th:case="'forretningsudvikler'">
             <div class="container">
