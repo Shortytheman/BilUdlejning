@@ -6,26 +6,28 @@
     <link rel="stylesheet" th:href="@{opretbruger.css}" href="../static/opretbruger.css"/>
 </head>
 <body>
-<form method="post">
-    <div>
-        <h3 class="mb-5">Opret bruger</h3>
-        <div class="form-outline mb-4">
-            <input type="text" id="brugernavn" name="brugernavn" class="form-control form-control-lg"
-                   placeholder="Brugernavn"/>
+
+<form class="form" method="post">
+    <div class="container">
+        <div class="login-container">
+            <h3>Opret bruger</h3>
+            <div>
+                <input type="text" id="brugernavn" name="brugernavn" class="form-control form-control-lg"
+                       placeholder="Brugernavn"/>
+            </div>
+            <div>
+                <input type="password" id="kodeord" name="kodeord" class="form-control form-control-lg"
+                       placeholder="Kodeord"/>
+            </div>
+            <div>Rolle:
+                <select id="rolle" name="rolle">
+                    <option value="dataregistrering">dataregistrering</option>
+                    <option value="forretningsudvikler">forretningsudvikler</option>
+                    <option value="skadeogudbedring">skadeogudbedring</option>
+                </select>
+            </div>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Opret bruger</button>
         </div>
-        <div class="form-outline mb-4">
-            <input type="password" id="kodeord" name="kodeord" class="form-control form-control-lg"
-                   placeholder="Kodeord"/>
-        </div>
-        <div>Rolle:
-            <select id="rolle" name="rolle">
-                <option value="dataregistrering">dataregistrering</option>
-                <option value="forretningsudvikler">forretningsudvikler</option>
-                <option value="skadeogudbedring">skadeogudbedring</option>
-            </select>
-        </div>
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Opret bruger</button>
-        <hr class="my-4">
     </div>
 </form>
 </body>
