@@ -1,8 +1,10 @@
 package com.example.biludlejning.controller;
 
 import com.example.biludlejning.model.Bruger;
+import com.example.biludlejning.model.LejeAftale;
 import com.example.biludlejning.service.BilService;
 import com.example.biludlejning.service.BrugerService;
+import com.example.biludlejning.service.KundeOgLejeaftaleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
