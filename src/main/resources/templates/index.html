@@ -78,7 +78,6 @@
                 </a>
             </div>
             <div class="container">
-                <h3>Indenfor hvilken abonnementstype kunne du tænke dig at se biltyper?</h3>
                 <div class="container position-absolute top-50 start-50 translate-middle">
                     <h3 class="udvikleroverskrift">Indenfor hvilken abonnementstype kunne du tænke dig at se
                         biltyper?</h3>
@@ -108,23 +107,12 @@
                                 </div>
                             </div>
                         </div>
-                        <!--<div class="col">
-                            <div class="dropdown">
-                                <button class="dropbtn">Menu</button>
-                                <div class="dropdown-content">
-                                    <a>Opret bruger</a>
-                                    <a>Slet brugere</a>
-                                    <a>Lort</a>
-                                </div>
-                                <input type="text" placeholder="Søg">
-                            </div>
-                        </div>-->
                     </div>
                 </div>
             </div>
-            <div th:case="'skadeogudbedring'">
-                Hvis man er logget ind som skadeogudbedring
-            </div>
+        </div>
+        <div th:case="'skadeogudbedring'">
+            Hvis man er logget ind som skadeogudbedring
         </div>
         <div th:case="null">
             <form>
