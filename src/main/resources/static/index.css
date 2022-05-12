@@ -17,6 +17,15 @@ h3 {
     cursor: pointer;
 
 }
+.adminnyhed{
+    font-weight: bold;
+    text-align: center;
+    justify-content: center;
+    position: absolute;
+    margin-top: 20%;
+    font-family: arial, sans-serif;
+
+}
 button1 {
     height: 50px;
     width: 150px;
