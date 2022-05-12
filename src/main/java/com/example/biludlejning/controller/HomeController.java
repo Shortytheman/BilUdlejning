@@ -28,13 +28,6 @@ public class HomeController {
         this.bilservice = bilservice;
     }
 
-    @GetMapping("/")
-    public String index(HttpSession httpSession, Model model) {
-        model.addAttribute("brugerRolle", httpSession.getAttribute("brugerRolle"));
-        model.addAttribute("brugere", brugerservice.seBrugere());
-        return "index";
-    }
-
     @GetMapping("/sletbrugere")
     public String sletbrugere(HttpSession httpSession, Model model) {
         model.addAttribute("brugerRolle", httpSession.getAttribute("brugerRolle"));
@@ -59,10 +52,12 @@ public class HomeController {
         return "redirect:/login";
     }
 
-    @GetMapping("/login")
-    public String visLogin(HttpSession httpSession) {
+    @GetMapping("/")
+    public String visLogin(HttpSession httpSession, Model model) {
+            model.addAttribute("brugerRolle", httpSession.getAttribute("brugerRolle"));
+            model.addAttribute("brugere", brugerservice.seBrugere());
         httpSession.getAttribute("fejlmeddelse");
-        return "login";
+        return "index";
     }
 
     @GetMapping("/logud")
@@ -71,7 +66,7 @@ public class HomeController {
         return "redirect:/";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/")
     public String login(@RequestParam String brugernavn, @RequestParam String kodeord,
                         HttpSession httpSession) {
         String returnStatement = "redirect:/";
@@ -86,7 +81,7 @@ public class HomeController {
             if (brugerservice.korrektLogin(brugernavn, kodeord, bruger)) {
                 httpSession.setAttribute("brugerRolle", bruger.getRolle());
                 httpSession.setAttribute("bruger", bruger);
-            } else returnStatement = "redirect:/login";
+            } else returnStatement = "redirect:/";
             //Hvis brugeren ikke findes, bliver der redirected, og her kan vi tilgå en model attribute "fejlmeddelse" der viser hvorfor.
             httpSession.setAttribute("fejlmeddelse", fejlmeddelse = brugerservice.loginFejl(bruger, kodeord));
         }
