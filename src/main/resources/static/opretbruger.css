@@ -1,5 +1,7 @@
 body{
  background-color: #b1d4e0;
+ background-size: cover;
+ background-repeat: no-repeat;
 }
 .container{
  display: flex;
@@ -11,10 +13,28 @@ body{
  display: flex;
  flex-direction: column;
 }
-.login-container{
- background-color: black;
- width: 450px;
- height: 500px;
- opacity: 85%;
- border-radius: 20px;
+.title{
+ text-align: center;
+}
+button1 {
+ display:flex;
+ justify-content: center;
+ align-items: center;
+ position: absolute;
+ background-color:#0a0a23;
+ color: #fff;
+ border:none;
+ border-radius:10px;
+ padding:15px;
+ min-height:30px;
+ min-width: 120px;
+ font-family: tahoma;
+ background-color:#002ead;
+ transition: 0.7s;
+ margin-top: 2%;
+ margin-left: 80%;
+}
+.button:hover {
+ background-color:#002ead;
+ transition: 0.7s;
 }
