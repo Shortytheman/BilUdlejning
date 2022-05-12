@@ -76,7 +76,7 @@ button3 {
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
 
 .sletbrugeretable{
-    top: 50%;
+    top: 70%;
     left: 50%;
     position: absolute;
     transform: translate(-50%, -50%);
