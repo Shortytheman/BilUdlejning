@@ -7,6 +7,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <a href="/">
+        <img src="https://i.imgur.com/lGpIOdu.png" class="logo1">
+    </a>
 </head>
 <body>
 <div>
@@ -17,31 +20,38 @@
                     <button3 class="btn btn-primary btn-lg btn-block">Log ud</button3>
                 </a>
             </div>
+            <div class="dropdown">
+                <button class="dropbtn">Admin menu</button>
+                <div class="dropdown-content">
+                    <a href="opretbruger">Opret bruger</a>
+                    <a href="sletbrugere">Slet brugere</a>
+                    <a href="#">Link 3</a>
+                </div>
+            </div>
             <div>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>
-                            Brugernavn
-                        </th>
-                        <th>
-                            Rolle
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="bruger : ${brugere}">
-                        <td th:text="${bruger.getBrugernavn()}">
-                        </td>
-                        <td th:text="${bruger.rolle}">
-                        </td>
-                        <td>
-                            <a class="btn btn-danger" th:href="@{'/slet/' + ${bruger.getBrugernavn()}}" role="button">Slet
-                                bruger</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                <!--           <table>
+                               <thead>
+                               <tr>
+                                   <th>
+                                       Brugernavn
+                                   </th>
+                                   <th>
+                                       Rolle
+                                   </th>
+                               </tr>
+                               </thead>
+                               <tbody>
+                               <tr th:each="bruger : ${brugere}">
+                                   <td th:text="${bruger.getBrugernavn()}">
+                                   </td>
+                                   <td th:text="${bruger.rolle}">
+                                   </td>
+                                   <td>
+                                       <a class="btn btn-danger" th:href="@{'/slet/' + ${bruger.getBrugernavn()}}" role="button">Slet bruger</a>
+                                   </td>
+                               </tr>
+                               </tbody>
+                           </table>  -->
             </div>
         </div>
         <div th:case="'dataregistrering'">
@@ -74,7 +84,8 @@
                             <img src="https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/c_fit,e_trim:0,q_80,w_640/v1/bilabonnement-fleet/kig2vudntj1i1ayban8w"
                                  class="card-img-top" alt="...">
                             <div class="card-body expanded-text">
-                                <h5 class="card-title overskrift">Bilabonnement<br>Unlimited<br>Ny bil i 3-36 måneder<br></h5>
+                                <h5 class="card-title overskrift">Bilabonnement<br>Unlimited<br>Ny bil i 3-36
+                                    måneder<br></h5>
                                 <span class="semere">Se mere</span>
                                 <span class="card-text detaljer"><br>Bilabonnement Unlimited er bilabonnementsløsninger med
                                     alt fra 3 - 36 måneders varighed. Det giver dig maksimal fleksibilitet i dit valg af
@@ -97,7 +108,7 @@
                                 <h5 class="card-title">Bilabonnement<br>Limited<br>Minileasing i 120 dage</h5>
                                 <p class="card-text">Oplev duften af ny bil og sæt dig godt til rette i din nye bil.
                                     Få følelsen af frihed i 120 dage med en ubekymret kørsel:
-                                    Alt er nemlig inkluderet i den månedlige ydelse og med  0 kr. i udbetaling.
+                                    Alt er nemlig inkluderet i den månedlige ydelse og med 0 kr. i udbetaling.
 
                                     Din opgave? Fyld brændstof på bilen og nyd friheden de næste 120 dage.
 
@@ -120,18 +131,46 @@
                 <div>
                     <img src="https://i.imgur.com/Agy8PG1.png" class="billede1">
                 </div>
-                <div>
-                    <a href="/opretbruger">
-                        <button1 class="btn btn-primary btn-lg btn-block" type="submit">Opret bruger</button1>
-                    </a>
-                </div>
+                <!--Skal muligvis fjernes permanent
+
+                                <div>
+                                    <a href="/opretbruger">
+                                        <button1 class="btn btn-primary btn-lg btn-block" type="submit">Opret bruger</button1>
+                                    </a>
+                                </div>
+                                -->
             </form>
             <form>
-                <div>
-                    <a href="/login">
-                        <button2 class="btn btn-primary btn-lg btn-block">Log ind</button2>
-                    </a>
-                </div>
+            </form>
+            <form method="post">
+                <section class="vh-100">
+                    <div class="container py-5 h-100">
+                        <div class="row d-flex justify-content-center align-items-center h-100">
+                            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                                <div class="card shadow-2-strong" style="border-radius: 2rem;">
+                                    <div class="card-body p-5 text-center">
+                                        <h3 class="mb-5">Log in</h3>
+                                        <div class="form-outline mb-4">
+                                            <input type="text" id="brugernavn" name="brugernavn"
+                                                   class="form-control form-control-lg" placeholder="Brugernavn"/>
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <input type="password" id="kodeord" name="kodeord"
+                                                   class="form-control form-control-lg" placeholder="Kodeord"/>
+                                        </div>
+                                        <div>
+                                            <a th:text="${session.fejlmeddelse}"></a>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-primary btn-lg btn-block" type="submit">Log in
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </form>
         </div>
     </div>

@@ -3,6 +3,13 @@ body, html {
     width: 100%;
     background-color: #b1d4e0;
 }
+.logo1 {
+    margin-top: 2%;
+    margin-left: 10%;
+    position: absolute;
+    cursor: pointer;
+
+}
 button1 {
     height: 50px;
     width: 150px;
@@ -37,6 +44,47 @@ button3 {
     position: absolute;
     transform: translate(-50%, -50%);
 }
+.dropdown {
+    top: 20%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+.dropbtn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content a:hover {background-color: #ddd;}
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+/* SLETBRUGERE START */
+
+.sletbrugeretable{
+    top: 70%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+
+}
+/* SLETBRUGERE SLUT */
 
 /* FORRETNINGSUDVIKLER START */
 
