@@ -42,7 +42,7 @@ public class HomeController {
     @PostMapping("/opretbruger")
     public String opretBruger(@RequestParam String brugernavn, @RequestParam String rolle, @RequestParam String kodeord) {
         brugerservice.opretBruger(new Bruger(brugernavn, rolle, kodeord));
-        return "redirect:/login";
+        return "redirect:/";
     }
 
     @GetMapping("/")

@@ -7,97 +7,99 @@
 <link rel="stylesheet" th:href="@{index.css}" href="../static/index.css"/>
 
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-  <a href="/">
-    <img src="https://i.imgur.com/lGpIOdu.png" class="logo1">
-  </a>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <a href="/">
+        <img src="https://images.squarespace-cdn.com/content/v1/6097afd4f58cde04722a1de0/1620939663927-D70X5M8YI41G9HVHXK9C/K.W.BRUNN%26CO_5.E_Hvid_rgb.png?format=1500w"
+             class="logo1 position-absolute top-0 start-50 translate-middle">
+    </a>
 </head>
 <body>
 <div>
-  <div th:switch="${brugerRolle}">
-    <div th:case="'admin'">
-      <div>
-        <a th:href="@{'/logud'}">
-          <button3 class="btn btn-primary btn-lg btn-block">Log ud</button3>
-        </a>
-      </div>
-      <div class="dropdown">
-        <button class="dropbtn">Admin menu</button>
-        <div class="dropdown-content">
-          <a href="opretbruger">Opret bruger</a>
-          <a href="sletbrugere">Slet brugere</a>
-          <a href="#">Link 3</a>
+    <div th:switch="${brugerRolle}">
+        <div th:case="'admin'">
+            <div>
+                <a th:href="@{'/logud'}">
+                    <button3 class="btn btn-primary btn-lg btn-block">Log ud</button3>
+                </a>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn" style="border-radius: 2rem;">Admin menu</button>
+                <div class="dropdown-content">
+                    <a href="opretbruger">Opret bruger</a>
+                    <a href="sletbrugere">Slet brugere</a>
+                    <a href="#">Link 3</a>
+                </div>
+            </div>
+            <div>
+                <table class="sletbrugeretable">
+                    <thead>
+                    <tr>
+                        <th>
+                            Brugernavn
+                        </th>
+                        <th>
+                            Rolle
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="bruger : ${brugere}">
+                        <td th:text="${bruger.getBrugernavn()}">
+                        </td>
+                        <td th:text="${bruger.rolle}">
+                        </td>
+                        <td>
+                            <a class="btn btn-danger" th:href="@{'/slet/' + ${bruger.getBrugernavn()}}" role="button">Slet
+                                bruger</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-      </div>
-      <div>
-        <table class="sletbrugeretable">
-          <thead>
-          <tr>
-            <th>
-              Brugernavn
-            </th>
-            <th>
-              Rolle
-            </th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr th:each="bruger : ${brugere}">
-            <td th:text="${bruger.getBrugernavn()}">
-            </td>
-            <td th:text="${bruger.rolle}">
-            </td>
-            <td>
-              <a class="btn btn-danger" th:href="@{'/slet/' + ${bruger.getBrugernavn()}}" role="button">Slet bruger</a>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div th:case="'dataregistrering'">
-      Hvis man er logget ind som dataregistrering
-    </div>
-    <div th:case="'forretningsudvikler'">
-      <div class="container">
-        <h3>Indenfor hvilken abonnementstype kunne du tænke dig at se biltyper?</h3>
-        <div class="d-grid gap-2">
-          <a href="/unlimitedBiltyper">
-            <button class="btn btn-primary" type="button">Unlimited</button>
-          </a>
-          <a href="/limitedBiltyper">
-            <button class="btn btn-primary" type="button">Limited</button>
-          </a>
+        <div th:case="'dataregistrering'">
+            Hvis man er logget ind som dataregistrering
         </div>
-      </div>
-    </div>
-    <div th:case="'skadeogudbedring'">
-      Hvis man er logget ind som skadeogudbedring
-    </div>
-    <div th:case="null">
-      <form>
-        <div>
-          <img src="https://i.imgur.com/Agy8PG1.png" class="billede1">
+        <div th:case="'forretningsudvikler'">
+            <div class="container">
+                <h3>Indenfor hvilken abonnementstype kunne du tænke dig at se biltyper?</h3>
+                <div class="d-grid gap-2">
+                    <a href="/unlimitedBiltyper">
+                        <button class="btn btn-primary" type="button">Unlimited</button>
+                    </a>
+                    <a href="/limitedBiltyper">
+                        <button class="btn btn-primary" type="button">Limited</button>
+                    </a>
+                </div>
+            </div>
         </div>
-        <!--Skal muligvis fjernes permanent
+        <div th:case="'skadeogudbedring'">
+            Hvis man er logget ind som skadeogudbedring
+        </div>
+        <div th:case="null">
+            <form>
+                <div>
+                    <img src="https://i.imgur.com/Agy8PG1.png" class="billede1">
+                </div>
+                <!--Skal muligvis fjernes permanent @Frederik
 
-                        <div>
-                            <a href="/opretbruger">
-                                <button1 class="btn btn-primary btn-lg btn-block" type="submit">Opret bruger</button1>
-                            </a>
-                        </div>
-                        -->
-      </form>
-      <form>
-        <div>
-          <a href="/login">
-            <button2 class="btn btn-primary btn-lg btn-block">Log ind</button2>
-          </a>
+                                <div>
+                                    <a href="/opretbruger">
+                                        <button1 class="btn btn-primary btn-lg btn-block" type="submit">Opret bruger</button1>
+                                    </a>
+                                </div>
+                                -->
+            </form>
+            <form>
+                <div>
+                    <a href="/login">
+                        <button2 class="btn btn-primary btn-lg btn-block">Log ind</button2>
+                    </a>
+                </div>
+            </form>
         </div>
-      </form>
     </div>
-  </div>
 </div>
 </body>
 </html>

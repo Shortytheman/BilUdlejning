@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head>
     <meta charset="UTF-8">
     <title>brugeroprettelse</title>
@@ -8,7 +8,11 @@
     <link rel="stylesheet" th:href="@{opretbruger.css}" href="../static/opretbruger.css"/>
 </head>
 <body>
-<!--
+<a href="/">
+    <img src="https://images.squarespace-cdn.com/content/v1/6097afd4f58cde04722a1de0/1620939663927-D70X5M8YI41G9HVHXK9C/K.W.BRUNN%26CO_5.E_Hvid_rgb.png?format=1500w"
+         class="logo1 position-absolute top-0 start-50 translate-middle">
+</a>
+<!-- Skal fjernes @Frederik
 <div>
     <a href="/">
         <button1 class="btn btn-primary btn-lg btn-block">Frontside</button1>
@@ -20,7 +24,7 @@
     </a>
 </div>
 <div class="dropdown">
-    <button class="dropbtn">Admin menu</button>
+    <button class="dropbtn" style="border-radius: 2rem;">Admin menu</button>
     <div class="dropdown-content">
         <a href="opretbruger">Opret bruger</a>
         <a href="sletbrugere">Slet brugere</a>

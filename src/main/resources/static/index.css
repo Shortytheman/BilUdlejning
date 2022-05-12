@@ -1,11 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&amp;family=Montserrat&amp;family=Roboto&amp;display=swap');
+
 body, html {
     height: 100%;
     width: 100%;
     background-color: #b1d4e0;
+    font-family: arial, sans-serif;
+}
+h3 {
+    font-size: 3vw;
 }
 .logo1 {
-    margin-top: 2%;
-    margin-left: 10%;
+    height: 80px;
+    width: 200px;
+    margin-top: 4%;
     position: absolute;
     cursor: pointer;
 
@@ -112,5 +119,30 @@ span.detaljer {
     box-shadow: inset 100000px 0 0 0 #54b3d6;
     color: white;
 }
+.card-img-top {
+    width: 100%;
+    height: 25vw;
+    object-fit: cover;
+}
+.udvikleroverskrift {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.ramme {
+    background-color: white;
+    padding: 5px 10px 35px 10px;
+    margin-top: 3%;
+    opacity: 01;
+    border-radius: 2rem;
+}
 
 /* FORRETNINGSUDVIKLER SLUT */
+
+/* NULL START */
+
+.ramme1 {
+    border-radius: 2rem;
+}
+
+/* NULL SLUT */
