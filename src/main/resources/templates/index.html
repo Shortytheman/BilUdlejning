@@ -29,7 +29,8 @@
                 </div>
             </div>
             <div>
-                <!--           <table>
+                <!--  Skal muligvis fjernes permanent @Frederik
+                         <table>
                                <thead>
                                <tr>
                                    <th>
@@ -70,6 +71,11 @@
             </div>
         </div>
         <div th:case="'forretningsudvikler'">
+            <div>
+                <a th:href="@{'/logud'}">
+                    <button3 class="btn btn-primary btn-lg btn-block">Log ud</button3>
+                </a>
+            </div>
             <div class="container">
                 <h3>Indenfor hvilken abonnementstype kunne du tænke dig at se biltyper?</h3>
                 <div class="row row-cols-1 row-cols-md-2 g-4">
@@ -131,7 +137,7 @@
                 <div>
                     <img src="https://i.imgur.com/Agy8PG1.png" class="billede1">
                 </div>
-                <!--Skal muligvis fjernes permanent
+                <!--Skal muligvis fjernes permanent @Frederik
 
                                 <div>
                                     <a href="/opretbruger">
