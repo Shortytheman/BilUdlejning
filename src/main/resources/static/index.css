@@ -75,6 +75,8 @@ button3 {
 .dropdown:hover .dropdown-content {display: block;}
 .dropdown:hover .dropbtn {background-color: #3e8e41;}
 
+/* SLETBRUGERE START */
+
 .sletbrugeretable{
     top: 70%;
     left: 50%;
@@ -82,7 +84,7 @@ button3 {
     transform: translate(-50%, -50%);
 
 }
-
+/* SLETBRUGERE SLUT */
 
 /* FORRETNINGSUDVIKLER START */
 
