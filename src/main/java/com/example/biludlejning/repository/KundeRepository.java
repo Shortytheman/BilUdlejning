@@ -3,10 +3,12 @@ package com.example.biludlejning.repository;
 import com.example.biludlejning.model.Bruger;
 import com.example.biludlejning.model.Kunde;
 import com.example.biludlejning.utilities.ConnectionManager;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 
+@Repository
 public class KundeRepository {
 
     Connection connection;
@@ -19,7 +21,6 @@ public class KundeRepository {
 
     public void opretKunde(Kunde kunde) {
         String query = "INSERT INTO kunder(navn, email, adresse, postnummer, by) VALUES (?, ?, ?, ?, ?)";
-
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, kunde.getNavn());

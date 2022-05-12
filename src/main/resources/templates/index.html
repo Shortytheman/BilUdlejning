@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -55,18 +55,70 @@
            </div>
         </div>
         <div th:case="'dataregistrering'">
-            Hvis man er logget ind som dataregistrering
+            <div>
+                <a th:href="@{'/logud'}">
+                    <button3 class="btn btn-primary btn-lg btn-block">Log ud</button3>
+                </a>
+            </div>
+            <div class="d-grid gap-2">
+                <a href="/opretkunde">
+                    <button class="btn btn-primary" type="button">Opret kunde</button>
+                </a>
+                <a href="/opretlejeaftale">
+                    <button class="btn btn-primary" type="button">Opret Lejeaftale</button>
+                </a>
+            </div>
         </div>
         <div th:case="'forretningsudvikler'">
             <div class="container">
                 <h3>Indenfor hvilken abonnementstype kunne du tænke dig at se biltyper?</h3>
-                <div class="d-grid gap-2">
+                <div class="row row-cols-1 row-cols-md-2 g-4">
                     <a href="/unlimitedBiltyper">
-                    <button class="btn btn-primary" type="button">Unlimited</button>
+                        <button class="btn btn-primary" type="button">Unlimited</button>
                     </a>
                     <a href="/limitedBiltyper">
-                    <button class="btn btn-primary" type="button">Limited</button>
+                        <button class="btn btn-primary" type="button">Limited</button>
                     </a>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/c_fit,e_trim:0,q_80,w_640/v1/bilabonnement-fleet/kig2vudntj1i1ayban8w"
+                                 class="card-img-top" alt="...">
+                            <div class="card-body expanded-text">
+                                <h5 class="card-title overskrift">Bilabonnement<br>Unlimited<br>Ny bil i 3-36 måneder<br></h5>
+                                <span class="semere">Se mere</span>
+                                <span class="card-text detaljer"><br>Bilabonnement Unlimited er bilabonnementsløsninger med
+                                    alt fra 3 - 36 måneders varighed. Det giver dig maksimal fleksibilitet i dit valg af
+                                    bil og hverdag: Du får alle fordelene ved at have en bil uden bekymringer om
+                                    vedligehold, forsikringer og gensalgsværdi. Mange af vores biler fås endda med 0 kr.
+                                    i udbetaling.
+                                    Se udvalget af Bilabonnement Unlimited korttidsleasing biler herunder.<br><br>
+                                    <a href="/unlimitedBiltyper">
+                                        <button class="btn btn-primary" type="button">Vælg Unlimited</button>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/c_fit,e_trim:0,q_80,w_640/v1/bilabonnement-fleet/x1ogl6lsn3shaa9jwhgv"
+                                 class="card-img-top" alt="...">
+                            <div class="card-body hoverbutton">
+                                <h5 class="card-title">Bilabonnement<br>Limited<br>Minileasing i 120 dage</h5>
+                                <p class="card-text">Oplev duften af ny bil og sæt dig godt til rette i din nye bil.
+                                    Få følelsen af frihed i 120 dage med en ubekymret kørsel:
+                                    Alt er nemlig inkluderet i den månedlige ydelse og med  0 kr. i udbetaling.
+
+                                    Din opgave? Fyld brændstof på bilen og nyd friheden de næste 120 dage.
+
+                                    Vælg din nye korttidsleasing bil herunder..
+                                </p>
+                                <a href="/limitedBiltyper">
+                                    <button class="btn btn-primary" type="button">Vælg Unlimited</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

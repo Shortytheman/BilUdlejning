@@ -17,7 +17,7 @@ public class LejeAftale {
   private double betalesIalt;
 
 
-  public LejeAftale(int kundeID, int vognnummer, int forskudsBetaling, int månedligBetaling, int antalBetalinger){
+  public LejeAftale(int kundeID, int vognnummer, double forskudsBetaling, double månedligBetaling, int antalBetalinger){
     this.kundeID = kundeID;
     this.vognnummer = vognnummer;
     //Sørger for at "dato" altid er dagen kontrakten er lavet.
@@ -64,7 +64,7 @@ public class LejeAftale {
     this.lejeaftaleID = lejeaftaleID;
   }
 
-  public int getKunde() {
+  public int getKundeId() {
     return kundeID;
   }
 

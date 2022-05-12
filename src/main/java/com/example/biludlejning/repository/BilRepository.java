@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 @Repository
 public class BilRepository {
@@ -168,24 +169,28 @@ public class BilRepository {
         }
         return bilerEfterModel;
     }
-    public ArrayList<Integer> antalBilAfModel(String model) {
-        ArrayList<Integer> antalPerModel = new ArrayList<>();
+    public LinkedHashMap<Bil, Integer> modelAntal() {
+        LinkedHashMap<Bil, Integer> modelAntal = new LinkedHashMap<>();
+        ArrayList<Bil> tempBil = seBiler();
         int counter = 0;
-        for (int i = 0; i < seBiler().size(); i++) {
-            counter = 0;
-            for (int j = i + 1; j < seBiler().size(); j++) {
-                if (enAfHverModel().get(i).getModel().equalsIgnoreCase(seBiler().get(j).getModel())) {
+        for (int i = 0; i < tempBil.size(); i++) {
+            counter = 1;
+            for (int j = i + 1; j < tempBil.size(); j++) {
+                if (tempBil.get(i).getModel().equalsIgnoreCase(tempBil.get(j).getModel())) {
                     counter++;
+                    tempBil.remove(j);
+                    j = j - 1;
                 }
             }
-            antalPerModel.add(counter);
+            modelAntal.put(tempBil.get(i), counter);
         }
-        return antalPerModel;
+        System.out.println(modelAntal);
+        return modelAntal;
     }
     public ArrayList<Bil> enAfHverModel() {
         ArrayList<Bil> enAfHverModel = seBiler();
-        for (int i = 0; i < seBiler().size(); i++) {
-            for (int j = i + 1; j < seBiler().size(); j++) {
+        for (int i = 0; i < enAfHverModel.size(); i++) {
+            for (int j = i + 1; j < enAfHverModel.size(); j++) {
                 if (seBiler().get(i).getModel().equalsIgnoreCase(seBiler().get(j).getModel())) {
                     enAfHverModel.remove(j);
                     j--;

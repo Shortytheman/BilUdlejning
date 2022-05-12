@@ -83,3 +83,32 @@ button3 {
 
 }
 
+
+/* FORRETNINGSUDVIKLER START */
+
+span.detaljer {
+    display: none;
+}
+.semere {
+    display: flex;
+    justify-content: center;
+    font-size: 300%;
+}
+.expanded-text:hover span.semere {
+    display: none;
+}
+
+.expanded-text:hover span.detaljer {
+    display: block;
+}
+.expanded-text {
+    box-shadow: inset 0 0 0 0 #54b3d6;
+    color: black;
+    transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+}
+.expanded-text:hover {
+    box-shadow: inset 100000px 0 0 0 #54b3d6;
+    color: white;
+}
+
+/* FORRETNINGSUDVIKLER SLUT */

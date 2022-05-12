@@ -8,3 +8,7 @@ body, html {
     height: 15vw;
     object-fit: cover;
 }
+
+.buttonback {
+    margin: 1% 12% 0 0;
+}
