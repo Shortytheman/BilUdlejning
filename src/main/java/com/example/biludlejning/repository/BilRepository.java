@@ -184,7 +184,6 @@ public class BilRepository {
             }
             modelAntal.put(tempBil.get(i), counter);
         }
-        System.out.println(modelAntal);
         return modelAntal;
     }
     public ArrayList<Bil> enAfHverModel() {
