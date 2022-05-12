@@ -8,6 +8,7 @@
     <title>Limited biltyper</title>
 </head>
 <body>
+<div th:if="${session.brugerRolle} == 'forretningsudvikler'">
 <div class="container">
     <div class="d-flex flex-row mb-3">
         <h1>Vores biltyper inden for limited-kategorien</h1>
@@ -66,6 +67,6 @@
         </div>
     </div>
 </div>
-
+</div>
 </body>
 </html>

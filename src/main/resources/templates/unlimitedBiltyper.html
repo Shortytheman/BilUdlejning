@@ -8,6 +8,7 @@
     <title>Unlimited biltyper</title>
 </head>
 <body>
+<div th:if="${session.brugerRolle} == 'forretningsudvikler'">
 <div class="container">
     <div>
         <h1>Oversigt over unlimited-biler</h1>
@@ -35,6 +36,7 @@
     </table>
 
     <p>&larr; Drag window (in editor or full page view) to see the effect. &rarr;</p>
+</div>
 </div>
 <!-- <div class="container">
     <h1>Vores biltyper inden for unlimited-kategorien</h1>
