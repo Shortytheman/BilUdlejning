@@ -20,8 +20,7 @@ public class LejeAftaleRepository {
     }
 
     public void tilføjLejeAftale(LejeAftale lejeAftale) {
-        String query = "INSERT INTO lejeaftaler(kundeid, vognnummer, dato, forskudsbetaling, månedligbetaling, førstebetalingsdato, antalbetalinger) VALUES (?, ?, ?, ?, ?, ?, ?)";
-
+        String query = "INSERT INTO lejeaftaler(kunde_id, vognnummer, dato, forskudsbetaling, månedligbetaling, førstebetalingsdato, antalbetalinger) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, lejeAftale.getKundeId());
@@ -112,6 +111,7 @@ public class LejeAftaleRepository {
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1,lejeaftaleID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int kundeID = resultSet.getInt("kundeid");
@@ -138,13 +138,48 @@ public class LejeAftaleRepository {
         return lejeAftale;
     }
 
+    public LejeAftale findlejeAftaleEfterKundeId(int kundeId) {
+        LejeAftale lejeAftale = null;
+        String query = "SELECT vognnummer, dato, forskudsbetaling, månedligbetaling, førstebetalingsdato," +
+            " antalbetalinger FROM lejeaftaler WHERE kunde_id=?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1,kundeId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int vognnummer = resultSet.getInt("vognnummer");
+                String dato = resultSet.getString("dato");
+                double forskudsBetaling = resultSet.getDouble("forskudsbetaling");
+                double månedligBetaling = resultSet.getDouble("månedligbetaling");
+                String førsteBetalingsDato = resultSet.getString("førstebetalingsdato");
+                int antalBetalinger = resultSet.getInt("antalbetalinger");
+
+                lejeAftale = new LejeAftale();
+                lejeAftale.setKunde(kundeId);
+                lejeAftale.setVognnummer(vognnummer);
+                lejeAftale.setDato(dato);
+                lejeAftale.setForskudsBetaling(forskudsBetaling);
+                lejeAftale.setMånedligBetaling(månedligBetaling);
+                lejeAftale.setFørsteBetalingsDato(førsteBetalingsDato);
+                lejeAftale.setAntalBetalinger(antalBetalinger);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Forkert kundeId. Prøv igen. " + e);
+        }
+        return lejeAftale;
+    }
+
     public String lavLejeKontrakt(LejeAftale lejeAftale) {
         String query = "SELECT navn FROM kunder WHERE kunde_id = " + lejeAftale.getKundeId();
         String kundenavn = "";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
-            kundenavn = resultSet.getString("navn");
+            while (resultSet.next()) {
+                kundenavn = resultSet.getString("navn");
+            }
         } catch (SQLException e){
             System.out.println("Fejl ved lejekontraktoprettelse" + e);
         }
@@ -184,9 +219,9 @@ public class LejeAftaleRepository {
 
         lejeKontrakt = "-----------Lejekontrakt-----------\n" + "Kontrakt dato: " + lejeAftale.getDato() +
             "\nUdlejer: Bilabonnement"
-            + "         Lejer: " + kundenavn + "\n\nForskudsbetaling: " + lejeAftale.getForskudsBetaling() +
+            + "\nLejer: " + kundenavn + "\n\nForskudsbetaling: " + lejeAftale.getForskudsBetaling() +
             "\nMånedlig betaling: " + lejeAftale.getMånedligBetaling() + "\nførste betaling den: " +
-            lejeAftale.getFørsteBetalingsDato() + " og derefter den 1. i hver måned" + "\nAfbetaling ialt: " +
+            lejeAftale.getFørsteBetalingsDato() + ", derefter den 1. i hver måned." + "\nAfbetaling ialt: " +
             lejeAftale.getTotalAfbetaling() + "\nTil betaling ialt: " + lejeAftale.getBetalesIalt() +
             "\n\nBil" + "\nMærke: " + mærke + "\nModel: " + model + "\nUdstyrsniveau: " + udstyrsNiveau +
             "\nStelnummer: " + stelnummer + "\nco2 udledning: " + co2Udledning + " g/km" + "\nAfhentes hos DS forhandler: " + hentHosDs;

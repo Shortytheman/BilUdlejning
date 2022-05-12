@@ -1,6 +1,7 @@
 package com.example.biludlejning.controller;
 
 import com.example.biludlejning.model.Bruger;
+import com.example.biludlejning.model.Kunde;
 import com.example.biludlejning.model.LejeAftale;
 import com.example.biludlejning.service.BilService;
 import com.example.biludlejning.service.BrugerService;
@@ -17,16 +18,16 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class HomeController {
 
-    BrugerService brugerservice;
-    KundeOgLejeaftaleService kundeOgLejeaftaleService;
-    String fejlmeddelse = "";
-    BilService bilservice;
+  BrugerService brugerservice;
+  KundeOgLejeaftaleService kundeOgLejeaftaleService;
+  String fejlmeddelse = "";
+  BilService bilservice;
 
-    public HomeController(BrugerService brugerservice, KundeOgLejeaftaleService kundeOgLejeaftaleService, BilService bilservice) {
-        this.brugerservice = brugerservice;
-        this.kundeOgLejeaftaleService = kundeOgLejeaftaleService;
-        this.bilservice = bilservice;
-    }
+  public HomeController(BrugerService brugerservice, KundeOgLejeaftaleService kundeOgLejeaftaleService,  BilService bilservice) {
+    this.brugerservice = brugerservice;
+    this.kundeOgLejeaftaleService = kundeOgLejeaftaleService;
+    this.bilservice = bilservice;
+  }
 
     @GetMapping("/sletbrugere")
     public String sletbrugere(HttpSession httpSession, Model model) {
@@ -38,7 +39,7 @@ public class HomeController {
     @GetMapping("/slet/{brugernavn}")
     public String sletBruger(@PathVariable("brugernavn") String brugernavn) {
         brugerservice.sletBruger(brugernavn);
-        return "redirect:/";
+        return "redirect:/sletbrugere";
     }
 
     @GetMapping("/opretbruger")
@@ -88,31 +89,49 @@ public class HomeController {
         return returnStatement;
     }
 
-    @GetMapping("/unlimitedBiltyper")
-    public String unlimitedBiltyper(Model model) {
-        model.addAttribute("biler", bilservice.seBiler());
-        model.addAttribute("modelAntal", bilservice.modelAntal());
-        model.addAttribute("enAfHverModel", bilservice.enAfHverModel());
-        return "unlimitedBiltyper";
-    }
+  @GetMapping("/unlimitedBiltyper")
+  public String unlimitedBiltyper(Model model) {
+    model.addAttribute("biler", bilservice.seBiler());
+    model.addAttribute("modelAntal", bilservice.modelAntal());
+    model.addAttribute("enAfHverModel", bilservice.enAfHverModel());
+    return "unlimitedBiltyper";
+  }
 
-    @GetMapping("/limitedBiltyper")
-    public String limitedBiltyper() {
-        return "limitedBiltyper";
-    }
+  @GetMapping("/limitedBiltyper")
+  public String limitedBiltyper() {
+    return "limitedBiltyper";
+  }
 
     @GetMapping("/opretkunde")
     public String opretKunde() {
         return "opretkunde";
     }
 
-    @GetMapping("/opretlejeaftale")
-    public String opretLejeaftale(@RequestParam int kundeid, @RequestParam int vognnummer, @RequestParam double forskudsbetaling,
-                                  @RequestParam double månedligbetaling, @RequestParam int antalbetalinger, Model model) {
-        LejeAftale lejeAftale = new LejeAftale(kundeid, vognnummer, forskudsbetaling, månedligbetaling, antalbetalinger);
-        kundeOgLejeaftaleService.lavLejeKontrakt(lejeAftale);
-        model.addAttribute("lejekontrakt", kundeOgLejeaftaleService.lavLejeKontrakt(lejeAftale));
-        return "opretlejeaftale";
-    }
+  @PostMapping("/opretkunde")
+  public String opretkunde(@RequestParam String navn, @RequestParam String email,
+                           @RequestParam String adresse, @RequestParam int postnummer, @RequestParam String by){
+  Kunde kunde = new Kunde(navn,email,adresse,postnummer,by);
+  kundeOgLejeaftaleService.opretKunde(kunde);
+  return "redirect:/";
+  }
+
+  @GetMapping("/opretlejeaftale")
+  public String opretLejeaftale(){
+    return "opretlejeaftale";
+  }
+
+  @PostMapping("/opretlejeaftale")
+  public String opretLejekontrakt(@RequestParam int kundeid, @RequestParam int vognnummer, @RequestParam double forskudsbetaling,
+                                  @RequestParam double månedligbetaling, @RequestParam int antalbetalinger, HttpSession httpSession){
+    LejeAftale lejeAftale = new LejeAftale(kundeid,vognnummer,forskudsbetaling,månedligbetaling,antalbetalinger);
+    httpSession.setAttribute("lejekontrakt", kundeOgLejeaftaleService.lavLejeKontrakt(lejeAftale));
+    return "redirect:/vislejekontrakt";
+  }
+
+  @GetMapping("/vislejekontrakt")
+  public String vislejekontrakt(HttpSession httpSession){
+    httpSession.getAttribute("lejekontrakt");
+    return "/vislejekontrakt";
+  }
 
 }

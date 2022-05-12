@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<link rel="stylesheet" th:href="@{index.css}" href="../static/index.css"/>
 <head>
     <meta charset="UTF-8">
     <title>Opret lejeaftale</title>
@@ -7,34 +10,32 @@
 <body>
 
 <div>
-
+<h3>Opret lejeaftale - udfyld formularen</h3>
+<div class="container">
+    <form class="form" method="post">
+    <div>
+        <input type="number" id="kundeid" name="kundeid" class="form-control form-control-lg"
+               placeholder="Kunde ID"/>
+    </div>
+    <div>
+        <input type="number" id="vognnummer" name="vognnummer" class="form-control form-control-lg"
+               placeholder="Vognnummer"/>
+    </div>
+    <div>
+        <input type="number" step="any" id="forskudsbetaling" name="forskudsbetaling" class="form-control form-control-lg"
+               placeholder="Forskudsbetaling"/>
+    </div>
+    <div>
+        <input type="number" step="any" id="månedligbetaling" name="månedligbetaling" class="form-control form-control-lg"
+               placeholder="Månedlig betaling"/>
+    </div>
+    <div>
+        <input type="number" id="antalbetalinger" name="antalbetalinger" class="form-control form-control-lg"
+               placeholder="Antal betalinger"/>
+    </div>
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Opret lejeaftale</button>
+    </form>
 </div>
-
-<div>
-    <a href="" id="a">Tryk for at oprette og sende lejekontrakt</a>
-    <!-- INDEN IDE OM DET HER VIRKER ENDNU FØR VI KAN OPRETTE KUNDER -->
-    <button th:attr="onclick=${'download('+lejekontrakt+', ''lejekontrakt.txt'', ''text/plain'')'}">Create file</button>
 </div>
-<script>
-    // Hentet fra: https://stackoverflow.com/questions/13405129/create-and-save-a-file-with-javascript
-    function download(data, filename, type) {
-        var file = new Blob([data], {type: type});
-        if (window.navigator.msSaveOrOpenBlob)
-            window.navigator.msSaveOrOpenBlob(file, filename);
-        else {
-            var a = document.createElement("a"),
-                url = URL.createObjectURL(file);
-            a.href = url;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            setTimeout(function() {
-                document.body.removeChild(a);
-                window.URL.revokeObjectURL(url);
-            }, 0);
-        }
-    }
-</script>
-
 </body>
 </html>
