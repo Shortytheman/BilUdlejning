@@ -39,7 +39,7 @@ public class HomeController {
     @GetMapping("/slet/{brugernavn}")
     public String sletBruger(@PathVariable("brugernavn") String brugernavn) {
         brugerservice.sletBruger(brugernavn);
-        return "redirect:/";
+        return "redirect:/sletbrugere";
     }
 
     @GetMapping("/opretbruger")

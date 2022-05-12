@@ -185,7 +185,6 @@ public class LejeAftaleRepository {
         }
 
         String query1 = "SELECT stelnummer, mærke, model, udstyrsniveau, co2udledning, erDS FROM biler WHERE vognnummer= " + lejeAftale.getVognnummer();
-        System.out.println(lejeAftale.getVognnummer());
         int stelnummer = 0;
         String mærke = "";
         String model = "";
@@ -220,9 +219,9 @@ public class LejeAftaleRepository {
 
         lejeKontrakt = "-----------Lejekontrakt-----------\n" + "Kontrakt dato: " + lejeAftale.getDato() +
             "\nUdlejer: Bilabonnement"
-            + "         Lejer: " + kundenavn + "\n\nForskudsbetaling: " + lejeAftale.getForskudsBetaling() +
+            + "\nLejer: " + kundenavn + "\n\nForskudsbetaling: " + lejeAftale.getForskudsBetaling() +
             "\nMånedlig betaling: " + lejeAftale.getMånedligBetaling() + "\nførste betaling den: " +
-            lejeAftale.getFørsteBetalingsDato() + " og derefter den 1. i hver måned" + "\nAfbetaling ialt: " +
+            lejeAftale.getFørsteBetalingsDato() + ", derefter den 1. i hver måned." + "\nAfbetaling ialt: " +
             lejeAftale.getTotalAfbetaling() + "\nTil betaling ialt: " + lejeAftale.getBetalesIalt() +
             "\n\nBil" + "\nMærke: " + mærke + "\nModel: " + model + "\nUdstyrsniveau: " + udstyrsNiveau +
             "\nStelnummer: " + stelnummer + "\nco2 udledning: " + co2Udledning + " g/km" + "\nAfhentes hos DS forhandler: " + hentHosDs;
