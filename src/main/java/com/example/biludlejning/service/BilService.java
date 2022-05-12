@@ -1,6 +1,7 @@
 package com.example.biludlejning.service;
 
 import com.example.biludlejning.model.Bil;
+import com.example.biludlejning.model.Bildata;
 import com.example.biludlejning.repository.BilRepository;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ public class BilService {
   public ArrayList<Bil> seBiler() {
     return bilRepository.seBiler();
   }
-  public LinkedHashMap<Bil, Integer> modelAntal() {
+  public LinkedHashMap<Bil, Bildata> modelAntal() {
     return bilRepository.modelAntal();
   }
   public ArrayList<Integer> antalBilAfModel() {

@@ -2,6 +2,7 @@ package com.example.biludlejning.repository;
 
 
 import com.example.biludlejning.model.Bil;
+import com.example.biludlejning.model.Bildata;
 import com.example.biludlejning.utilities.ConnectionManager;
 import org.springframework.stereotype.Repository;
 
@@ -169,20 +170,35 @@ public class BilRepository {
         }
         return bilerEfterModel;
     }
-    public LinkedHashMap<Bil, Integer> modelAntal() {
-        LinkedHashMap<Bil, Integer> modelAntal = new LinkedHashMap<>();
+    public LinkedHashMap<Bil, Bildata> modelAntal() {
+        LinkedHashMap<Bil, Bildata> modelAntal = new LinkedHashMap<>();
         ArrayList<Bil> tempBil = seBiler();
         int counter = 0;
+        int udlejedeCounter = 0;
+        int ikkeUdlejedeCounter = 0;
         for (int i = 0; i < tempBil.size(); i++) {
             counter = 1;
+            if (tempBil.get(i).isUdlejet()) {
+                udlejedeCounter = 1;
+                ikkeUdlejedeCounter = 0;
+            } else if (!tempBil.get(i).isUdlejet()) {
+                ikkeUdlejedeCounter = 1;
+                udlejedeCounter = 0;
+            }
             for (int j = i + 1; j < tempBil.size(); j++) {
                 if (tempBil.get(i).getModel().equalsIgnoreCase(tempBil.get(j).getModel())) {
                     counter++;
+                    if (tempBil.get(j).isUdlejet()) {
+                        udlejedeCounter++;
+                    } else if (!tempBil.get(j).isUdlejet()) {
+                        ikkeUdlejedeCounter++;
+                    }
                     tempBil.remove(j);
                     j = j - 1;
                 }
             }
-            modelAntal.put(tempBil.get(i), counter);
+            modelAntal.put(tempBil.get(i), new Bildata(tempBil.get(i).getMaerke(), tempBil.get(i).getModel(),
+                    tempBil.get(i).getUdstyrsNiveau(), tempBil.get(i).isUdlejet(), counter, udlejedeCounter, ikkeUdlejedeCounter));
         }
         return modelAntal;
     }
