@@ -79,50 +79,52 @@
             </div>
             <div class="container">
                 <h3>Indenfor hvilken abonnementstype kunne du tænke dig at se biltyper?</h3>
-            <div class="container position-absolute top-50 start-50 translate-middle">
-                <h3 class="udvikleroverskrift">Indenfor hvilken abonnementstype kunne du tænke dig at se biltyper?</h3>
-                <div class="row row-cols-1 row-cols-md-2 g-4">
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/c_fit,e_trim:0,q_80,w_640/v1/bilabonnement-fleet/kig2vudntj1i1ayban8w"
-                                 class="card-img-top" alt="...">
-                            <div class="card-body expanded-text">
-                                <h5 class="card-title overskrift">Bilabonnement<br>Unlimited<br>Ny bil i 3-36
-                                    måneder<br></h5>
-                                <a href="/unlimitedBiltyper">
-                                    <button class="btn btn-primary" type="button">Vælg Unlimited</button>
-                                </a>
+                <div class="container position-absolute top-50 start-50 translate-middle">
+                    <h3 class="udvikleroverskrift">Indenfor hvilken abonnementstype kunne du tænke dig at se
+                        biltyper?</h3>
+                    <div class="row row-cols-1 row-cols-md-2 g-4">
+                        <div class="col">
+                            <div class="card h-100">
+                                <img src="https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/c_fit,e_trim:0,q_80,w_640/v1/bilabonnement-fleet/kig2vudntj1i1ayban8w"
+                                     class="card-img-top" alt="...">
+                                <div class="card-body expanded-text">
+                                    <h5 class="card-title overskrift">Bilabonnement<br>Unlimited<br>Ny bil i 3-36
+                                        måneder<br></h5>
+                                    <a href="/unlimitedBiltyper">
+                                        <button class="btn btn-primary" type="button">Vælg Unlimited</button>
+                                    </a>
+                                </div>
                             </div>
                         </div>
+                        <div class="col">
+                            <div class="card h-100">
+                                <img src="https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/c_fit,e_trim:0,q_80,w_640/v1/bilabonnement-fleet/x1ogl6lsn3shaa9jwhgv"
+                                     class="card-img-top" alt="...">
+                                <div class="card-body expanded-text">
+                                    <h5 class="card-title">Bilabonnement<br>Limited<br>Minileasing i 120 dage</h5>
+                                    <a href="/limitedBiltyper">
+                                        <button class="btn btn-primary" type="button">Vælg Limited</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="col">
+                            <div class="dropdown">
+                                <button class="dropbtn">Menu</button>
+                                <div class="dropdown-content">
+                                    <a>Opret bruger</a>
+                                    <a>Slet brugere</a>
+                                    <a>Lort</a>
+                                </div>
+                                <input type="text" placeholder="Søg">
+                            </div>
+                        </div>-->
                     </div>
-                    <div class="col">
-                        <div class="card h-100">
-                            <img src="https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/c_fit,e_trim:0,q_80,w_640/v1/bilabonnement-fleet/x1ogl6lsn3shaa9jwhgv"
-                                 class="card-img-top" alt="...">
-                            <div class="card-body expanded-text">
-                                <h5 class="card-title">Bilabonnement<br>Limited<br>Minileasing i 120 dage</h5>
-                                <a href="/limitedBiltyper">
-                                    <button class="btn btn-primary" type="button">Vælg Limited</button>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!--<div class="col">
-                        <div class="dropdown">
-                            <button class="dropbtn">Menu</button>
-                            <div class="dropdown-content">
-                                <a>Opret bruger</a>
-                                <a>Slet brugere</a>
-                                <a>Lort</a>
-                            </div>
-                            <input type="text" placeholder="Søg">
-                        </div>
-                    </div>-->
                 </div>
             </div>
-        </div>
-        <div th:case="'skadeogudbedring'">
-            Hvis man er logget ind som skadeogudbedring
+            <div th:case="'skadeogudbedring'">
+                Hvis man er logget ind som skadeogudbedring
+            </div>
         </div>
         <div th:case="null">
             <form>
