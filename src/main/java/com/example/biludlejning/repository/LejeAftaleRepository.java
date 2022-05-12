@@ -185,6 +185,7 @@ public class LejeAftaleRepository {
         }
 
         String query1 = "SELECT stelnummer, mærke, model, udstyrsniveau, co2udledning, erDS FROM biler WHERE vognnummer= " + lejeAftale.getVognnummer();
+        System.out.println(lejeAftale.getVognnummer());
         int stelnummer = 0;
         String mærke = "";
         String model = "";

@@ -35,43 +35,7 @@
     </div>
         <button class="btn btn-primary btn-lg btn-block" type="submit">Opret lejeaftale</button>
     </form>
-<div>
-    <!-- INGEN IDE OM DET HER VIRKER ENDNU FØR VI KAN OPRETTE KUNDER VIRKER KUN 1. gang brugeren lander på siden med "null"?!?! -->
-    <a href="" id="a">click here to download your file</a>
-    <button th:attr="onclick=${'download('+session.lejekontrakt+', ''lejekontrakt.json'', ''text/json'')'}">Gem lejekontrakt</button>
 </div>
-
-    <!-- Hentet fra: https://stackoverflow.com/questions/13405129/create-and-save-a-file-with-javascript -->
-<script>
-
-    function download(text, name, type) {
-        var a = document.getElementById("a");
-        var file = new Blob([text], {type: type});
-        a.href = URL.createObjectURL(file);
-        a.download = name;
-    }
-
-    /*function download(data, filename, type) {
-
-        var file = new Blob([data], {type: type});
-        if (window.navigator.msSaveOrOpenBlob)
-            window.navigator.msSaveOrOpenBlob(file, filename);
-        else {
-            var a = document.createElement("a"),
-                url = URL.createObjectURL(file);
-            a.href = url;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            setTimeout(function() {
-                document.body.removeChild(a);
-                window.URL.revokeObjectURL(url);
-            }, 0);
-        }
-
-
-    } */
-</script>
-
+</div>
 </body>
 </html>

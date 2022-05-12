@@ -94,6 +94,7 @@ public String sletBruger(@PathVariable("brugernavn") String brugernavn){
     model.addAttribute("enAfHverModel", bilservice.enAfHverModel());
     return "unlimitedBiltyper";
   }
+
   @GetMapping("/limitedBiltyper")
   public String limitedBiltyper() {
     return "limitedBiltyper";
@@ -113,8 +114,7 @@ public String sletBruger(@PathVariable("brugernavn") String brugernavn){
   }
 
   @GetMapping("/opretlejeaftale")
-  public String opretLejeaftale(HttpSession httpSession){
-    httpSession.getAttribute("lejekontrakt");
+  public String opretLejeaftale(){
     return "opretlejeaftale";
   }
 
@@ -122,10 +122,14 @@ public String sletBruger(@PathVariable("brugernavn") String brugernavn){
   public String opretLejekontrakt(@RequestParam int kundeid, @RequestParam int vognnummer, @RequestParam double forskudsbetaling,
                                   @RequestParam double månedligbetaling, @RequestParam int antalbetalinger, HttpSession httpSession){
     LejeAftale lejeAftale = new LejeAftale(kundeid,vognnummer,forskudsbetaling,månedligbetaling,antalbetalinger);
-    String lejekontrakt = kundeOgLejeaftaleService.lavLejeKontrakt(lejeAftale);
-    kundeOgLejeaftaleService.lavLejeaftale(lejeAftale);
-    httpSession.setAttribute("lejekontrakt", lejekontrakt);
-    return "redirect:/opretlejeaftale";
+    httpSession.setAttribute("lejekontrakt", kundeOgLejeaftaleService.lavLejeKontrakt(lejeAftale));
+    return "redirect:/vislejekontrakt";
+  }
+
+  @GetMapping("/vislejekontrakt")
+  public String vislejekontrakt(HttpSession httpSession){
+    httpSession.getAttribute("lejekontrakt");
+    return "/vislejekontrakt";
   }
 
 }
