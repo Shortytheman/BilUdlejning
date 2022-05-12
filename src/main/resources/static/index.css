@@ -10,8 +10,9 @@ h3 {
     font-size: 3vw;
 }
 .logo1 {
-    margin-top: 2%;
-    margin-left: 10%;
+    height: 80px;
+    width: 200px;
+    margin-top: 4%;
     position: absolute;
     cursor: pointer;
 

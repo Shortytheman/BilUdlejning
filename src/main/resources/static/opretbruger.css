@@ -1,7 +1,16 @@
-body{
+body, html {
+ height: 100%;
+ width: 100%;
  background-color: #b1d4e0;
- background-size: cover;
- background-repeat: no-repeat;
+ font-family: arial, sans-serif;
+}
+.logo1 {
+ height: 80px;
+ width: 200px;
+ margin-top: 4%;
+ position: absolute;
+ cursor: pointer;
+
 }
 .container{
  display: flex;
