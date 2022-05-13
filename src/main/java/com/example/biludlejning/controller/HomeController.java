@@ -56,6 +56,8 @@ public class HomeController {
     @GetMapping("/logud")
     public String logud(HttpSession httpSession) {
         httpSession.setAttribute("brugerRolle", null);
+        httpSession.setAttribute("fejlmeddelse","");
+        //Virker branch?
         return "redirect:/";
     }
 
