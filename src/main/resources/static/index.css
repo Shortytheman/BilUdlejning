@@ -65,6 +65,7 @@ button3 {
     left: 50%;
     position: absolute;
     transform: translate(-50%, -50%);
+    z-index: 2;
 }
 .dropbtn {
     background-color: #04AA6D;
@@ -153,5 +154,52 @@ span.detaljer {
 .ramme1 {
     border-radius: 2rem;
 }
-
+.card-body {
+    border-radius: 2rem;
+    box-shadow: 0 5px 30px black;
+}
+.form-control{
+    border: none;
+    width: 80%;
+    border-bottom: 2px solid black;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: transparent;
+    color: black;
+}
+.form-control:focus {
+    outline: none !important;
+    border-bottom: 2px solid rgb(91, 243, 131);
+    font-size: 17px;
+    font-weight: bold;
+    color: black;
+}
+::placeholder {
+    color: white;
+}
+.mb-5 {
+    padding: 3px;
+    margin: 0px 0px 0px 0px;
+    border-style: none;
+    background-color: transparent;
+    color: black;
+    font-size: 18px;
+    font-weight: 550;
+}
+.btn{
+    padding: 10px;
+    width: 150px;
+    border-radius: 20px;
+    background-color: #b1d4e0;
+    border-style: none;
+    color: white;
+    font-weight: 600;
+}
+.btn:hover {
+    background-color: rgba(10, 136, 43, 0.5);
+}
 /* NULL SLUT */
+/* TEST */
+
