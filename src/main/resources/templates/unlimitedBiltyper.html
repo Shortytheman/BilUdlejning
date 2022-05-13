@@ -28,10 +28,10 @@
         <tr th:each="bil : ${modelAntal}">
             <td data-th="Mærke" th:text="${bil.key.getMaerke()}"></td>
             <td data-th="Model" th:text="${bil.key.getModel()}"></td>
-            <td data-th="Antal i alt" th:text="${bil.value.intValue()}"></td>
-            <td data-th="Antal ikke leasede" th:if="${bil.key.isUdlejet()}">10</td>
-            <td data-th="Antal leasede">10</td>
-            <td data-th="Pris på leasede biler i alt">460,935,665 dkk</td>
+            <td data-th="Antal i alt" th:text="${bil.value.getAntalBiler()}"></td>
+            <td data-th="Antal ikke leasede" th:text="${bil.value.getAntalIkkeUdlejede()}"></td>
+            <td data-th="Antal leasede" th:text="${bil.value.getAntalUdlejede()}"></td>
+            <td data-th="Pris på leasede biler i alt">100.000 dkk</td>
         </tr>
     </table>
 

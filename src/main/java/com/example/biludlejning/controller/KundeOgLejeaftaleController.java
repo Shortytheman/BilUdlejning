@@ -42,6 +42,7 @@ public class KundeOgLejeaftaleController {
                                   @RequestParam double månedligbetaling, @RequestParam int antalbetalinger, HttpSession httpSession){
     LejeAftale lejeAftale = new LejeAftale(kundeid,vognnummer,forskudsbetaling,månedligbetaling,antalbetalinger);
     httpSession.setAttribute("lejekontrakt", kundeOgLejeaftaleService.lavLejeKontrakt(lejeAftale));
+    kundeOgLejeaftaleService.lavLejeaftale(lejeAftale);
     return "redirect:/vislejekontrakt";
   }
 
