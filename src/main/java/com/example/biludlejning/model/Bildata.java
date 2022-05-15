@@ -1,77 +1,77 @@
 package com.example.biludlejning.model;
 
 public class Bildata {
-    private String maerke;
-    private String model;
-    private String udstyrsNiveau;
-    private boolean udlejet;
-    private int antalBiler;
-    private int antalUdlejede;
-    private int antalIkkeUdlejede;
+  private String maerke;
+  private String model;
+  private String udstyrsNiveau;
+  private boolean udlejet;
+  private int antalBiler;
+  private int antalUdlejede;
+  private int antalIkkeUdlejede;
 
-    public int getAntalUdlejede() {
-        return antalUdlejede;
-    }
+  public Bildata(String marke, String model, String udstyrsNiveau, boolean udlejet, int antalBiler, int antalUdlejede, int antalIkkeUdlejede) {
+    this.maerke = marke;
+    this.model = model;
+    this.udstyrsNiveau = udstyrsNiveau;
+    this.udlejet = udlejet;
+    this.antalBiler = antalBiler;
+    this.antalUdlejede = antalUdlejede;
+    this.antalIkkeUdlejede = antalIkkeUdlejede;
+  }
 
-    public void setAntalUdlejede(int antalUdlejede) {
-        this.antalUdlejede = antalUdlejede;
-    }
+  public int getAntalUdlejede() {
+    return antalUdlejede;
+  }
 
-    public int getAntalIkkeUdlejede() {
-        return antalIkkeUdlejede;
-    }
+  public void setAntalUdlejede(int antalUdlejede) {
+    this.antalUdlejede = antalUdlejede;
+  }
 
-    public void setAntalIkkeUdlejede(int antalIkkeUdlejede) {
-        this.antalIkkeUdlejede = antalIkkeUdlejede;
-    }
+  public int getAntalIkkeUdlejede() {
+    return antalIkkeUdlejede;
+  }
 
-    public String getMaerke() {
-        return maerke;
-    }
+  public void setAntalIkkeUdlejede(int antalIkkeUdlejede) {
+    this.antalIkkeUdlejede = antalIkkeUdlejede;
+  }
 
-    public void setMaerke(String maerke) {
-        this.maerke = maerke;
-    }
+  public String getMaerke() {
+    return maerke;
+  }
 
-    public String getModel() {
-        return model;
-    }
+  public void setMaerke(String maerke) {
+    this.maerke = maerke;
+  }
 
-    public void setModel(String model) {
-        this.model = model;
-    }
+  public String getModel() {
+    return model;
+  }
 
-    public String getUdstyrsNiveau() {
-        return udstyrsNiveau;
-    }
+  public void setModel(String model) {
+    this.model = model;
+  }
 
-    public void setUdstyrsNiveau(String udstyrsNiveau) {
-        this.udstyrsNiveau = udstyrsNiveau;
-    }
+  public String getUdstyrsNiveau() {
+    return udstyrsNiveau;
+  }
 
-    public boolean isUdlejet() {
-        return udlejet;
-    }
+  public void setUdstyrsNiveau(String udstyrsNiveau) {
+    this.udstyrsNiveau = udstyrsNiveau;
+  }
 
-    public void setUdlejet(boolean udlejet) {
-        this.udlejet = udlejet;
-    }
+  public boolean isUdlejet() {
+    return udlejet;
+  }
 
-    public int getAntalBiler() {
-        return antalBiler;
-    }
+  public void setUdlejet(boolean udlejet) {
+    this.udlejet = udlejet;
+  }
 
-    public void setAntalBiler(int antalBiler) {
-        this.antalBiler = antalBiler;
-    }
+  public int getAntalBiler() {
+    return antalBiler;
+  }
 
-    public Bildata(String marke, String model, String udstyrsNiveau, boolean udlejet, int antalBiler, int antalUdlejede, int antalIkkeUdlejede) {
-        this.maerke = marke;
-        this.model = model;
-        this.udstyrsNiveau = udstyrsNiveau;
-        this.udlejet = udlejet;
-        this.antalBiler = antalBiler;
-        this.antalUdlejede = antalUdlejede;
-        this.antalIkkeUdlejede = antalIkkeUdlejede;
-    }
+  public void setAntalBiler(int antalBiler) {
+    this.antalBiler = antalBiler;
+  }
 }

@@ -129,7 +129,13 @@
             </div>
         </div>
         <div th:case="'skadeogudbedring'">
-            Hvis man er logget ind som skadeogudbedring
+
+            <a href="/lavSkadesrapport">
+                <button class="btn btn-primary" type="button">Opret skadesrapport</button>
+            </a>
+            <a href="/seSkadesrapporter">
+                <button class="btn btn-primary" type="button">Se Skadesrapporter</button>
+            </a>
         </div>
         <div th:case="null">
             <form>
