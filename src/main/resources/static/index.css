@@ -6,9 +6,11 @@ body, html {
     background-color: #b1d4e0;
     font-family: arial, sans-serif;
 }
+
 h3 {
     font-size: 3vw;
 }
+
 .logo1 {
     height: 80px;
     width: 200px;
@@ -17,15 +19,17 @@ h3 {
     cursor: pointer;
 
 }
-.adminnyhed{
+/* Ved ikke helt om der skal være en nyheds tekst på admin siden.
+.adminnyhed {
     font-weight: bold;
     text-align: center;
     justify-content: center;
     position: absolute;
     margin-top: 20%;
     font-family: arial, sans-serif;
-
+*/
 }
+
 button1 {
     height: 50px;
     width: 150px;
@@ -36,6 +40,7 @@ button1 {
     border-bottom: black;
     position: absolute;
 }
+
 button2 {
     height: 50px;
     width: 150px;
@@ -45,21 +50,33 @@ button2 {
     margin-left: 90%;
     position: absolute;
 }
+
 button3 {
     height: 50px;
     width: 150px;
     cursor: pointer;
-    font-family: tahoma;
     margin-top: 2%;
     margin-left: 90%;
     position: absolute;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+    background-color: #04AA6D;
+    font-size: 14px;
 }
+
+.btn3:hover {
+    background-color: #3e8e41;
+}
+
 .billede1 {
     top: 50%;
     left: 50%;
     position: absolute;
     transform: translate(-50%, -50%);
 }
+
 .dropdown {
     top: 20%;
     left: 50%;
@@ -67,6 +84,7 @@ button3 {
     transform: translate(-50%, -50%);
     z-index: 2;
 }
+
 .dropbtn {
     background-color: #04AA6D;
     color: white;
@@ -74,33 +92,45 @@ button3 {
     font-size: 16px;
     border: none;
 }
+
 .dropdown-content {
     display: none;
     position: absolute;
     background-color: #f1f1f1;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
+
 .dropdown-content a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
-.dropdown-content a:hover {background-color: #ddd;}
-.dropdown:hover .dropdown-content {display: block;}
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
 
 /* SLETBRUGERE START */
 
-.sletbrugeretable{
+.sletbrugeretable {
     top: 70%;
     left: 50%;
     position: absolute;
     transform: translate(-50%, -50%);
 
 }
+
 /* SLETBRUGERE SLUT */
 
 /* FORRETNINGSUDVIKLER START */
@@ -108,11 +138,13 @@ button3 {
 span.detaljer {
     display: none;
 }
+
 .semere {
     display: flex;
     justify-content: center;
     font-size: 300%;
 }
+
 .expanded-text:hover span.semere {
     display: none;
 }
@@ -120,25 +152,30 @@ span.detaljer {
 .expanded-text:hover span.detaljer {
     display: block;
 }
+
 .expanded-text {
     box-shadow: inset 0 0 0 0 #54b3d6;
     color: black;
     transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
 }
+
 .expanded-text:hover {
     box-shadow: inset 100000px 0 0 0 #54b3d6;
     color: white;
 }
+
 .card-img-top {
     width: 100%;
     height: 25vw;
     object-fit: cover;
 }
+
 .udvikleroverskrift {
     display: flex;
     justify-content: center;
     text-align: center;
 }
+
 .ramme {
     background-color: white;
     padding: 5px 10px 35px 10px;
@@ -154,11 +191,16 @@ span.detaljer {
 .ramme1 {
     border-radius: 2rem;
 }
+
 .card-body {
     border-radius: 2rem;
     box-shadow: 0 5px 30px black;
 }
-.form-control{
+.form-outline{
+
+}
+
+.form-control {
     border: none;
     width: 80%;
     border-bottom: 2px solid black;
@@ -169,6 +211,7 @@ span.detaljer {
     background-color: transparent;
     color: black;
 }
+
 .form-control:focus {
     outline: none !important;
     border-bottom: 2px solid rgb(91, 243, 131);
@@ -176,9 +219,11 @@ span.detaljer {
     font-weight: bold;
     color: black;
 }
+
 ::placeholder {
     color: white;
 }
+
 .mb-5 {
     padding: 3px;
     margin: 0px 0px 0px 0px;
@@ -188,7 +233,8 @@ span.detaljer {
     font-size: 18px;
     font-weight: 550;
 }
-.btn{
+
+.btn5 {
     padding: 10px;
     width: 150px;
     border-radius: 20px;
@@ -197,9 +243,11 @@ span.detaljer {
     color: white;
     font-weight: 600;
 }
-.btn:hover {
+
+.btn5:hover {
     background-color: rgba(10, 136, 43, 0.5);
 }
+
 /* NULL SLUT */
 /* TEST */
 
