@@ -106,11 +106,11 @@ public class KundeRepository {
                 String by = resultSet.getString("byen");
 
                 kunde = new Kunde();
-                kunde.getNavn();
-                kunde.getEmail();
-                kunde.getAdresse();
-                kunde.getPostnummer();
-                kunde.getBy();
+                kunde.setNavn(navn);
+                kunde.setEmail(email);
+                kunde.setAdresse(adresse);
+                kunde.setPostnummer(postnummer);
+                kunde.setBy(by);
 
             }
         } catch (SQLException e) {
