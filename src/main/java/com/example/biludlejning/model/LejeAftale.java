@@ -15,9 +15,10 @@ public class LejeAftale {
   private int antalBetalinger;
   private double totalAfbetaling;
   private double betalesIalt;
+  private String slutLejeDato;
 
-
-  public LejeAftale(int kundeID, int vognnummer, double forskudsBetaling, double månedligBetaling, int antalBetalinger){
+  public LejeAftale(int kundeID, int vognnummer, double forskudsBetaling, double månedligBetaling, int antalBetalinger,
+                    String slutLejeDato){
     this.kundeID = kundeID;
     this.vognnummer = vognnummer;
     //Sørger for at "dato" altid er dagen kontrakten er lavet.
@@ -31,6 +32,7 @@ public class LejeAftale {
     this.antalBetalinger = antalBetalinger;
     this.totalAfbetaling = antalBetalinger * månedligBetaling;
     this.betalesIalt = (antalBetalinger * månedligBetaling) + forskudsBetaling;
+    this.slutLejeDato = slutLejeDato;
   }
   public LejeAftale() {
   }
@@ -54,6 +56,14 @@ public class LejeAftale {
       }
     }
     return "01" + nyMåned + år;
+  }
+
+  public String getSlutLejeDato() {
+    return slutLejeDato;
+  }
+
+  public void setSlutLejeDato(String slutLejeDato) {
+    this.slutLejeDato = slutLejeDato;
   }
 
   public int getLejeaftaleID() {

@@ -20,7 +20,7 @@ public class LejeAftaleRepository {
     }
 
     public void tilføjLejeAftale(LejeAftale lejeAftale) {
-        String query = "INSERT INTO lejeaftaler(kunde_id, vognnummer, dato, forskudsbetaling, månedligbetaling, førstebetalingsdato, antalbetalinger) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO lejeaftaler(kunde_id, vognnummer, dato, forskudsbetaling, månedligbetaling, førstebetalingsdato, antalbetalinger, slutlejedato) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, lejeAftale.getKundeId());
@@ -30,6 +30,7 @@ public class LejeAftaleRepository {
             preparedStatement.setDouble(5, lejeAftale.getMånedligBetaling());
             preparedStatement.setString(6, lejeAftale.getFørsteBetalingsDato());
             preparedStatement.setInt(7, lejeAftale.getAntalBetalinger());
+            preparedStatement.setString(8,lejeAftale.getSlutLejeDato());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -52,15 +53,17 @@ public class LejeAftaleRepository {
                 double månedligBetaling = resultSet.getDouble("månedligbetaling");
                 String førsteBetalingsDato = resultSet.getString("førstebetalingsdato");
                 int antalBetalinger = resultSet.getInt("antalbetalinger");
+                String slutLejeDato = resultSet.getString("slutlejedaato");
 
                 LejeAftale lejeAftale = new LejeAftale();
-                lejeAftale.getKundeId();
-                lejeAftale.getVognnummer();
-                lejeAftale.getDato();
-                lejeAftale.getForskudsBetaling();
-                lejeAftale.getMånedligBetaling();
-                lejeAftale.getFørsteBetalingsDato();
-                lejeAftale.getAntalBetalinger();
+                lejeAftale.setKunde(kundeID);
+                lejeAftale.setVognnummer(vognnummer);
+                lejeAftale.setDato(dato);
+                lejeAftale.setForskudsBetaling(forskudsBetaling);
+                lejeAftale.setMånedligBetaling(månedligBetaling);
+                lejeAftale.setFørsteBetalingsDato(førsteBetalingsDato);
+                lejeAftale.setAntalBetalinger(antalBetalinger);
+                lejeAftale.setSlutLejeDato(slutLejeDato);
                 lejeAftaler.add(lejeAftale);
             }
         } catch (SQLException e) {
@@ -71,7 +74,7 @@ public class LejeAftaleRepository {
     }
 
     public void opdaterLejeAftale(LejeAftale lejeAftale) {
-        String query = "UPDATE lejeaftaler SET kundeid=?, vognnummer=?, dato=?, forskudsbetaling=?, månedligbetaling=?, førstegangsbetaling=?, antalbetalinger=? WHERE lejeaftaleid=?";
+        String query = "UPDATE lejeaftaler SET kundeid=?, vognnummer=?, dato=?, forskudsbetaling=?, månedligbetaling=?, førstegangsbetaling=?, antalbetalinger=?, slutlejedato=? WHERE lejeaftaleid=?";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -82,6 +85,7 @@ public class LejeAftaleRepository {
             preparedStatement.setDouble(5, lejeAftale.getMånedligBetaling());
             preparedStatement.setString(6, lejeAftale.getFørsteBetalingsDato());
             preparedStatement.setInt(7, lejeAftale.getAntalBetalinger());
+            preparedStatement.setString(8,lejeAftale.getSlutLejeDato());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -107,7 +111,7 @@ public class LejeAftaleRepository {
     public LejeAftale findLejeaftale(int lejeaftaleID) {
         LejeAftale lejeAftale = new LejeAftale();
         String query = "SELECT kundeid, vognnummer, dato, forskudsbetaling, månedligbetaling, førstebetalingsdato," +
-            " antalbetalinger FROM lejeaftaler WHERE lejeaftaleid=?";
+            " antalbetalinger, slutlejedato FROM lejeaftaler WHERE lejeaftaleid=?";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -121,6 +125,7 @@ public class LejeAftaleRepository {
                 double månedligBetaling = resultSet.getDouble("månedligbetaling");
                 String førsteBetalingsDato = resultSet.getString("førstebetalingsdato");
                 int antalBetalinger = resultSet.getInt("antalbetalinger");
+                String slutlejedato = resultSet.getString("slutlejedato");
 
                 lejeAftale = new LejeAftale();
                 lejeAftale.setKunde(kundeID);
@@ -130,6 +135,7 @@ public class LejeAftaleRepository {
                 lejeAftale.setMånedligBetaling(månedligBetaling);
                 lejeAftale.setFørsteBetalingsDato(førsteBetalingsDato);
                 lejeAftale.setAntalBetalinger(antalBetalinger);
+                lejeAftale.setSlutLejeDato(slutlejedato);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -141,7 +147,7 @@ public class LejeAftaleRepository {
     public LejeAftale findlejeAftaleEfterKundeId(int kundeId) {
         LejeAftale lejeAftale = null;
         String query = "SELECT vognnummer, dato, forskudsbetaling, månedligbetaling, førstebetalingsdato," +
-            " antalbetalinger FROM lejeaftaler WHERE kunde_id=?";
+            " antalbetalinger, slutlejedato FROM lejeaftaler WHERE kunde_id=?";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -154,6 +160,7 @@ public class LejeAftaleRepository {
                 double månedligBetaling = resultSet.getDouble("månedligbetaling");
                 String førsteBetalingsDato = resultSet.getString("førstebetalingsdato");
                 int antalBetalinger = resultSet.getInt("antalbetalinger");
+                String slutlejedato = resultSet.getString("slutlejedato");
 
                 lejeAftale = new LejeAftale();
                 lejeAftale.setKunde(kundeId);
@@ -163,6 +170,7 @@ public class LejeAftaleRepository {
                 lejeAftale.setMånedligBetaling(månedligBetaling);
                 lejeAftale.setFørsteBetalingsDato(førsteBetalingsDato);
                 lejeAftale.setAntalBetalinger(antalBetalinger);
+                lejeAftale.setSlutLejeDato(slutlejedato);
             }
         } catch (SQLException e) {
             e.printStackTrace();

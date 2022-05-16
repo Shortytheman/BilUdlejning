@@ -92,7 +92,6 @@ public class BrugerRepository {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
-                String brugernavn = resultSet.getString("brugernavn");
                 String rolle = resultSet.getString("rolle");
                 String kodeord = resultSet.getString("kodeord");
                 bruger = new Bruger(brugerNavn, rolle, kodeord);

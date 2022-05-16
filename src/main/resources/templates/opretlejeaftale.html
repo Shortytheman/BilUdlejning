@@ -11,34 +11,43 @@
 
 <div>
     <div>
-<h3>Opret lejeaftale - udfyld formularen</h3>
-    <button type="button" onclick="java:history.back()" class="btn btn-primary position-absolute top-0 end-0 buttonback">Back</button>
+        <h3>Opret lejeaftale</h3>
+        <button type="button" onclick="java:history.back()"
+                class="btn btn-primary position-absolute top-0 end-0 buttonback">Back
+        </button>
     </div>
-<div class="container">
-    <form class="form" method="post">
-    <div>
-        <input type="number" id="kundeid" name="kundeid" class="form-control form-control-lg"
-               placeholder="Kunde ID"/>
+    <div class="container">
+        <form class="form" method="post">
+            <div>
+                <input type="number" id="kundeid" name="kundeid" class="form-control form-control-lg"
+                       placeholder="Kunde ID"/>
+            </div>
+            <div>
+                <input type="number" id="vognnummer" name="vognnummer" class="form-control form-control-lg"
+                       placeholder="Vognnummer"/>
+            </div>
+            <div>
+                <input type="number" step="any" id="forskudsbetaling" name="forskudsbetaling"
+                       class="form-control form-control-lg"
+                       placeholder="Forskudsbetaling"/>
+            </div>
+            <div>
+                <input type="number" step="any" id="månedligbetaling" name="månedligbetaling"
+                       class="form-control form-control-lg"
+                       placeholder="Månedlig betaling"/>
+            </div>
+            <div>
+                <input type="number" id="antalbetalinger" name="antalbetalinger" class="form-control form-control-lg"
+                       placeholder="Antal betalinger"/>
+            </div>
+            <div>
+                <input type="text" id="slutlejedato" name="slutlejedato"
+                       class="form-control form-control-lg"
+                       placeholder="Slut lejedato (ddmmåå)"/>
+            </div>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Se lejekontrakt med indtastede oplysninger</button>
+        </form>
     </div>
-    <div>
-        <input type="number" id="vognnummer" name="vognnummer" class="form-control form-control-lg"
-               placeholder="Vognnummer"/>
-    </div>
-    <div>
-        <input type="number" step="any" id="forskudsbetaling" name="forskudsbetaling" class="form-control form-control-lg"
-               placeholder="Forskudsbetaling"/>
-    </div>
-    <div>
-        <input type="number" step="any" id="månedligbetaling" name="månedligbetaling" class="form-control form-control-lg"
-               placeholder="Månedlig betaling"/>
-    </div>
-    <div>
-        <input type="number" id="antalbetalinger" name="antalbetalinger" class="form-control form-control-lg"
-               placeholder="Antal betalinger"/>
-    </div>
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Opret lejeaftale</button>
-    </form>
-</div>
 </div>
 </body>
 </html>
