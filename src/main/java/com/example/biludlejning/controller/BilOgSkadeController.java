@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.servlet.http.HttpSession;
 
 @Controller
-public class BilController {
+public class BilOgSkadeController {
   BilService bilservice;
 
-  public BilController(BilService bilservice){
+  public BilOgSkadeController(BilService bilservice){
     this.bilservice = bilservice;
   }
 

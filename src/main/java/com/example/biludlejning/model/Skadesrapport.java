@@ -4,36 +4,44 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 
-public class SkadesRapport {
+public class Skadesrapport {
 
   //https://www.sampleforms.com/damage-report-forms.html for inspiration
 
+  private int skadesrapportId;
   private String medarbejderNavn;
   private String medarbejderEmail;
   private String datoForUdfyldelse;
-  private Bil bil;
-  private LinkedHashMap<String, Double> skadeOgPris; //Key = skade, value = pris på skaden
-  private Kunde kunde;
+  private int vognnummer;
+  private int kundeId;
+  private LinkedHashMap<String,Double> skader;
 
-  public SkadesRapport(String medarbejderNavn, String medarbejderEmail,
-                       Bil bil, LinkedHashMap<String, Double> skadeOgPris, Kunde kunde) {
+  public Skadesrapport(String medarbejderNavn, String medarbejderEmail,
+                       int vognnummer, int kundeId) {
     this.medarbejderNavn = medarbejderNavn;
     this.medarbejderEmail = medarbejderEmail;
     // dataformatter fundet her: https://www.javatpoint.com/java-get-current-date
     DateTimeFormatter datoenIdag = DateTimeFormatter.ofPattern("ddMMyy");
     LocalDateTime nu = LocalDateTime.now();
     this.datoForUdfyldelse = datoenIdag.format(nu);
-    this.bil = bil;
-    this.skadeOgPris = skadeOgPris;
-    this.kunde = kunde;
+    this.vognnummer = vognnummer;
+    this.kundeId = kundeId;
   }
 
-  public LinkedHashMap<String, Double> getSkadeOgPris() {
-    return skadeOgPris;
+  public Skadesrapport(){
+
   }
 
-  public void setSkadeOgPris(LinkedHashMap<String, Double> skadeOgPris) {
-    this.skadeOgPris = skadeOgPris;
+  public void setSkader(LinkedHashMap<String, Double> skader) {
+    this.skader = skader;
+  }
+
+  public void setSkadesrapportId(int skadesrapportId) {
+    this.skadesrapportId = skadesrapportId;
+  }
+
+  public int getSkadesrapportId() {
+    return skadesrapportId;
   }
 
   public String getMedarbejderNavn() {
@@ -60,19 +68,19 @@ public class SkadesRapport {
     this.datoForUdfyldelse = datoForUdfyldelse;
   }
 
-  public Bil getBil() {
-    return bil;
+  public int getVognnummer() {
+    return vognnummer;
   }
 
-  public void setBil(Bil bil) {
-    this.bil = bil;
+  public void setVognnummer(int vognnummer) {
+    this.vognnummer = vognnummer;
   }
 
-  public Kunde getKunde() {
-    return kunde;
+  public int getKundeId() {
+    return kundeId;
   }
 
-  public void setKunde(Kunde kunde) {
-    this.kunde = kunde;
+  public void setKundeId(int kundeId) {
+    this.kundeId = kundeId;
   }
 }
