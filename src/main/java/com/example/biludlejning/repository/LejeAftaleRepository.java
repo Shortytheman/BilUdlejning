@@ -4,10 +4,9 @@ import com.example.biludlejning.model.LejeAftale;
 import com.example.biludlejning.utilities.ConnectionManager;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 @Repository
@@ -30,7 +29,7 @@ public class LejeAftaleRepository {
             preparedStatement.setDouble(5, lejeAftale.getMånedligBetaling());
             preparedStatement.setString(6, lejeAftale.getFørsteBetalingsDato());
             preparedStatement.setInt(7, lejeAftale.getAntalBetalinger());
-            preparedStatement.setString(8,lejeAftale.getSlutLejeDato());
+            preparedStatement.setString(8, lejeAftale.getSlutLejeDato());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -85,7 +84,7 @@ public class LejeAftaleRepository {
             preparedStatement.setDouble(5, lejeAftale.getMånedligBetaling());
             preparedStatement.setString(6, lejeAftale.getFørsteBetalingsDato());
             preparedStatement.setInt(7, lejeAftale.getAntalBetalinger());
-            preparedStatement.setString(8,lejeAftale.getSlutLejeDato());
+            preparedStatement.setString(8, lejeAftale.getSlutLejeDato());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -111,11 +110,11 @@ public class LejeAftaleRepository {
     public LejeAftale findLejeaftale(int lejeaftaleID) {
         LejeAftale lejeAftale = new LejeAftale();
         String query = "SELECT kundeid, vognnummer, dato, forskudsbetaling, månedligbetaling, førstebetalingsdato," +
-            " antalbetalinger, slutlejedato FROM lejeaftaler WHERE lejeaftaleid=?";
+                " antalbetalinger, slutlejedato FROM lejeaftaler WHERE lejeaftaleid=?";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1,lejeaftaleID);
+            preparedStatement.setInt(1, lejeaftaleID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int kundeID = resultSet.getInt("kundeid");
@@ -147,11 +146,11 @@ public class LejeAftaleRepository {
     public LejeAftale findlejeAftaleEfterKundeId(int kundeId) {
         LejeAftale lejeAftale = null;
         String query = "SELECT vognnummer, dato, forskudsbetaling, månedligbetaling, førstebetalingsdato," +
-            " antalbetalinger, slutlejedato FROM lejeaftaler WHERE kunde_id=?";
+                " antalbetalinger, slutlejedato FROM lejeaftaler WHERE kunde_id=?";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1,kundeId);
+            preparedStatement.setInt(1, kundeId);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int vognnummer = resultSet.getInt("vognnummer");
@@ -188,7 +187,7 @@ public class LejeAftaleRepository {
             while (resultSet.next()) {
                 kundenavn = resultSet.getString("navn");
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println("Fejl ved lejekontraktoprettelse" + e);
         }
 
@@ -211,12 +210,12 @@ public class LejeAftaleRepository {
                 co2Udledning = resultSet.getInt("co2Udledning");
                 erDS = resultSet.getBoolean("erDS");
             }
-        } catch (SQLException a){
+        } catch (SQLException a) {
             System.out.println("Fejl ved lejekontraktoprettelse" + a);
         }
 
         String hentHosDs = "";
-        if (erDS){
+        if (erDS) {
             hentHosDs = "ja";
         } else {
             hentHosDs = "nej";
@@ -226,15 +225,87 @@ public class LejeAftaleRepository {
         lejeAftale.findFørsteBetalingsdato();
 
         lejeKontrakt = "-----------Lejekontrakt-----------\n" + "Kontrakt dato: " + lejeAftale.getDato() +
-            "\nUdlejer: Bilabonnement"
-            + "\nLejer: " + kundenavn + "\n\nForskudsbetaling: " + lejeAftale.getForskudsBetaling() +
-            "\nMånedlig betaling: " + lejeAftale.getMånedligBetaling() + "\nførste betaling den: " +
-            lejeAftale.getFørsteBetalingsDato() + ", derefter den 1. i hver måned." + "\nAfbetaling ialt: " +
-            lejeAftale.getTotalAfbetaling() + "\nTil betaling ialt: " + lejeAftale.getBetalesIalt() +
-            "\n\nBil" + "\nMærke: " + mærke + "\nModel: " + model + "\nUdstyrsniveau: " + udstyrsNiveau +
-            "\nStelnummer: " + stelnummer + "\nco2 udledning: " + co2Udledning + " g/km" + "\nAfhentes hos DS forhandler: " + hentHosDs;
+                "\nUdlejer: Bilabonnement"
+                + "\nLejer: " + kundenavn + "\n\nForskudsbetaling: " + lejeAftale.getForskudsBetaling() +
+                "\nMånedlig betaling: " + lejeAftale.getMånedligBetaling() + "\nførste betaling den: " +
+                lejeAftale.getFørsteBetalingsDato() + ", derefter den 1. i hver måned." + "\nAfbetaling ialt: " +
+                lejeAftale.getTotalAfbetaling() + "\nTil betaling ialt: " + lejeAftale.getBetalesIalt() +
+                "\n\nBil" + "\nMærke: " + mærke + "\nModel: " + model + "\nUdstyrsniveau: " + udstyrsNiveau +
+                "\nStelnummer: " + stelnummer + "\nco2 udledning: " + co2Udledning + " g/km" + "\nAfhentes hos DS forhandler: " + hentHosDs;
 
-            return lejeKontrakt;
+        return lejeKontrakt;
     }
-
+    public ArrayList<LejeAftale> slutAftaleAdvarsel() {
+        ArrayList<LejeAftale> udløberSnart = null;
+        String dagsDatoString;
+        DateTimeFormatter datoenIdag = DateTimeFormatter.ofPattern("ddMMyy");
+        LocalDateTime nu = LocalDateTime.now();
+        dagsDatoString = datoenIdag.format(nu);
+        int dagsDatoDag = Integer.parseInt(dagsDatoString.substring(0, 2));
+        int dagsDatoMåned = Integer.parseInt(dagsDatoString.substring(2, 4));
+        int dagsDatoÅr = Integer.parseInt(dagsDatoString.substring(4, 6));
+        for (int i = 0; i < seLejeAftaler().size(); i++) {
+            boolean årMatcher = false;
+            boolean månedMatcher = false;
+            int slutDatoDag = Integer.parseInt(seLejeAftaler().get(i).getSlutLejeDato().substring(0, 2));
+            int slutDatoMåned = Integer.parseInt(seLejeAftaler().get(i).getSlutLejeDato().substring(2, 4));
+            int slutDatoÅr = Integer.parseInt(seLejeAftaler().get(i).getSlutLejeDato().substring(4, 6));
+            if (slutDatoÅr == dagsDatoÅr) {
+                årMatcher = true;
+                if (slutDatoMåned == dagsDatoMåned) {
+                    månedMatcher = true;
+                }
+            }
+            if (årMatcher && månedMatcher) {
+                if (dagsDatoDag < 5) {
+                    udløberSnart.add(seLejeAftaler().get(i));
+                } else if (slutDatoDag - 5 < dagsDatoDag) {
+                    udløberSnart.add(seLejeAftaler().get(i));
+                }
+            }
+            if (slutDatoÅr - 1 == dagsDatoÅr && slutDatoDag < 6 && dagsDatoMåned == 12 && dagsDatoDag > 24) {
+                udløberSnart.add(seLejeAftaler().get(i));
+            }
+            if (årMatcher && !månedMatcher && dagsDatoMåned == slutDatoMåned - 1 && slutDatoDag < 6 && dagsDatoDag > 24) {
+                udløberSnart.add(seLejeAftaler().get(i));
+            }
+        }
+        return udløberSnart;
+    }
+    public boolean slutAftaleAdvarselTest(String dato) {
+        ArrayList<LejeAftale> udløberSnart = null;
+        String dagsDatoString;
+        DateTimeFormatter datoenIdag = DateTimeFormatter.ofPattern("ddMMyy");
+        LocalDateTime nu = LocalDateTime.now();
+        dagsDatoString = datoenIdag.format(nu);
+        int dagsDatoDag = Integer.parseInt(dagsDatoString.substring(0, 2));
+        int dagsDatoMåned = Integer.parseInt(dagsDatoString.substring(2, 4));
+        int dagsDatoÅr = Integer.parseInt(dagsDatoString.substring(4, 6));
+            boolean advarsel = false;
+            boolean årMatcher = false;
+            boolean månedMatcher = false;
+            int slutDatoDag = Integer.parseInt(dato.substring(0,2));
+            int slutDatoMåned = Integer.parseInt(dato.substring(2,4));
+            int slutDatoÅr = Integer.parseInt(dato.substring(4,6));
+            if (slutDatoÅr == dagsDatoÅr) {
+                årMatcher = true;
+                if (slutDatoMåned == dagsDatoMåned) {
+                    månedMatcher = true;
+                }
+            }
+            if (årMatcher && månedMatcher) {
+                if (dagsDatoDag < 5) {
+                    advarsel = true;
+                } else if (slutDatoDag - 5 < dagsDatoDag) {
+                    advarsel = true;
+                }
+            }
+            if (slutDatoÅr - 1 == dagsDatoÅr && slutDatoDag < 6 && dagsDatoMåned == 12 && dagsDatoDag > 24) {
+                advarsel = true;
+            }
+            if (årMatcher && !månedMatcher && dagsDatoMåned == slutDatoMåned - 1 && slutDatoDag < 6 && dagsDatoDag > 24) {
+                advarsel = true;
+            }
+        return advarsel;
+    }
 }
