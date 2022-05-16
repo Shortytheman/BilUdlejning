@@ -1,9 +1,11 @@
 package com.example.biludlejning.controller;
 
 import com.example.biludlejning.service.BilService;
+import com.example.biludlejning.service.SkadeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
@@ -11,8 +13,10 @@ import javax.servlet.http.HttpSession;
 @Controller
 public class BilOgSkadeController {
   BilService bilservice;
+  SkadeService skadeService;
 
-  public BilOgSkadeController(BilService bilservice){
+  public BilOgSkadeController(BilService bilservice, SkadeService skadeService){
+    this.skadeService = skadeService;
     this.bilservice = bilservice;
   }
 
@@ -30,9 +34,10 @@ public class BilOgSkadeController {
     return "limitedBiltyper";
   }
 
-  @GetMapping("/seSkadesrapport")
-  public String seSkadesrapport(){
-    return "seSkadesrapport";
+  @GetMapping("/seSkadesrapporter")
+  public String seSkadesrapporter(Model model){
+    model.addAttribute("skadesrapporter",skadeService.seSkadesrapporter());
+    return "seSkadesrapporter";
   }
 
   @GetMapping("/lavSkadesrapport")
@@ -44,4 +49,11 @@ public class BilOgSkadeController {
   public String lavSkadesrapporten(){
     return "redirect:/";
   }
+
+  @GetMapping("/seskadesrapport/{skadesrapportid}")
+  public String seskadesrapport(@PathVariable("skadesrapportid") int skadesrapportId, Model model){
+    model.addAttribute("skadesrapport",skadeService.findSkadesrapport(skadesrapportId));
+    return "seskadesrapport";
+  }
+
 }

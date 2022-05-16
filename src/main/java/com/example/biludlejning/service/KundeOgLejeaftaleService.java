@@ -13,7 +13,7 @@ public class KundeOgLejeaftaleService {
   LejeAftaleRepository lejeAftaleRepository;
 
 
-  //Lejeadtale metoder
+  //Lejeaftale metoder
   public KundeOgLejeaftaleService(KundeRepository kundeRepository, LejeAftaleRepository lejeAftaleRepository) {
     this.kundeRepository = kundeRepository;
     this.lejeAftaleRepository = lejeAftaleRepository;

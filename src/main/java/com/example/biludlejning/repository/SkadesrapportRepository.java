@@ -53,6 +53,7 @@ public class SkadesrapportRepository {
         int kundeId = resultSet.getInt("kunde_id");
 
         Skadesrapport skadesrapport = new Skadesrapport();
+        skadesrapport.setSkadesrapportId(skadesrapportId);
         skadesrapport.setMedarbejderNavn(medarbejdernavn);
         skadesrapport.setMedarbejderEmail(medarbejderemail);
         skadesrapport.setDatoForUdfyldelse(dato);

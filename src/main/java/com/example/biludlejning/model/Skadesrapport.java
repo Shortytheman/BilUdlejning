@@ -36,6 +36,10 @@ public class Skadesrapport {
     this.skader = skader;
   }
 
+  public LinkedHashMap<String, Double> getSkader() {
+    return skader;
+  }
+
   public void setSkadesrapportId(int skadesrapportId) {
     this.skadesrapportId = skadesrapportId;
   }
