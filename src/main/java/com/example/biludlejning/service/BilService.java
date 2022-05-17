@@ -31,6 +31,9 @@ public class BilService {
   public ArrayList<Bil> enAfHverModel() {
     return bilRepository.enAfHverModel();
   }
+  public LinkedHashMap<String, Double> resterendeBetalingPerModel() {
+    return bilRepository.resterendeBetalingPerModel();
+  }
 
 
 
