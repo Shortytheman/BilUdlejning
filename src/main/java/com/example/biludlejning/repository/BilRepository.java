@@ -3,6 +3,7 @@ package com.example.biludlejning.repository;
 
 import com.example.biludlejning.model.Bil;
 import com.example.biludlejning.model.Bildata;
+import com.example.biludlejning.model.LejeAftale;
 import com.example.biludlejning.utilities.ConnectionManager;
 import org.springframework.stereotype.Repository;
 
@@ -10,8 +11,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.Set;
 
 @Repository
 public class BilRepository {
@@ -203,15 +207,107 @@ public class BilRepository {
         return modelAntal;
     }
     public ArrayList<Bil> enAfHverModel() {
+        System.out.println(seBiler().size());
         ArrayList<Bil> enAfHverModel = seBiler();
+        System.out.println(enAfHverModel.size() + "efter oprettelse");
         for (int i = 0; i < enAfHverModel.size(); i++) {
+            System.out.println(enAfHverModel.size() + "I i-loopet");
             for (int j = i + 1; j < enAfHverModel.size(); j++) {
-                if (seBiler().get(i).getModel().equalsIgnoreCase(seBiler().get(j).getModel())) {
+                System.out.println(enAfHverModel.size() + "i j-loopet");
+                if (enAfHverModel.get(i).getModel().equalsIgnoreCase(seBiler().get(j).getModel())) {
+                    System.out.println(enAfHverModel.size() + "starten af if");
                     enAfHverModel.remove(j);
-                    j--;
+                    j = j - 1;
+                    System.out.println(enAfHverModel.size() + "slutningen af if");
                 }
             }
         }
         return enAfHverModel;
+    }
+    public double manglendeBetalingPerLejeaftale(double månedligBetaling, String slutLejeDato) {
+        String dagsDatoString;
+        DateTimeFormatter datoenIdag = DateTimeFormatter.ofPattern("ddMMyy");
+        LocalDateTime nu = LocalDateTime.now();
+        dagsDatoString = datoenIdag.format(nu);
+        int dagsDatoDag = Integer.parseInt(dagsDatoString.substring(0, 2));
+        int dagsDatoMåned = Integer.parseInt(dagsDatoString.substring(2, 4));
+        int dagsDatoÅr = Integer.parseInt(dagsDatoString.substring(4, 6));
+        int slutDatoDag = Integer.parseInt(slutLejeDato.substring(0,2));
+        int slutDatoMåned = Integer.parseInt(slutLejeDato.substring(2, 4));
+        int slutDatoÅr = Integer.parseInt(slutLejeDato.substring(4, 6));
+
+        int månedCounter;
+        int årCounter;
+        double resterendeBetaling = 0;
+        if (dagsDatoÅr == slutDatoÅr) {
+            månedCounter = slutDatoMåned - dagsDatoMåned;
+            resterendeBetaling = månedligBetaling * månedCounter;
+        } else {
+            årCounter = slutDatoÅr - dagsDatoÅr;
+            månedCounter = 12 - dagsDatoMåned + slutDatoMåned;
+            if (årCounter > 1) {
+                månedCounter += 12 * årCounter - 1;
+            }
+            resterendeBetaling = månedligBetaling * månedCounter;
+        }
+        return resterendeBetaling;
+    }
+    public LinkedHashMap<String, Double> resterendeBetalingPerModel() {
+        LinkedHashMap<String, Double> modelPris = new LinkedHashMap<>();
+
+        ArrayList<Bil> biler = seBiler();
+        ArrayList<LejeAftale> lejeAftaler = new ArrayList<>();
+        String query = "SELECT * FROM lejeaftaler";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int kundeID = resultSet.getInt("kunde_id");
+                int vognnummer = resultSet.getInt("vognnummer");
+                String dato = resultSet.getString("dato");
+                double forskudsBetaling = resultSet.getDouble("forskudsbetaling");
+                double månedligBetaling = resultSet.getDouble("månedligbetaling");
+                String førsteBetalingsDato = resultSet.getString("førstebetalingsdato");
+                int antalBetalinger = resultSet.getInt("antalbetalinger");
+                String slutLejeDato = resultSet.getString("slutlejedato");
+
+                LejeAftale lejeAftale = new LejeAftale();
+                lejeAftale.setKunde(kundeID);
+                lejeAftale.setVognnummer(vognnummer);
+                lejeAftale.setDato(dato);
+                lejeAftale.setForskudsBetaling(forskudsBetaling);
+                lejeAftale.setMånedligBetaling(månedligBetaling);
+                lejeAftale.setFørsteBetalingsDato(førsteBetalingsDato);
+                lejeAftale.setAntalBetalinger(antalBetalinger);
+                lejeAftale.setSlutLejeDato(slutLejeDato);
+                lejeAftaler.add(lejeAftale);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Fejl i fremvisning af lejeaftaler");
+        }
+        ArrayList<Bil> fedGed = enAfHverModel();
+        for (int i = 0; i < fedGed.size(); i++) {
+            modelPris.put(fedGed.get(i).getModel(), 0.0);
+            System.out.println(fedGed.size());
+        }
+        for (int i = 0; i < biler.size(); i++) {
+            double prisCounter = 0.0;
+            for (int j = 0; j < lejeAftaler.size(); j++) {
+                if (biler.get(i).getVognnummer() == lejeAftaler.get(j).getVognnummer()) {
+                    prisCounter = manglendeBetalingPerLejeaftale(lejeAftaler.get(j).getMånedligBetaling(), lejeAftaler.get(j).getSlutLejeDato());
+                }
+            }
+            if (modelPris.containsKey(biler.get(i).getModel())) {
+                prisCounter += modelPris.get(biler.get(i).getModel());
+                modelPris.put(biler.get(i).getModel(), prisCounter);
+            }
+        }
+        Set<String> Keys = modelPris.keySet();
+        for (String key : Keys){
+            System.out.println(key + modelPris.get(key));
+        }
+        return modelPris;
     }
 }

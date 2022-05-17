@@ -21,6 +21,7 @@ public class BilController {
     model.addAttribute("biler", bilservice.seBiler());
     model.addAttribute("modelAntal", bilservice.modelAntal());
     model.addAttribute("enAfHverModel", bilservice.enAfHverModel());
+    model.addAttribute("resterendeBetalingPerModel", bilservice.resterendeBetalingPerModel());
     return "unlimitedBiltyper";
   }
 

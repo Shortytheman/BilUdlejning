@@ -23,7 +23,6 @@
             <th>Antal i alt</th>
             <th>Antal ikke leasede</th>
             <th>Antal leasede</th>
-            <th>Pris på leasede biler i alt</th>
         </tr>
         <tr th:each="bil : ${modelAntal}">
             <td data-th="Mærke" th:text="${bil.key.getMaerke()}"></td>
@@ -31,7 +30,16 @@
             <td data-th="Antal i alt" th:text="${bil.value.getAntalBiler()}"></td>
             <td data-th="Antal ikke leasede" th:text="${bil.value.getAntalIkkeUdlejede()}"></td>
             <td data-th="Antal leasede" th:text="${bil.value.getAntalUdlejede()}"></td>
-            <td data-th="Pris på leasede biler i alt">100.000 dkk</td>
+        </tr>
+    </table>
+    <table class="rwd-table">
+        <tr>
+            <th>Model</th>
+            <th>Restende indkomst fra mnd. betalinger</th>
+        </tr>
+        <tr th:each="model : ${resterendeBetalingPerModel}">
+            <td data-th="Model" th:text="${model.getKey()}"></td>
+            <td data-th="Restende indkomst fra mnd. betalinger" th:text="${model.getValue()}"></td>
         </tr>
     </table>
 
