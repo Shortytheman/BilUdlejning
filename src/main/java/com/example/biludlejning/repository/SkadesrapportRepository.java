@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
@@ -23,12 +25,17 @@ public class SkadesrapportRepository {
   }
 
   public void tilføjSkadesrapport(Skadesrapport skadesrapport) {
+
+    DateTimeFormatter datoenIdag = DateTimeFormatter.ofPattern("ddMMyy");
+    LocalDateTime nu = LocalDateTime.now();
+    String dato = datoenIdag.format(nu);
+
     String query = "INSERT INTO skadesrapporter(medarbejdernavn, medarbejderemail, datoforudfyldelse, vognnummer, kunde_id) VALUES (?, ?, ?, ?, ?)";
     try {
       PreparedStatement preparedStatement = connection.prepareStatement(query);
       preparedStatement.setString(1,skadesrapport.getMedarbejderNavn());
       preparedStatement.setString(2, skadesrapport.getMedarbejderEmail());
-      preparedStatement.setString(3, skadesrapport.getDatoForUdfyldelse());
+      preparedStatement.setString(3, dato);
       preparedStatement.setInt(4,skadesrapport.getVognnummer());
       preparedStatement.setInt(5,skadesrapport.getKundeId());
       preparedStatement.executeUpdate();
@@ -36,6 +43,14 @@ public class SkadesrapportRepository {
       e.printStackTrace();
       System.out.println("Fejl i oprettelse af skadesrapport: " + e);
     }
+
+    Skade skade1 = new Skade("skade1",skadesrapport.getSkader().get("skade1"),skadesrapport.getSkadesrapportId());
+    Skade skade2 = new Skade("skade2",skadesrapport.getSkader().get("skade2"),skadesrapport.getSkadesrapportId());
+    Skade skade3 = new Skade("skade3",skadesrapport.getSkader().get("skade3"),skadesrapport.getSkadesrapportId());
+    tilføjSkade(skade1);
+    tilføjSkade(skade2);
+    tilføjSkade(skade3);
+
   }
 
   public ArrayList<Skadesrapport> seSkadesrapporter() {
@@ -110,11 +125,12 @@ public class SkadesrapportRepository {
         String dato = resultSet.getString("datoforudfyldelse");
         int vognnummer = resultSet.getInt("vognnummer");
         int kundeId = resultSet.getInt("kunde_id");
-
+        skadesrapport.setSkadesrapportId(skadesrapportId);
         skadesrapport.setMedarbejderNavn(medarbejderNavn);
         skadesrapport.setMedarbejderEmail(medarbejderEmail);
         skadesrapport.setVognnummer(vognnummer);
         skadesrapport.setKundeId(kundeId);
+        skadesrapport.setDatoForUdfyldelse(dato);
         LinkedHashMap<String, Double> skader = new LinkedHashMap<>();
         for (int i = 0; i < findSkader(skadesrapportId).size(); i++){
           skader.put(findSkader(skadesrapportId).get(i).getSkadeBeskrivelse(),findSkader(skadesrapportId).get(i).getPris());
