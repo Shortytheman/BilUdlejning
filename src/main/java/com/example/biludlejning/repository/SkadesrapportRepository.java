@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.Set;
 
 @Repository
 public class SkadesrapportRepository {
@@ -44,13 +45,10 @@ public class SkadesrapportRepository {
       System.out.println("Fejl i oprettelse af skadesrapport: " + e);
     }
 
-    Skade skade1 = new Skade("skade1",skadesrapport.getSkader().get("skade1"),skadesrapport.getSkadesrapportId());
-    Skade skade2 = new Skade("skade2",skadesrapport.getSkader().get("skade2"),skadesrapport.getSkadesrapportId());
-    Skade skade3 = new Skade("skade3",skadesrapport.getSkader().get("skade3"),skadesrapport.getSkadesrapportId());
-    tilføjSkade(skade1);
-    tilføjSkade(skade2);
-    tilføjSkade(skade3);
-
+    Set<String> Keys = skadesrapport.getSkader().keySet();
+    for (String key : Keys){
+      tilføjSkade(new Skade(key,skadesrapport.getSkader().get(key),findSkadesrapportMedVognnummer(skadesrapport.getVognnummer()).getSkadesrapportId()));
+    }
   }
 
   public ArrayList<Skadesrapport> seSkadesrapporter() {
@@ -177,4 +175,39 @@ public class SkadesrapportRepository {
       System.out.println("Fejl i oprettelse af skade: " + e);
     }
   }
+
+  public Skadesrapport findSkadesrapportMedVognnummer(int vognnummer) {
+    Skadesrapport skadesrapport = new Skadesrapport();
+    String query = "SELECT skadesrapport_id, medarbejdernavn, medarbejderemail, datoforudfyldelse, vognnummer, kunde_id FROM skadesrapporter WHERE vognnummer=?";
+
+    try {
+      PreparedStatement preparedStatement = connection.prepareStatement(query);
+      preparedStatement.setInt(1,vognnummer);
+      ResultSet resultSet = preparedStatement.executeQuery();
+      while (resultSet.next()) {
+        int skadesrapportId = resultSet.getInt("skadesrapport_id");
+        String medarbejderNavn = resultSet.getString("medarbejdernavn");
+        String medarbejderEmail = resultSet.getString("medarbejderemail");
+        String dato = resultSet.getString("datoforudfyldelse");
+        int vognnummerr = resultSet.getInt("vognnummer");
+        int kundeId = resultSet.getInt("kunde_id");
+        skadesrapport.setSkadesrapportId(skadesrapportId);
+        skadesrapport.setMedarbejderNavn(medarbejderNavn);
+        skadesrapport.setMedarbejderEmail(medarbejderEmail);
+        skadesrapport.setVognnummer(vognnummer);
+        skadesrapport.setKundeId(kundeId);
+        skadesrapport.setDatoForUdfyldelse(dato);
+        LinkedHashMap<String, Double> skader = new LinkedHashMap<>();
+        for (int i = 0; i < findSkader(skadesrapportId).size(); i++){
+          skader.put(findSkader(skadesrapportId).get(i).getSkadeBeskrivelse(),findSkader(skadesrapportId).get(i).getPris());
+        }
+        skadesrapport.setSkader(skader);
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      System.out.println("Forkert vognnummer ved skadesrapport. Prøv igen. " + e);
+    }
+    return skadesrapport;
+  }
+
 }

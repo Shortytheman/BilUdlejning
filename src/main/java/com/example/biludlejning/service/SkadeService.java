@@ -28,5 +28,4 @@ public class SkadeService {
   public void lavSkadesrapport(Skadesrapport skadesrapport){
     skadesrapportRepository.tilføjSkadesrapport(skadesrapport);
   }
-
 }
