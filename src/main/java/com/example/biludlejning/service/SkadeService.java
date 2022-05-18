@@ -28,4 +28,9 @@ public class SkadeService {
   public void lavSkadesrapport(Skadesrapport skadesrapport){
     skadesrapportRepository.tilføjSkadesrapport(skadesrapport);
   }
+
+  public double findTotalSkadePris(int skadesrapportId){
+    return skadesrapportRepository.totalSkadePris(skadesrapportId);
+  }
+
 }

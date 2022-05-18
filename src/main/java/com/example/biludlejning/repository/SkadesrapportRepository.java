@@ -194,7 +194,7 @@ public class SkadesrapportRepository {
         skadesrapport.setSkadesrapportId(skadesrapportId);
         skadesrapport.setMedarbejderNavn(medarbejderNavn);
         skadesrapport.setMedarbejderEmail(medarbejderEmail);
-        skadesrapport.setVognnummer(vognnummer);
+        skadesrapport.setVognnummer(vognnummerr);
         skadesrapport.setKundeId(kundeId);
         skadesrapport.setDatoForUdfyldelse(dato);
         LinkedHashMap<String, Double> skader = new LinkedHashMap<>();
@@ -210,4 +210,11 @@ public class SkadesrapportRepository {
     return skadesrapport;
   }
 
+  public double totalSkadePris(int skadesrapportId){
+    double totalpris = 0.0;
+    for (int i = 0; i < findSkader(skadesrapportId).size();i++) {
+      totalpris += findSkader(skadesrapportId).get(i).getPris();
+    }
+    return totalpris;
+  }
 }

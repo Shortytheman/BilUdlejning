@@ -70,6 +70,7 @@ public class BilOgSkadeController {
   @GetMapping("/seskadesrapport/{skadesrapportid}")
   public String seskadesrapport(@PathVariable("skadesrapportid") int skadesrapportId, Model model){
     model.addAttribute("skadesrapport",skadeService.findSkadesrapport(skadesrapportId));
+    model.addAttribute("totalskadepris",skadeService.findTotalSkadePris(skadesrapportId));
     return "seskadesrapport";
   }
 }

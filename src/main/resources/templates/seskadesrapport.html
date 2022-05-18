@@ -25,14 +25,20 @@
     <th>
         pris:
     </th>
+    <th>
+        Total skadepris:
+    </th>
 </tr>
     </thead>
 
 <tr class="border" th:each="skade : ${skadesrapport.getSkader()}">
     <td th:text="${skade.getKey()}">
     </td>
-    <td class="gg" th:text="${skade.getValue()}">
+    <td th:text="${skade.getValue()}">
 </table>
-
+<div>
+    <h4>Total skadepris:</h4>
+<div th:text="${totalskadepris}"></div>
+</div>
 </body>
 </html>
