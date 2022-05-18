@@ -75,8 +75,8 @@ public class BilOgSkadeController {
     return "tilføjbil";
   }
 
-  @PostMapping("/tilføjbil")
-  public String tilføjbil(@RequestParam int vognnummer, @RequestParam int stelnummer, @RequestParam String mærke,
+  @PostMapping("/tilføjbilen")
+  public String tilføjbilen(@RequestParam int vognnummer, @RequestParam int stelnummer, @RequestParam String mærke,
                           @RequestParam String model, @RequestParam String udstyrsniveau, @RequestParam int co2udledning){
     Bil bil = new Bil();
     bil.setVognnummer(vognnummer);

@@ -11,23 +11,23 @@
 <body>
 
 <div>
-  <a th:href="@{'/logud'}">
-    <button class="btn btn-primary btn-lg btn-block">Log ud</button>
-  </a>
+  <button type="button" onclick="java:history.back()"
+          class="btn btn-primary position-absolute top-0 end-0 buttonback">Back
+  </button>
 </div>
 <div class="container">
-  <div class="container position-absolute top-50 start-50 translate-middle card shadow-2-strong ramme">
+  <div class="container position-absolute top-0 start-50 translate-middle-x card shadow-2-strong ramme">
     <h3 class="udvikleroverskrift">Hvilken bil skal oprettes?</h3>
-    <div class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="row row-cols-3 row-cols-md-3 g-4">
       <div class="col">
         <div class="card h-100">
           <img src="https://res.cloudinary.com/digital-interdan-bilabonnement/image/upload/c_fit,e_trim:0,q_80,w_640/v1/bilabonnement-fleet/kig2vudntj1i1ayban8w"
                class="card-img-top" alt="...">
           <div class="card-body expanded-text">
             <h5 class="card-title overskrift">Peugeot 208<br>Active pack<br>co2 udledning: 122 g/km<br></h5>
-            <input type="number" id="vognnummer" name="vognnummer"
+            <input type="number" id="vognnummer1" name="vognnummer"
                    class="form-control form-control-lg" placeholder="Vognnummer"/>
-            <input type="number" id="stelnummer" name="stelnummer"
+            <input type="number" id="stelnummer1" name="stelnummer"
                    class="form-control form-control-lg" placeholder="Stelnummer"/>
             <a href="/Tilføjbil?!">
               <button class="btn btn-primary" type="button">Tilføj bil</button>
@@ -41,9 +41,9 @@
                class="card-img-top" alt="...">
           <div class="card-body expanded-text">
             <h5 class="card-title overskrift">Peugeot 208<br>Active pack<br>co2 udledning: 122 g/km<br></h5>
-            <input type="number" id="vognnummer" name="vognnummer"
+            <input type="number" id="vognnummer2" name="vognnummer"
                    class="form-control form-control-lg" placeholder="Vognnummer"/>
-            <input type="number" id="stelnummer" name="stelnummer"
+            <input type="number" id="stelnummer2" name="stelnummer"
                    class="form-control form-control-lg" placeholder="Stelnummer"/>
             <a href="/Tilføjbil?!">
               <button class="btn btn-primary" type="button">Tilføj bil</button>
