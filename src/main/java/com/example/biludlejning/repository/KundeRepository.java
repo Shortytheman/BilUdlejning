@@ -63,18 +63,6 @@ public class KundeRepository {
         return kunder;
     }
 
-    public void sletKundeMedId(int kundeId) {
-        // DB kald som sletter kunde fra DB.
-        ArrayList<Kunde> kunder = new ArrayList<>();
-        try {
-            String query = "DELETE FROM kunder WHERE kunde_id = " + kundeId;
-            Statement statement = connection.createStatement();
-            statement.executeQuery(query);
-        } catch (SQLException e) {
-            System.out.println("Fejl ved sletning af kunde" + e);
-        }
-    }
-
     public void opdaterKunde(Kunde kunde) {
         // DB kald som opdaterer kunde i DB. - evetuelt opdaterer rolle eller kode.
         try {
@@ -89,6 +77,18 @@ public class KundeRepository {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Fejl ved opdatering af kunde" + e);
+        }
+    }
+
+    public void sletKundeMedId(int kundeId) {
+        // DB kald som sletter kunde fra DB.
+        ArrayList<Kunde> kunder = new ArrayList<>();
+        try {
+            String query = "DELETE FROM kunder WHERE kunde_id = " + kundeId;
+            Statement statement = connection.createStatement();
+            statement.executeQuery(query);
+        } catch (SQLException e) {
+            System.out.println("Fejl ved sletning af kunde" + e);
         }
     }
 

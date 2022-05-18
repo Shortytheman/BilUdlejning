@@ -1,3 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+/* GENEREL START */
+
+html, body {
+    height: 100%;
+    width: 100%;
+    background-color: #b1d4e0;
+    font-family: Montserrat, sans-serif;
+}
+
+h2 {
+    font-family: Montserrat, sans-serif;
+}
+
+
+/* GENEREL SLUT */
+
 .skadesrapportForm{
     display: inline-flex;
     width: 100%;

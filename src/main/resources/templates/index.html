@@ -118,27 +118,48 @@
             </div>
         </div>
         <div th:case="'skadeogudbedring'">
-
-            <a href="/lavSkadesrapport">
-                <button class="btn btn-primary" type="button">Opret skadesrapport</button>
-            </a>
-            <a href="/seSkadesrapporter">
-                <button class="btn btn-primary" type="button">Se Skadesrapporter</button>
-            </a>
+            <div>
+                <a th:href="@{'/logud'}">
+                    <button3 class="btn btn-primary btn-lg btn-block">Log ud</button3>
+                </a>
+            </div>
+            <form method="post">
+                <section class="vh-100">
+                    <div class="container py-5 h-100 w3-animate-zoom">
+                        <div class="row d-flex justify-content-center align-items-center h-100">
+                            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                                <div class="card shadow-2-strong ramme1">
+                                    <div class="card-body p-5 text-center">
+                                        <h3 class="mb-4">Skade og udbedring</h3>
+                                        <div class="skadeborder">
+                                            <div class="form-outline mb-4">
+                                                <a href="/lavSkadesrapport">
+                                                    <button class="btn btn-primary btn-lg" type="button">Opret
+                                                        skadesrapport
+                                                    </button>
+                                                </a>
+                                            </div>
+                                            <div class="form-outline mb-4">
+                                                <a href="/seSkadesrapporter">
+                                                    <button class="btn btn-primary btn-lg" type="button">Se
+                                                        Skadesrapporter
+                                                    </button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </form>
         </div>
         <div th:case="null">
             <form>
                 <div>
                     <img src="https://i.imgur.com/Agy8PG1.png" class="billede1">
                 </div>
-                <!--Skal muligvis fjernes permanent @Frederik
-
-                                <div>
-                                    <a href="/opretbruger">
-                                        <button1 class="btn btn-primary btn-lg btn-block" type="submit">Opret bruger</button1>
-                                    </a>
-                                </div>
-                                -->
             </form>
             <form method="post">
                 <section class="vh-100">

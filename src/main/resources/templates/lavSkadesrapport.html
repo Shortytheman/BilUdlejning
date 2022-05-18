@@ -9,52 +9,61 @@
     <title>Lav skadesrapport</title>
 </head>
 <body>
-
-<form class="form" method="post" >
-    <div>
-        <input type="text" id="medarbejdernavn" name="medarbejdernavn" class="form-control form-control-lg"
-        placeholder="Medarbejders navn"/>
+<div class="position-absolute top-50 start-50 translate-middle">
+    <div class="container py-5 h-100 w3-animate-zoom">
+        <form class="form" method="post">
+            <h2>Udfyld rapport</h2>
+            <div>
+                <input type="text" id="medarbejdernavn" name="medarbejdernavn" class="form-control form-control-lg"
+                       placeholder="Medarbejders navn"/>
+            </div>
+            <div>
+                <input type="text" id="medarbejderemail" name="medarbejderemail" class="form-control form-control-lg"
+                       placeholder="Medarbejders Email"/>
+            </div>
+            <div>
+                <input type="number" id="vognnummer" name="vognnummer" class="form-control form-control-lg"
+                       placeholder="Bilens vognnummer"/>
+            </div>
+            <div>
+                <div class="skadesrapportForm">
+                    <input type="text" id="skade1" name="skade1" class="form-control form-control-lg"
+                           placeholder="Skade"/>
+                    <input type="number" step="any" id="pris1" name="pris1" class="form-control form-control-lg"
+                           placeholder="Pris1"/>
+                </div>
+            </div>
+            <div>
+                <div class="skadesrapportForm">
+                    <input type="text" id="skade2" name="skade2" class="form-control form-control-lg"
+                           placeholder="Skade"/>
+                    <input type="number" step="any" id="pris2" name="pris2" class="form-control form-control-lg"
+                           placeholder="Pris2"/>
+                </div>
+            </div>
+            <div>
+                <div class="skadesrapportForm">
+                    <input type="text" id="skade3" name="skade3" class="form-control form-control-lg"
+                           placeholder="Skade"/>
+                    <input type="number" step="any" id="pris3" name="pris3" class="form-control form-control-lg"
+                           placeholder="Pris3"/>
+                </div>
+            </div>
+            <div>
+                <input type="number" id="kundeid" name="kundeid" class="form-control form-control-lg"
+                       placeholder="Kunde ID"/>
+            </div>
+            <div>
+                <br>
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Lav skadesrapport</button>
+                <button class="btn btn-primary btn-lg btn-black" id="tilbage" type="button"
+                        onclick="java:history.back()">
+                    Tilbage
+                </button>
+            </div>
+        </form>
     </div>
-    <div>
-        <input type="text" id="medarbejderemail" name="medarbejderemail" class="form-control form-control-lg"
-        placeholder="Medarbejders Email"/>
-    </div>
-    <div>
-        <input type="number" id="vognnummer" name="vognnummer" class="form-control form-control-lg"
-        placeholder="Bilens vognnummer"/>
-    </div>
-    <div>
-    <div class="skadesrapportForm">
-        <input type="text" id="skade1" name="skade1" class="form-control form-control-lg"
-               placeholder="Skade"/>
-        <input type="number" step="any" id="pris1" name="pris1" class="form-control form-control-lg"
-               placeholder="Pris1"/>
-    </div>
-    </div>
-    <div>
-    <div class="skadesrapportForm">
-        <input type="text" id="skade2" name="skade2" class="form-control form-control-lg"
-               placeholder="Skade"/>
-        <input type="number" step="any" id="pris2" name="pris2" class="form-control form-control-lg"
-               placeholder="Pris2"/>
-    </div>
-    </div>
-    <div>
-    <div class="skadesrapportForm">
-        <input type="text" id="skade3" name="skade3" class="form-control form-control-lg"
-               placeholder="Skade"/>
-        <input type="number" step="any" id="pris3" name="pris3" class="form-control form-control-lg"
-               placeholder="Pris3"/>
-    </div>
-    </div>
-    <div>
-        <input type="number" id="kundeid" name="kundeid" class="form-control form-control-lg"
-        placeholder="Kunde ID"/>
-    </div>
-    <div>
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Lav skadesrapport</button>
-    </div>
-</form>
+</div>
 
 </body>
 </html>

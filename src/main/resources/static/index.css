@@ -4,7 +4,7 @@ body, html {
     height: 100%;
     width: 100%;
     background-color: #b1d4e0;
-    font-family: arial, sans-serif;
+    font-family: Montserrat, sans-serif;
 }
 
 h3 {
@@ -187,6 +187,17 @@ span.detaljer {
 }
 
 /* FORRETNINGSUDVIKLER SLUT */
+
+/* SKADE START */
+
+.skadeborder {
+    border-top: 2px solid black;
+    padding-top: 15px;
+}
+
+
+
+/* SKADE SLUT */
 
 /* NULL START */
 

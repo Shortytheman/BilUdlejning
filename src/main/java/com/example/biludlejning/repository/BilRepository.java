@@ -160,6 +160,7 @@ public class BilRepository {
         }
         return bil;
     }
+
     public ArrayList<Bil> retunerBilEfterModel(String model) {
         ArrayList<Bil> biler = seBiler();
         ArrayList<Bil> bilerEfterModel = new ArrayList<>();
@@ -170,6 +171,7 @@ public class BilRepository {
         }
         return bilerEfterModel;
     }
+
     public LinkedHashMap<Bil, Bildata> modelAntal() {
         LinkedHashMap<Bil, Bildata> modelAntal = new LinkedHashMap<>();
         ArrayList<Bil> tempBil = seBiler();
@@ -202,6 +204,7 @@ public class BilRepository {
         }
         return modelAntal;
     }
+
     public ArrayList<Bil> enAfHverModel() {
         ArrayList<Bil> enAfHverModel = seBiler();
         for (int i = 0; i < enAfHverModel.size(); i++) {
