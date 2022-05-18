@@ -9,9 +9,10 @@ body, html {
 
 h3 {
     font-size: 3vw;
+    font-family: Montserrat, sans-serif;
 }
 h6 {
-    font-size: 2vw;
+    font-size: 18px;
     font-family: Montserrat, sans-serif;
 }
 
@@ -145,9 +146,7 @@ button2 {
 
 /* DATAREGISTRERING START*/
 
-.databorder {
-    border-top: 2px solid black;
-}
+
 .ramme2 {
     width: 500px;
     height: 400px;
@@ -214,10 +213,6 @@ span.detaljer {
 /* FORRETNINGSUDVIKLER SLUT */
 
 /* SKADE START */
-
-.skadeborder {
-    border-top: 2px solid black;
-}
 
 
 
