@@ -300,10 +300,6 @@ public class BilRepository {
                 modelPris.put(biler.get(i).getModel(), prisCounter);
             }
         }
-        Set<String> Keys = modelPris.keySet();
-        for (String key : Keys){
-            System.out.println(key + modelPris.get(key));
-        }
         return modelPris;
     }
 }
