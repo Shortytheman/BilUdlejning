@@ -1,0 +1,48 @@
+span.detaljer {
+    display: none;
+}
+
+.semere {
+    display: flex;
+    justify-content: center;
+    font-size: 300%;
+}
+
+.expanded-text:hover span.semere {
+    display: none;
+}
+
+.expanded-text:hover span.detaljer {
+    display: block;
+}
+
+.expanded-text {
+    box-shadow: inset 0 0 0 0 #54b3d6;
+    color: black;
+    transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+}
+
+.expanded-text:hover {
+    box-shadow: inset 100000px 0 0 0 #54b3d6;
+    color: white;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 25vw;
+    object-fit: cover;
+}
+
+.udvikleroverskrift {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.ramme {
+    background-color: white;
+    padding: 5px 10px 35px 10px;
+    margin-top: 3%;
+    opacity: 01;
+    border-radius: 2rem;
+}

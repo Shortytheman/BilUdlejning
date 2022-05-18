@@ -1,5 +1,6 @@
 package com.example.biludlejning.controller;
 
+import com.example.biludlejning.model.Bil;
 import com.example.biludlejning.model.Skadesrapport;
 import com.example.biludlejning.service.BilService;
 import com.example.biludlejning.service.SkadeService;
@@ -73,4 +74,24 @@ public class BilOgSkadeController {
     model.addAttribute("totalskadepris",skadeService.findTotalSkadePris(skadesrapportId));
     return "seskadesrapport";
   }
+
+  @GetMapping("/tilføjbil")
+  public String tilføjBil(){
+    return "tilføjbil";
+  }
+
+  @PostMapping("/tilføjbil")
+  public String tilføjbil(@RequestParam int vognnummer, @RequestParam int stelnummer, @RequestParam String mærke,
+                          @RequestParam String model, @RequestParam String udstyrsniveau, @RequestParam int co2udledning){
+    Bil bil = new Bil();
+    bil.setVognnummer(vognnummer);
+    bil.setStelnummer(stelnummer);
+    bil.setMærke(mærke);
+    bil.setModel(model);
+    bil.setUdstyrsNiveau(udstyrsniveau);
+    bil.setCo2Udledning(co2udledning);
+    bilservice.tilføjBil(bil);
+    return "redirect:/tilføjbil";
+  }
+
 }

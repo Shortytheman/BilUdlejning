@@ -34,9 +34,9 @@ public class BilService {
   public LinkedHashMap<String, Double> resterendeBetalingPerModel() {
     return bilRepository.resterendeBetalingPerModel();
   }
-
-
-
+  public void tilføjBil(Bil bil){
+    bilRepository.tilføjBil(bil);
+  }
 
 
 }
