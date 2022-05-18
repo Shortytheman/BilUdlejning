@@ -10,6 +10,10 @@ body, html {
 h3 {
     font-size: 3vw;
 }
+h6 {
+    font-size: 2vw;
+    font-family: Montserrat, sans-serif;
+}
 
 .logo1 {
     height: 80px;
@@ -48,6 +52,10 @@ button2 {
     margin-top: 2%;
     margin-left: 90%;
     position: absolute;
+}
+
+.indexknap {
+    width: 300px;
 }
 
 .btn3 {
@@ -135,6 +143,23 @@ button2 {
 
 /* SLETBRUGERE SLUT */
 
+/* DATAREGISTRERING START*/
+
+.databorder {
+    border-top: 2px solid black;
+}
+.ramme2 {
+    width: 500px;
+    height: 400px;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+
+/* DATAREGISTRERING SLUT */
+
 /* FORRETNINGSUDVIKLER START */
 
 span.detaljer {
@@ -192,7 +217,6 @@ span.detaljer {
 
 .skadeborder {
     border-top: 2px solid black;
-    padding-top: 15px;
 }
 
 
