@@ -35,11 +35,13 @@ public class BilRepository {
             preparedStatement.setInt(2, bil.getStelnummer());
             preparedStatement.setString(3, bil.getMaerke());
             preparedStatement.setString(4, bil.getModel());
-            preparedStatement.setInt(5, bil.getStålpris());
-            preparedStatement.setInt(6, bil.getCo2Udledning());
-            preparedStatement.setBoolean(7, bil.isUdlejet());
-            preparedStatement.setString(8, bil.getUdlejningsdato());
-            preparedStatement.setBoolean(9, bil.isErDS());
+            preparedStatement.setString(5, bil.getUdstyrsNiveau());
+            preparedStatement.setInt(6,bil.getStålpris());
+            preparedStatement.setInt(7,bil.getRegAfgift());
+            preparedStatement.setInt(8, bil.getCo2Udledning());
+            preparedStatement.setBoolean(9, bil.isUdlejet());
+            preparedStatement.setString(10, bil.getUdlejningsdato());
+            preparedStatement.setBoolean(11, bil.isErDS());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
