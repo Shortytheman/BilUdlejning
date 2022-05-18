@@ -16,19 +16,13 @@ public class BilController {
     this.bilservice = bilservice;
   }
 
-  @GetMapping("/unlimitedBiltyper")
-  public String unlimitedBiltyper(Model model) {
+  @GetMapping("/fudvikler")
+  public String fudvikler(Model model) {
     model.addAttribute("biler", bilservice.seBiler());
     model.addAttribute("modelAntal", bilservice.modelAntal());
     model.addAttribute("enAfHverModel", bilservice.enAfHverModel());
     model.addAttribute("resterendeBetalingPerModel", bilservice.resterendeBetalingPerModel());
-    return "unlimitedBiltyper";
-  }
-
-  @GetMapping("/limitedBiltyper")
-  public String limitedBiltyper(HttpSession httpSession) {
-    httpSession.getAttribute("brugerrolle");
-    return "limitedBiltyper";
+    return "fudvikler";
   }
 
   @GetMapping("/seSkadesrapport")
