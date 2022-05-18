@@ -21,6 +21,13 @@ body, html {
  color: black;
 }
 
+.opretbrugeretable {
+ box-shadow: 0 5px 30px black;
+ background-color: white;
+ width: 400px;
+ height: 400px;
+}
+
 /* GENEREL SLUT */
 
 .logo1 {

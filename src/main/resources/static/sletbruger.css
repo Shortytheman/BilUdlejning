@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
-
 body, html {
     height: 100%;
     width: 100%;
@@ -8,6 +7,9 @@ body, html {
     font-family: Montserrat, sans-serif;
 }
 
-.sletborder {
-
+.sletbrugeretable {
+    box-shadow: 0 5px 30px black;
+    background-color: white;
+    width: 400px;
+    height: 400px;
 }
