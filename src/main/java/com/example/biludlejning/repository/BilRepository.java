@@ -212,16 +212,11 @@ public class BilRepository {
     public ArrayList<Bil> enAfHverModel() {
         System.out.println(seBiler().size());
         ArrayList<Bil> enAfHverModel = seBiler();
-        System.out.println(enAfHverModel.size() + "efter oprettelse");
         for (int i = 0; i < enAfHverModel.size(); i++) {
-            System.out.println(enAfHverModel.size() + "I i-loopet");
             for (int j = i + 1; j < enAfHverModel.size(); j++) {
-                System.out.println(enAfHverModel.size() + "i j-loopet");
-                if (enAfHverModel.get(i).getModel().equalsIgnoreCase(seBiler().get(j).getModel())) {
-                    System.out.println(enAfHverModel.size() + "starten af if");
+                if (enAfHverModel.get(i).getModel().equalsIgnoreCase(enAfHverModel.get(j).getModel())) {
                     enAfHverModel.remove(j);
                     j = j - 1;
-                    System.out.println(enAfHverModel.size() + "slutningen af if");
                 }
             }
         }
