@@ -24,18 +24,13 @@ public class BilOgSkadeController {
     this.bilservice = bilservice;
   }
 
-  @GetMapping("/unlimitedBiltyper")
-  public String unlimitedBiltyper(Model model) {
+  @GetMapping("/fudvikler")
+  public String fudvikler(Model model) {
     model.addAttribute("biler", bilservice.seBiler());
     model.addAttribute("modelAntal", bilservice.modelAntal());
     model.addAttribute("enAfHverModel", bilservice.enAfHverModel());
-    return "unlimitedBiltyper";
-  }
-
-  @GetMapping("/limitedBiltyper")
-  public String limitedBiltyper(HttpSession httpSession) {
-    httpSession.getAttribute("brugerrolle");
-    return "limitedBiltyper";
+    model.addAttribute("resterendeBetalingPerModel",bilservice.resterendeBetalingPerModel());
+    return "fudvikler";
   }
 
   @GetMapping("/seSkadesrapporter")
