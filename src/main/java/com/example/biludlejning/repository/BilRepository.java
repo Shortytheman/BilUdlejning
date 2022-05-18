@@ -200,7 +200,7 @@ public class BilRepository {
                         ikkeUdlejedeCounter++;
                     }
                     tempBil.remove(j);
-                    j = j - 1;
+                    j--;
                 }
             }
             modelAntal.put(tempBil.get(i), new Bildata(tempBil.get(i).getMaerke(), tempBil.get(i).getModel(),
@@ -210,13 +210,12 @@ public class BilRepository {
     }
 
     public ArrayList<Bil> enAfHverModel() {
-        System.out.println(seBiler().size());
         ArrayList<Bil> enAfHverModel = seBiler();
         for (int i = 0; i < enAfHverModel.size(); i++) {
             for (int j = i + 1; j < enAfHverModel.size(); j++) {
                 if (enAfHverModel.get(i).getModel().equalsIgnoreCase(enAfHverModel.get(j).getModel())) {
                     enAfHverModel.remove(j);
-                    j = j - 1;
+                    j--;
                 }
             }
         }
@@ -285,10 +284,9 @@ public class BilRepository {
             e.printStackTrace();
             System.out.println("Fejl i fremvisning af lejeaftaler");
         }
-        ArrayList<Bil> fedGed = enAfHverModel();
-        for (int i = 0; i < fedGed.size(); i++) {
-            modelPris.put(fedGed.get(i).getModel(), 0.0);
-            System.out.println(fedGed.size());
+        ArrayList<Bil> enAfHverModel = enAfHverModel();
+        for (int i = 0; i < enAfHverModel.size(); i++) {
+            modelPris.put(enAfHverModel.get(i).getModel(), 0.0);
         }
         for (int i = 0; i < biler.size(); i++) {
             double prisCounter = 0.0;
