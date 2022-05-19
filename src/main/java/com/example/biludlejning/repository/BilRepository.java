@@ -7,10 +7,7 @@ import com.example.biludlejning.model.LejeAftale;
 import com.example.biludlejning.utilities.ConnectionManager;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -89,7 +86,16 @@ public class BilRepository {
         }
         return biler;
     }
-
+    public ArrayList<Bil> seIkkeUdlejedeBiler() {
+        ArrayList<Bil> ikkeUdlejedeBiler = new ArrayList<>();
+        ArrayList<Bil> alleBiler = seBiler();
+        for (int i = 0; i < alleBiler.size(); i++) {
+            if (!alleBiler.get(i).isUdlejet()) {
+                ikkeUdlejedeBiler.add(alleBiler.get(i));
+            }
+        }
+        return ikkeUdlejedeBiler;
+    }
     public void opdaterBil(Bil bil) {
         String query = "UPDATE biler SET stelnummer=?, mærke=?, model=?, udstyrsniveau=?, stålpris=?, regafgift=?, co2udledning=?, udlejet=?, udlejningsdato=?, erDS=? WHERE vognnummer=?";
 
@@ -228,10 +234,10 @@ public class BilRepository {
         DateTimeFormatter datoenIdag = DateTimeFormatter.ofPattern("ddMMyy");
         LocalDateTime nu = LocalDateTime.now();
         dagsDatoString = datoenIdag.format(nu);
-        int dagsDatoDag = Integer.parseInt(dagsDatoString.substring(0, 2));
+        //int dagsDatoDag = Integer.parseInt(dagsDatoString.substring(0, 2));
         int dagsDatoMåned = Integer.parseInt(dagsDatoString.substring(2, 4));
         int dagsDatoÅr = Integer.parseInt(dagsDatoString.substring(4, 6));
-        int slutDatoDag = Integer.parseInt(slutLejeDato.substring(0,2));
+        //int slutDatoDag = Integer.parseInt(slutLejeDato.substring(0,2));
         int slutDatoMåned = Integer.parseInt(slutLejeDato.substring(2, 4));
         int slutDatoÅr = Integer.parseInt(slutLejeDato.substring(4, 6));
 

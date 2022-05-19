@@ -4,6 +4,7 @@ import com.example.biludlejning.model.Kunde;
 import com.example.biludlejning.model.LejeAftale;
 import com.example.biludlejning.service.KundeOgLejeaftaleService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,9 +32,16 @@ public class KundeOgLejeaftaleController {
     kundeOgLejeaftaleService.opretKunde(kunde);
     return "redirect:/";
   }
+  @GetMapping("/kundeliste")
+  public String kundeliste(Model model) {
+    model.addAttribute("kunder", kundeOgLejeaftaleService.visAlleKunder());
+    return "kundeliste";
+  }
 
   @GetMapping("/opretlejeaftale")
-  public String opretLejeaftale(){
+  public String opretLejeaftale(Model model){
+    model.addAttribute("kunder", kundeOgLejeaftaleService.visAlleKunder());
+    model.addAttribute("hjemmebiler", kundeOgLejeaftaleService.seIkkeUdlejedeBiler());
     return "opretlejeaftale";
   }
 

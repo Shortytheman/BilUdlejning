@@ -43,6 +43,7 @@ public class KundeRepository {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
+                int kundeId = resultSet.getInt("kunde_id");
                 String navn = resultSet.getString("navn");
                 String email = resultSet.getString("email");
                 String adresse = resultSet.getString("adresse");
@@ -50,11 +51,12 @@ public class KundeRepository {
                 String by = resultSet.getString("byen");
 
                 Kunde kunde = new Kunde();
-                kunde.getNavn();
-                kunde.getEmail();
-                kunde.getAdresse();
-                kunde.getPostnummer();
-                kunde.getBy();
+                kunde.setKundeId(kundeId);
+                kunde.setNavn(navn);
+                kunde.setEmail(email);
+                kunde.setAdresse(adresse);
+                kunde.setPostnummer(postnummer);
+                kunde.setBy(by);
                 kunder.add(kunde);
             }
         } catch (SQLException e) {

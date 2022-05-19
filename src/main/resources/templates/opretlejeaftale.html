@@ -48,6 +48,54 @@
             </button>
         </form>
     </div>
+    <div>
+        <table class="table caption-top">
+            <caption>Kundeliste</caption>
+            <thead>
+            <tr>
+                <th scope="col">Kunde ID</th>
+                <th scope="col">Navn</th>
+                <th scope="col">Email</th>
+                <th scope="col">Adresse</th>
+                <th scope="col">Postnummer</th>
+                <th scope="col">By</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="kunde : ${kunder}">
+                <td data-th="Kunde ID" th:text="${kunde.getKundeId()}"></td>
+                <td data-th="Navn" th:text="${kunde.getNavn()}"></td>
+                <td data-th="Email" th:text="${kunde.getEmail()}"></td>
+                <td data-th="Adresse" th:text="${kunde.getAdresse()}"></td>
+                <td data-th="Postnummer" th:text="${kunde.getPostnummer()}"></td>
+                <td data-th="By" th:text="${kunde.getBy()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <table class="table caption-top">
+            <caption>Ikke-udlejede biler</caption>
+            <thead>
+            <tr>
+                <th scope="col">Vognnummer</th>
+                <th scope="col">Stelnummer</th>
+                <th scope="col">Mærke</th>
+                <th scope="col">Model</th>
+                <th scope="col">Udstyrsniveau</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="bil : ${hjemmebiler}">
+                <td data-th="Vognnummer" th:text="${bil.getVognnummer()}"></td>
+                <td data-th="Stelnummer" th:text="${bil.getStelnummer()}"></td>
+                <td data-th="Mærke" th:text="${bil.getMaerke()}"></td>
+                <td data-th="Model" th:text="${bil.getModel()}"></td>
+                <td data-th="Udstyrsniveau" th:text="${bil.getUdstyrsNiveau()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 </body>
 </html>
