@@ -249,10 +249,9 @@ public class BilRepository {
             resterendeBetaling = månedligBetaling * månedCounter;
         } else {
             årCounter = slutDatoÅr - dagsDatoÅr;
-            månedCounter = 12 - dagsDatoMåned + slutDatoMåned;
-            if (årCounter > 1) {
-                månedCounter += 12 * årCounter - 1;
-            }
+            månedCounter = årCounter*12;
+            månedCounter += slutDatoMåned - dagsDatoMåned;
+
             resterendeBetaling = månedligBetaling * månedCounter;
         }
         return resterendeBetaling;
