@@ -10,9 +10,10 @@
 <body>
 <div th:if="${session.brugerRolle} == 'dataregistrering'">
     <div>
-        <a th:href="@{'/logud'}">
-            <button3 class="btn3 btn-lg btn-block">Log ud</button3>
-        </a>
+        <button class="btn btn-primary btn-lg btn-black" id="tilbage" type="button"
+                onclick="java:history.back()">
+            Tilbage
+        </button>
     </div>
     <div class="container">
         <h1>Kundeliste</h1>
@@ -35,6 +36,10 @@
                 <td data-th="Adresse" th:text="${kunde.getAdresse()}"></td>
                 <td data-th="Postnummer" th:text="${kunde.getPostnummer()}"></td>
                 <td data-th="By" th:text="${kunde.getBy()}"></td>
+                <td class="gg">
+                    <a class="btn btn-danger" th:href="@{'/delete/' + ${kunde.getKundeId()}}" role="button">Delete</a>
+                    <a class="btn btn-primary" th:href="@{'/opdater/' + ${kunde.getKundeId()}}" role="button">Update</a>
+                </td>
             </tr>
             </tbody>
         </table>

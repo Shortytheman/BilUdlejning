@@ -49,4 +49,16 @@ public class KundeOgLejeaftaleService {
     return bilRepository.seIkkeUdlejedeBiler();
   }
 
+  public void sletKunde(int kundeId){
+    kundeRepository.sletKundeMedId(kundeId);
+  }
+
+  public void opdaterKunde(Kunde kunde){
+    kundeRepository.opdaterKunde(kunde);
+  }
+
+  public Kunde findKundeMedId(int Id){
+  return kundeRepository.findKundeMedId(Id);
+  }
+
 }

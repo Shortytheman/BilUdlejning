@@ -74,7 +74,6 @@ public class BilOgSkadeController {
   public String tilføjBil(){
     return "tilføjbil";
   }
-
   //<editor-fold desc="Her oprettes alle de individuelle biler - OBS 9 ret ens metoder.">
   @PostMapping("/tilføjpeugeot208")
   public String tilføjPeugeot208(@RequestParam int vognnummer1, @RequestParam int stelnummer1){
@@ -194,5 +193,4 @@ public class BilOgSkadeController {
     return "redirect:/";
   }
   //</editor-fold>
-
 }

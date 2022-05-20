@@ -101,6 +101,7 @@ public class KundeRepository {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
+                int kundeId = resultSet.getInt("kunde_id");
                 String navn = resultSet.getString("navn");
                 String email = resultSet.getString("email");
                 String adresse = resultSet.getString("adresse");
@@ -108,6 +109,7 @@ public class KundeRepository {
                 String by = resultSet.getString("byen");
 
                 kunde = new Kunde();
+                kunde.setKundeId(kundeId);
                 kunde.setNavn(navn);
                 kunde.setEmail(email);
                 kunde.setAdresse(adresse);
