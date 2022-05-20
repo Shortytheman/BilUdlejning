@@ -214,6 +214,15 @@ public class LejeAftaleRepository {
             System.out.println("Fejl ved lejekontraktoprettelse" + a);
         }
 
+        try {
+            String query2 = "UPDATE biler SET udlejet=1 WHERE vognnummer = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query2);
+            preparedStatement.setInt(1, lejeAftale.getVognnummer());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Fejl når vi sætter bil til udlejet via lejeaftale" + e);
+        }
+
         String hentHosDs = "";
         if (erDS) {
             hentHosDs = "ja";
@@ -228,7 +237,7 @@ public class LejeAftaleRepository {
                 "\nUdlejer: Bilabonnement"
                 + "\nLejer: " + kundenavn + "\n\nForskudsbetaling: " + lejeAftale.getForskudsBetaling() +
                 "\nMånedlig betaling: " + lejeAftale.getMånedligBetaling() + "\nførste betaling den: " +
-                lejeAftale.getFørsteBetalingsDato() + ", derefter den 1. i hver måned." + "\nAfbetaling ialt: " +
+                lejeAftale.getFørsteBetalingsDato() + "\nAfbetaling ialt: " +
                 lejeAftale.getTotalAfbetaling() + "\nTil betaling ialt: " + lejeAftale.getBetalesIalt() +
                 "\n\nBil" + "\nMærke: " + mærke + "\nModel: " + model + "\nUdstyrsniveau: " + udstyrsNiveau +
                 "\nStelnummer: " + stelnummer + "\nco2 udledning: " + co2Udledning + " g/km" + "\nAfhentes hos DS forhandler: " + hentHosDs;

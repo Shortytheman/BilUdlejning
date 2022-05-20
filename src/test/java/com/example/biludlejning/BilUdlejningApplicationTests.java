@@ -14,6 +14,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class BilUdlejningApplicationTests {
+  @Test
+  void contextLoads() {
+  }
+  @Test
+  void slutAftaleAdvarselTest() {
+    //Tester om metoden virker ved årsskifte
+    boolean årsskifteAdvarsel = slutAftaleAdvarselTest("301222", "020123");
+    assertTrue(årsskifteAdvarsel);
+
+    //Tester om metoden virker ved månedsskifte
+    boolean månedsskifteAdvarsel = slutAftaleAdvarselTest("290622", "050722");
+    assertTrue(månedsskifteAdvarsel);
+  }
   public boolean slutAftaleAdvarselTest(String dagsdato, String dato) {
     ArrayList<LejeAftale> udløberSnart = null;
     String dagsDatoString;
@@ -49,18 +62,5 @@ class BilUdlejningApplicationTests {
       advarsel = true;
     }
     return advarsel;
-  }
-  @Test
-  void contextLoads() {
-  }
-  @Test
-  void slutAftaleAdvarselTest() {
-    //Tester om metoden virker ved årsskifte
-    boolean årsskifteAdvarsel = slutAftaleAdvarselTest("301222", "020123");
-    assertTrue(årsskifteAdvarsel);
-
-    //Tester om metoden virker ved månedsskifte
-    boolean månedsskifteAdvarsel = slutAftaleAdvarselTest("290622", "050722");
-    assertTrue(månedsskifteAdvarsel);
   }
 }
