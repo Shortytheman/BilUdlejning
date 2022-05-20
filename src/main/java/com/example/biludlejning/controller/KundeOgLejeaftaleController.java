@@ -40,7 +40,7 @@ public class KundeOgLejeaftaleController {
     return "kundeoverblik";
   }
 
-  @GetMapping("/slet/{id}")
+  @GetMapping("/sletkunde/{id}")
   public String sletKunde(@PathVariable("id") int kundeId) {
     kundeOgLejeaftaleService.sletKunde(kundeId);
     return "redirect:/kundeoverblik";

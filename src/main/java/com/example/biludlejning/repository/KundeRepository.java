@@ -84,11 +84,11 @@ public class KundeRepository {
 
     public void sletKundeMedId(int kundeId) {
         // DB kald som sletter kunde fra DB.
-        ArrayList<Kunde> kunder = new ArrayList<>();
         try {
-            String query = "DELETE FROM kunder WHERE kunde_id = " + kundeId;
-            Statement statement = connection.createStatement();
-            statement.executeQuery(query);
+            String query = "DELETE FROM kunder WHERE kunde_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1,kundeId);
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             System.out.println("Fejl ved sletning af kunde" + e);
         }

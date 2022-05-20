@@ -36,9 +36,9 @@
                 <td data-th="Adresse" th:text="${kunde.getAdresse()}"></td>
                 <td data-th="Postnummer" th:text="${kunde.getPostnummer()}"></td>
                 <td data-th="By" th:text="${kunde.getBy()}"></td>
-                <td class="gg">
-                    <a class="btn btn-danger" th:href="@{'/delete/' + ${kunde.getKundeId()}}" role="button">Delete</a>
-                    <a class="btn btn-primary" th:href="@{'/opdater/' + ${kunde.getKundeId()}}" role="button">Update</a>
+                <td>
+                    <a class="btn btn-danger" th:href="@{'/sletkunde/' + ${kunde.getKundeId()}}" role="button">Slet</a>
+                    <a class="btn btn-primary" th:href="@{'/opdater/' + ${kunde.getKundeId()}}" role="button">Opdater</a>
                 </td>
             </tr>
             </tbody>
