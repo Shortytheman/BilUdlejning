@@ -47,7 +47,9 @@ public class SkadesrapportRepository {
 
     Set<String> Keys = skadesrapport.getSkader().keySet();
     for (String key : Keys){
-      tilføjSkade(new Skade(key,skadesrapport.getSkader().get(key),findSkadesrapportMedVognnummer(skadesrapport.getVognnummer()).getSkadesrapportId()));
+      if (skadesrapport.getSkader().get(key) != null) {
+        tilføjSkade(new Skade(key, skadesrapport.getSkader().get(key), findSkadesrapportMedVognnummer(skadesrapport.getVognnummer()).getSkadesrapportId()));
+      }
     }
   }
 

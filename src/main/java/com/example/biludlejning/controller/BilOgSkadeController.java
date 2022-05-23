@@ -48,9 +48,9 @@ public class BilOgSkadeController {
   public String lavSkadesrapporten(@RequestParam(name = "medarbejdernavn") String medarbejdernavn,
                                    @RequestParam(name = "medarbejderemail") String medarbejderemail,
                                    @RequestParam(name = "vognnummer") int vognnummer,
-                                   @RequestParam(name = "skade1") String skade1, @RequestParam(name = "pris1") double pris1,
-                                   @RequestParam(name = "skade2") String skade2, @RequestParam(name = "pris2") double pris2,
-                                   @RequestParam(name = "skade3") String skade3, @RequestParam(name = "pris3") double pris3,
+                                   @RequestParam(required = false, name = "skade1") String skade1, @RequestParam(required = false, name = "pris1") Double pris1,
+                                   @RequestParam(required = false, name = "skade2") String skade2, @RequestParam(required = false, name = "pris2") Double pris2,
+                                   @RequestParam(required = false, name = "skade3") String skade3, @RequestParam(required = false, name = "pris3") Double pris3,
                                    @RequestParam(name = "kundeid") int kundeid){
 
     Skadesrapport skadesrapport = new Skadesrapport();
