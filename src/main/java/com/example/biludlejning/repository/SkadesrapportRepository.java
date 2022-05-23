@@ -219,4 +219,38 @@ public class SkadesrapportRepository {
     }
     return totalpris;
   }
+
+  public Skadesrapport findSkadesrapportMedVognummer(int vognnummer){
+      Skadesrapport skadesrapport = new Skadesrapport();
+      String query = "SELECT skadesrapport_id, medarbejdernavn, medarbejderemail, datoforudfyldelse, vognnummer, kunde_id FROM skadesrapporter WHERE vognnummer=?";
+
+      try {
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1,vognnummer);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+          int skadesrapportId = resultSet.getInt("skadesrapport_id");
+          String medarbejderNavn = resultSet.getString("medarbejdernavn");
+          String medarbejderEmail = resultSet.getString("medarbejderemail");
+          String dato = resultSet.getString("datoforudfyldelse");
+          int kundeId = resultSet.getInt("kunde_id");
+          skadesrapport.setSkadesrapportId(skadesrapportId);
+          skadesrapport.setMedarbejderNavn(medarbejderNavn);
+          skadesrapport.setMedarbejderEmail(medarbejderEmail);
+          skadesrapport.setVognnummer(vognnummer);
+          skadesrapport.setKundeId(kundeId);
+          skadesrapport.setDatoForUdfyldelse(dato);
+          LinkedHashMap<String, Double> skader = new LinkedHashMap<>();
+          for (int i = 0; i < findSkader(skadesrapportId).size(); i++){
+            skader.put(findSkader(skadesrapportId).get(i).getSkadeBeskrivelse(),findSkader(skadesrapportId).get(i).getPris());
+          }
+          skadesrapport.setSkader(skader);
+        }
+      } catch (SQLException e) {
+        e.printStackTrace();
+        System.out.println("Forkert vognnummer til at finde skadesrapport. Prøv igen. " + e);
+      }
+      return skadesrapport;
+  }
+
 }

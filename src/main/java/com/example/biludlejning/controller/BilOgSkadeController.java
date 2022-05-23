@@ -51,8 +51,7 @@ public class BilOgSkadeController {
                                    @RequestParam(required = false, name = "skade1") String skade1, @RequestParam(required = false, name = "pris1") Double pris1,
                                    @RequestParam(required = false, name = "skade2") String skade2, @RequestParam(required = false, name = "pris2") Double pris2,
                                    @RequestParam(required = false, name = "skade3") String skade3, @RequestParam(required = false, name = "pris3") Double pris3,
-                                   @RequestParam(name = "kundeid") int kundeid){
-
+                                   @RequestParam(name = "kundeid") int kundeid, HttpSession httpSession){
     Skadesrapport skadesrapport = new Skadesrapport();
     skadesrapport.setMedarbejderNavn(medarbejdernavn);
     skadesrapport.setMedarbejderEmail(medarbejderemail);
@@ -64,13 +63,16 @@ public class BilOgSkadeController {
     skadesrapport.setSkader(skader);
     skadesrapport.setKundeId(kundeid);
     skadeService.lavSkadesrapport(skadesrapport);
+    httpSession.setAttribute("meddelse", "Skadesrapport oprettet med skadesrapportID: " +
+        skadeService.findSkadesrapportMedVognummer(vognnummer).getSkadesrapportId());
     return "redirect:/";
   }
 
   @GetMapping("/seskadesrapport/{skadesrapportid}")
-  public String seskadesrapport(@PathVariable("skadesrapportid") int skadesrapportId, Model model){
+  public String seskadesrapport(@PathVariable("skadesrapportid") int skadesrapportId, Model model, HttpSession httpSession){
     model.addAttribute("skadesrapport",skadeService.findSkadesrapport(skadesrapportId));
     model.addAttribute("totalskadepris",skadeService.findTotalSkadePris(skadesrapportId));
+    httpSession.setAttribute("meddelse", "");
     return "seskadesrapport";
   }
 
