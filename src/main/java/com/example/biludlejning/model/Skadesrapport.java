@@ -4,7 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 
-public class Skadesrapport {
+public class
+Skadesrapport {
 
   //https://www.sampleforms.com/damage-report-forms.html for inspiration
 

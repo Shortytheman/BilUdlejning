@@ -8,7 +8,7 @@ public class Bildata {
   private int antalBiler;
   private int antalUdlejede;
   private int antalIkkeUdlejede;
-  private double restendeBetaling;
+  private double resterendeBetaling;
 
   public Bildata(String marke, String model, String udstyrsNiveau, boolean udlejet, int antalBiler, int antalUdlejede, int antalIkkeUdlejede) {
     this.maerke = marke;
@@ -19,11 +19,11 @@ public class Bildata {
     this.antalUdlejede = antalUdlejede;
     this.antalIkkeUdlejede = antalIkkeUdlejede;
   }
-  public double getRestendeBetaling() {
-    return restendeBetaling;
+  public double getResterendeBetaling() {
+    return resterendeBetaling;
   }
-  public void setRestendeBetaling(double restendeBetaling) {
-    this.restendeBetaling = restendeBetaling;
+  public void setResterendeBetaling(double resterendeBetaling) {
+    this.resterendeBetaling = resterendeBetaling;
   }
   public int getAntalUdlejede() {
     return antalUdlejede;
