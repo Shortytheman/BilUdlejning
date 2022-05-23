@@ -45,10 +45,14 @@ public class BilOgSkadeController {
   }
 
   @PostMapping("/lavSkadesrapport")
-  public String lavSkadesrapporten(@RequestParam String medarbejdernavn, @RequestParam String medarbejderemail,
-                                   @RequestParam int vognnummer, @RequestParam String skade1, @RequestParam double pris1,
-                                   @RequestParam String skade2, @RequestParam double pris2, @RequestParam String skade3,
-                                   @RequestParam double pris3, @RequestParam int kundeid){
+  public String lavSkadesrapporten(@RequestParam(name = "medarbejdernavn") String medarbejdernavn,
+                                   @RequestParam(name = "medarbejderemail") String medarbejderemail,
+                                   @RequestParam(name = "vognnummer") int vognnummer,
+                                   @RequestParam(name = "skade1") String skade1, @RequestParam(name = "pris1") double pris1,
+                                   @RequestParam(name = "skade2") String skade2, @RequestParam(name = "pris2") double pris2,
+                                   @RequestParam(name = "skade3") String skade3, @RequestParam(name = "pris3") double pris3,
+                                   @RequestParam(name = "kundeid") int kundeid){
+
     Skadesrapport skadesrapport = new Skadesrapport();
     skadesrapport.setMedarbejderNavn(medarbejdernavn);
     skadesrapport.setMedarbejderEmail(medarbejderemail);
