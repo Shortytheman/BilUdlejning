@@ -23,6 +23,7 @@ public class BilRepository {
         connection = ConnectionManager.connectToSql();
     }
 
+    //Mikkel
     public void tilføjBil(Bil bil) {
         String query = "INSERT INTO biler (vognnummer, stelnummer, mærke, model, udstyrsNiveau, stålpris, regAfgift, co2Udledning, udlejet, udlejningsdato, erDS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -46,6 +47,7 @@ public class BilRepository {
         }
     }
 
+    //Mikkel
     public ArrayList<Bil> seBiler() {
         ArrayList<Bil> biler = new ArrayList<>();
         String query = "SELECT * FROM biler";
@@ -86,6 +88,7 @@ public class BilRepository {
         }
         return biler;
     }
+
     public ArrayList<Bil> seIkkeUdlejedeBiler() {
         ArrayList<Bil> ikkeUdlejedeBiler = new ArrayList<>();
         ArrayList<Bil> alleBiler = seBiler();
@@ -96,6 +99,8 @@ public class BilRepository {
         }
         return ikkeUdlejedeBiler;
     }
+
+    //Mikkel
     public void opdaterBil(Bil bil) {
         String query = "UPDATE biler SET stelnummer=?, mærke=?, model=?, udstyrsniveau=?, stålpris=?, regafgift=?, co2udledning=?, udlejet=?, udlejningsdato=?, erDS=? WHERE vognnummer=?";
 
@@ -119,6 +124,7 @@ public class BilRepository {
         }
     }
 
+    //Mikkel
     public void sletBil(int vognnummer) {
         String query = "DELETE FROM biler WHERE vognnummer=?";
 
@@ -229,6 +235,7 @@ public class BilRepository {
         }
         return enAfHverModel;
     }
+
     public double manglendeBetalingPerLejeaftale(double månedligBetaling, String slutLejeDato) {
         String dagsDatoString;
         DateTimeFormatter datoenIdag = DateTimeFormatter.ofPattern("ddMMyy");
@@ -256,6 +263,7 @@ public class BilRepository {
         }
         return resterendeBetaling;
     }
+
     public LinkedHashMap<String, Double> resterendeBetalingPerModel() {
         LinkedHashMap<String, Double> modelPris = new LinkedHashMap<>();
 

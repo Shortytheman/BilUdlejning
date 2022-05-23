@@ -19,6 +19,7 @@ public class KundeRepository {
 
     //CRUD!
 
+    //Mikkel
     public void opretKunde(Kunde kunde) {
         String query = "INSERT INTO kunder(navn, email, adresse, postnummer, byen) VALUES (?, ?, ?, ?, ?)";
         try {
@@ -36,6 +37,7 @@ public class KundeRepository {
 
     }
 
+    //Mikkel
     public ArrayList<Kunde> visAlleKunder() {
         ArrayList<Kunde> kunder = new ArrayList<>();
         try {
@@ -65,6 +67,7 @@ public class KundeRepository {
         return kunder;
     }
 
+    //Mikkel
     public void opdaterKunde(Kunde kunde) {
         // DB kald som opdaterer kunde i DB. - evetuelt opdaterer rolle eller kode.
         try {
@@ -82,6 +85,7 @@ public class KundeRepository {
         }
     }
 
+    //Mikkel
     public void sletKundeMedId(int kundeId) {
         // DB kald som sletter kunde fra DB.
         try {

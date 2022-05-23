@@ -244,6 +244,7 @@ public class LejeAftaleRepository {
 
         return lejeKontrakt;
     }
+
     public ArrayList<LejeAftale> slutAftaleAdvarsel() {
         ArrayList<LejeAftale> udløberSnart = null;
         String dagsDatoString;
@@ -281,6 +282,7 @@ public class LejeAftaleRepository {
         }
         return udløberSnart;
     }
+
     public boolean slutAftaleAdvarselTest(String dato) {
         ArrayList<LejeAftale> udløberSnart = null;
         String dagsDatoString;

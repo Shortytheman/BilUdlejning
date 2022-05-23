@@ -17,6 +17,7 @@ public class BrugerRepository {
         connection = ConnectionManager.connectToSql();
     }
 
+    //Mikkel
     public void opretBruger(Bruger bruger) {
         try {
             String query = "INSERT INTO brugere(brugernavn, rolle, kodeord) values (?,?,?)";
@@ -30,6 +31,7 @@ public class BrugerRepository {
         }
     }
 
+    //Mikkel
     public ArrayList<Bruger> seBrugere() {
         ArrayList<Bruger> brugere = new ArrayList<>();
         String query = "SELECT * FROM brugere";
@@ -56,6 +58,7 @@ public class BrugerRepository {
         return brugere;
     }
 
+    //Mikkel
     public void opdaterBruger(Bruger bruger) {
         String query = "UPDATE brugere SET brugernavn=?, rolle=?, kodeord=? WHERE brugernavn=?";
 
@@ -72,6 +75,7 @@ public class BrugerRepository {
         }
     }
 
+    //Mikkel
     public void sletBruger(String brugernavn) {
         String query = "DELETE FROM brugere WHERE brugernavn=?";
 
@@ -85,6 +89,7 @@ public class BrugerRepository {
         }
     }
 
+    //Mikkel
     public Bruger findBruger(String brugerNavn) {
         Bruger bruger = null;
         try {
