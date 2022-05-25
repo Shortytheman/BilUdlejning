@@ -13,3 +13,12 @@ body, html {
     width: 400px;
     height: 400px;
 }
+.mb-5 {
+    padding: 3px;
+    margin: 0px 0px 0px 0px;
+    border-style: none;
+    background-color: transparent;
+    color: black;
+    font-size: 18px;
+    font-weight: 550;
+}
