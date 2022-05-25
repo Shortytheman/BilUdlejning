@@ -25,11 +25,12 @@ public class BilOgSkadeController {
   }
 
   @GetMapping("/fudvikler")
-  public String fudvikler(Model model) {
+  public String fudvikler(Model model, HttpSession httpSession) {
     model.addAttribute("biler", bilservice.seBiler());
     model.addAttribute("modelAntal", bilservice.modelAntal());
     model.addAttribute("enAfHverModel", bilservice.enAfHverModel());
     model.addAttribute("resterendeBetalingPerModel",bilservice.resterendeBetalingPerModel());
+    model.addAttribute("slutAftaleAdvarsel",bilservice.slutAftaleAdvarsel());
     return "fudvikler";
   }
 

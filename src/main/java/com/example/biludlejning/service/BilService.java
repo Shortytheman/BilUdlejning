@@ -2,7 +2,9 @@ package com.example.biludlejning.service;
 
 import com.example.biludlejning.model.Bil;
 import com.example.biludlejning.model.Bildata;
+import com.example.biludlejning.model.LejeAftale;
 import com.example.biludlejning.repository.BilRepository;
+import com.example.biludlejning.repository.LejeAftaleRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,12 +14,14 @@ import java.util.LinkedHashMap;
 public class BilService {
 
   BilRepository bilRepository;
+  LejeAftaleRepository lejeAftaleRepository;
 
   // Her skal vi kalde metoder fra bilrepository, så vores controller ser lidt mere clean ud.
 
   // Constructor dependency injection
-  public BilService(BilRepository bilRepository){
+  public BilService(BilRepository bilRepository, LejeAftaleRepository lejeAftaleRepository){
     this.bilRepository = bilRepository;
+    this.lejeAftaleRepository = lejeAftaleRepository;
   }
   public ArrayList<Bil> seBiler() {
     return bilRepository.seBiler();
@@ -37,6 +41,8 @@ public class BilService {
   public void tilføjBil(Bil bil){
     bilRepository.tilføjBil(bil);
   }
-
+  public ArrayList<LejeAftale> slutAftaleAdvarsel(){
+    return lejeAftaleRepository.slutAftaleAdvarsel();
+  }
 
 }

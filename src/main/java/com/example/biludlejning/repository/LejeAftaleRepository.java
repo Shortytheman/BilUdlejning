@@ -45,14 +45,14 @@ public class LejeAftaleRepository {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int kundeID = resultSet.getInt("kundeid");
+                int kundeID = resultSet.getInt("kunde_id");
                 int vognnummer = resultSet.getInt("vognnummer");
                 String dato = resultSet.getString("dato");
                 double forskudsBetaling = resultSet.getDouble("forskudsbetaling");
                 double månedligBetaling = resultSet.getDouble("månedligbetaling");
                 String førsteBetalingsDato = resultSet.getString("førstebetalingsdato");
                 int antalBetalinger = resultSet.getInt("antalbetalinger");
-                String slutLejeDato = resultSet.getString("slutlejedaato");
+                String slutLejeDato = resultSet.getString("slutlejedato");
 
                 LejeAftale lejeAftale = new LejeAftale();
                 lejeAftale.setKunde(kundeID);
@@ -246,7 +246,7 @@ public class LejeAftaleRepository {
     }
 
     public ArrayList<LejeAftale> slutAftaleAdvarsel() {
-        ArrayList<LejeAftale> udløberSnart = null;
+        ArrayList<LejeAftale> udløberSnart = new ArrayList<>();
         String dagsDatoString;
         DateTimeFormatter datoenIdag = DateTimeFormatter.ofPattern("ddMMyy");
         LocalDateTime nu = LocalDateTime.now();
