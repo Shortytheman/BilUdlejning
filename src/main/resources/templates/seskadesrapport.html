@@ -8,37 +8,45 @@
     <title>se skadesrapport</title>
 </head>
 <body>
-<h1>Her er der en skadesrapport sat lækkert op</h1>
-<h3>Oprettet af medarbejder:</h3>
-<div th:text="${skadesrapport.getMedarbejderNavn()}"></div>
-<h3>Medarbejders e-mail: </h3>
-<div th:text="${skadesrapport.getMedarbejderEmail()}"></div>
-<h3>Dato for udfyldelse: </h3>
-<div th:text="${skadesrapport.getDatoForUdfyldelse()}"></div>
+<div class="position-absolute top-50 start-50 translate-middle">
+    <button class="btn btn-primary btn-lg btn-black" id="tilbage" type="button"
+            onclick="java:history.back()">
+        Tilbage
+    </button>
+    <div class="container py-5 h-100 card">
+        <h1>Her er der en skadesrapport sat lækkert op</h1>
+        <h3>Oprettet af medarbejder:</h3>
+        <div th:text="${skadesrapport.getMedarbejderNavn()}"></div>
+        <h3>Medarbejders e-mail: </h3>
+        <div th:text="${skadesrapport.getMedarbejderEmail()}"></div>
+        <h3>Dato for udfyldelse: </h3>
+        <div th:text="${skadesrapport.getDatoForUdfyldelse()}"></div>
 
-<table>
-    <thead>
-<tr>
-    <th>
-        Skade:
-    </th>
-    <th>
-        pris:
-    </th>
-    <th>
-        Total skadepris:
-    </th>
-</tr>
-    </thead>
+        <table>
+            <thead>
+            <tr>
+                <th>
+                    Skade:
+                </th>
+                <th>
+                    pris:
+                </th>
+                <th>
+                    Total skadepris:
+                </th>
+            </tr>
+            </thead>
 
-<tr class="border" th:each="skade : ${skadesrapport.getSkader()}">
-    <td th:text="${skade.getKey()}">
-    </td>
-    <td th:text="${skade.getValue()}">
-</table>
-<div>
-    <h4>Total skadepris:</h4>
-<div th:text="${totalskadepris}"></div>
+            <tr class="border" th:each="skade : ${skadesrapport.getSkader()}">
+                <td th:text="${skade.getKey()}">
+                </td>
+                <td th:text="${skade.getValue()}">
+        </table>
+        <div>
+            <h4>Total skadepris:</h4>
+            <div th:text="${totalskadepris}"></div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
