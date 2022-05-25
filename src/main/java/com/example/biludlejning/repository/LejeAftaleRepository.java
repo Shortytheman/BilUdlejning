@@ -282,41 +282,4 @@ public class LejeAftaleRepository {
         }
         return udløberSnart;
     }
-
-    public boolean slutAftaleAdvarselTest(String dato) {
-        ArrayList<LejeAftale> udløberSnart = null;
-        String dagsDatoString;
-        DateTimeFormatter datoenIdag = DateTimeFormatter.ofPattern("ddMMyy");
-        LocalDateTime nu = LocalDateTime.now();
-        dagsDatoString = datoenIdag.format(nu);
-        int dagsDatoDag = Integer.parseInt(dagsDatoString.substring(0, 2));
-        int dagsDatoMåned = Integer.parseInt(dagsDatoString.substring(2, 4));
-        int dagsDatoÅr = Integer.parseInt(dagsDatoString.substring(4, 6));
-            boolean advarsel = false;
-            boolean årMatcher = false;
-            boolean månedMatcher = false;
-            int slutDatoDag = Integer.parseInt(dato.substring(0,2));
-            int slutDatoMåned = Integer.parseInt(dato.substring(2,4));
-            int slutDatoÅr = Integer.parseInt(dato.substring(4,6));
-            if (slutDatoÅr == dagsDatoÅr) {
-                årMatcher = true;
-                if (slutDatoMåned == dagsDatoMåned) {
-                    månedMatcher = true;
-                }
-            }
-            if (årMatcher && månedMatcher) {
-                if (dagsDatoDag < 5) {
-                    advarsel = true;
-                } else if (slutDatoDag - 5 < dagsDatoDag) {
-                    advarsel = true;
-                }
-            }
-            if (slutDatoÅr - 1 == dagsDatoÅr && slutDatoDag < 6 && dagsDatoMåned == 12 && dagsDatoDag > 24) {
-                advarsel = true;
-            }
-            if (årMatcher && !månedMatcher && dagsDatoMåned == slutDatoMåned - 1 && slutDatoDag < 6 && dagsDatoDag > 24) {
-                advarsel = true;
-            }
-        return advarsel;
-    }
 }

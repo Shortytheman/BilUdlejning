@@ -25,8 +25,8 @@ public class SkadeService {
     return skadesrapportRepository.findSkadesrapport(skadesrapportId);
   }
 
-  public Skadesrapport findSkadesrapportMedVognummer(int vognnummer){
-    return skadesrapportRepository.findSkadesrapportMedVognummer(vognnummer);
+  public Skadesrapport findSkadesrapportMedVognnummer(int vognnummer){
+    return skadesrapportRepository.findSkadesrapportMedVognnummer(vognnummer);
   }
 
   public void lavSkadesrapport(Skadesrapport skadesrapport){

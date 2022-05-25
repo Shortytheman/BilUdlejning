@@ -1,19 +1,26 @@
 package com.example.biludlejning;
-
+import com.example.biludlejning.model.Bil;
+import com.example.biludlejning.model.Bildata;
 import com.example.biludlejning.model.LejeAftale;
+import com.example.biludlejning.model.Skadesrapport;
+import com.example.biludlejning.repository.BilRepository;
 import com.example.biludlejning.repository.LejeAftaleRepository;
+import com.example.biludlejning.repository.SkadesrapportRepository;
+import org.hamcrest.collection.IsMapContaining;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.LinkedHashMap;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class BilUdlejningApplicationTests {
+
   @Test
   void contextLoads() {
   }
@@ -63,4 +70,17 @@ class BilUdlejningApplicationTests {
     }
     return advarsel;
   }
+
+  @Test
+  void findSkadesRapportMedVognnummerTest(){
+    var skadesrep = new SkadesrapportRepository();
+    assertThat(skadesrep.findSkadesrapportMedVognnummer(2).getKundeId(), is(6));
+  }
+
+  @Test
+  void findlejeAftaleEfterKundeId(){
+    var lejeaftalerep = new LejeAftaleRepository();
+    assertThat(lejeaftalerep.findlejeAftaleEfterKundeId(32).getVognnummer(),is(567));
+  }
+
 }

@@ -179,7 +179,7 @@ public class BilRepository {
         return bil;
     }
 
-    public ArrayList<Bil> retunerBilEfterModel(String model) {
+    public ArrayList<Bil> returnerBilEfterModel(String model) {
         ArrayList<Bil> biler = seBiler();
         ArrayList<Bil> bilerEfterModel = new ArrayList<>();
         for (int i=0; i < biler.size(); i++) {
