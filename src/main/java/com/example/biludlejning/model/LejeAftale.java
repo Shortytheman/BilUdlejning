@@ -34,6 +34,7 @@ public class LejeAftale {
     this.betalesIalt = (antalBetalinger * månedligBetaling) + forskudsBetaling;
     this.slutLejeDato = slutLejeDato;
   }
+
   public LejeAftale() {
   }
 

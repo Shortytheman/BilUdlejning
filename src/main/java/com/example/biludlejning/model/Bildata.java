@@ -22,9 +22,11 @@ public class Bildata {
   public double getResterendeBetaling() {
     return resterendeBetaling;
   }
+
   public void setResterendeBetaling(double resterendeBetaling) {
     this.resterendeBetaling = resterendeBetaling;
   }
+
   public int getAntalUdlejede() {
     return antalUdlejede;
   }
