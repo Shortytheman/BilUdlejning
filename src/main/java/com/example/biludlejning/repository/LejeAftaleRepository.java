@@ -45,6 +45,7 @@ public class LejeAftaleRepository {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
+                int lejeaftaleId = resultSet.getInt("lejeaftale_id");
                 int kundeID = resultSet.getInt("kunde_id");
                 int vognnummer = resultSet.getInt("vognnummer");
                 String dato = resultSet.getString("dato");
@@ -55,6 +56,7 @@ public class LejeAftaleRepository {
                 String slutLejeDato = resultSet.getString("slutlejedato");
 
                 LejeAftale lejeAftale = new LejeAftale();
+                lejeAftale.setLejeaftaleID(lejeaftaleId);
                 lejeAftale.setKunde(kundeID);
                 lejeAftale.setVognnummer(vognnummer);
                 lejeAftale.setDato(dato);

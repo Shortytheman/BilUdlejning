@@ -14,7 +14,8 @@
             <button3 class="btn3 btn-lg btn-block">Log ud</button3>
         </a>
     </div>
-    <div class="container position-absolute top-50 start-50 translate-middle">
+    <div class="container position-absolute top-75 start-50 translate-middle-x">
+
         <h1>Oversigt bilmodeller</h1>
         <table class="mb-4">
             <thead>
@@ -36,6 +37,28 @@
             </tr>
             </tbody>
         </table>
+        <h1>Lejeaftaler som snart udløber</h1>
+        <table class="mb-4">
+            <thead>
+            <tr>
+                <th>Lejeaftale ID</th>
+                <th>Kunde ID</th>
+                <th>Vognnummer</th>
+                <th>Lejedato</th>
+                <th>Slut lejedato</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="lejeaftale : ${slutAftaleAdvarsel}">
+                <td data-th="Mærke" th:text="${lejeaftale.getLejeaftaleID()}"></td>
+                <td data-th="Model" th:text="${lejeaftale.getKundeId()}"></td>
+                <td data-th="Antal ikke leasede" th:text="${lejeaftale.getVognnummer()}"></td>
+                <td data-th="Antal leasede" th:text="${lejeaftale.getDato()}"></td>
+                <td data-th="Antal i alt" th:text="${lejeaftale.getSlutLejeDato()}"></td>
+            </tr>
+            </tbody>
+        </table>
+
         <h1>Resterende indkomst fra månedlige betalinger</h1>
         <table>
             <thead>
