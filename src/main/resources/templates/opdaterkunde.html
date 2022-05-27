@@ -9,29 +9,33 @@
     <title>Opdater kunde</title>
 </head>
 <body>
-
-<div class="position-absolute top-50 start-50 translate-middle">
-    <div class="container py-5 h-100 w3-animate-zoom card">
-<form method="post" >
-    <h3>Opdater kunde</h3>
-    <label for="navn">name: </label>
-    <input class="form-control form-control-lg" id="navn" name="navn" type="text" th:value="${kunde.getNavn()}">
-    <label for="email">email: </label>
-    <input class="form-control form-control-lg" id="email" name="email" type="text" th:value="${kunde.getEmail()}">
-    <label for="adresse">adresse: </label>
-    <input class="form-control form-control-lg" id="adresse" name="adresse" type="text" th:value="${kunde.getAdresse()}">
-    <label for="postnummer">postnummer: </label>
-    <input class="form-control form-control-lg" id="postnummer" name="postnummer" type="text" th:value="${kunde.getPostnummer()}">
-    <label for="by">by: </label>
-    <input class="form-control form-control-lg" id="by" name="by" type="text" th:value="${kunde.getBy()}">
-    <button class="btn btn-primary btn-lg btn-block" type="submit">Opdater kunde</button>
-    <button class="btn btn-primary btn-lg btn-black" id="tilbage" type="button"
-            onclick="java:history.back()">
-        Tilbage
-    </button>
-</form>
+<div th:if="${session.brugerRolle} == 'dataregistrering'">
+    <div class="position-absolute top-50 start-50 translate-middle">
+        <div class="container py-5 h-100 w3-animate-zoom card">
+            <form method="post">
+                <h3>Opdater kunde</h3>
+                <label for="navn">name: </label>
+                <input class="form-control form-control-lg" id="navn" name="navn" type="text"
+                       th:value="${kunde.getNavn()}">
+                <label for="email">email: </label>
+                <input class="form-control form-control-lg" id="email" name="email" type="text"
+                       th:value="${kunde.getEmail()}">
+                <label for="adresse">adresse: </label>
+                <input class="form-control form-control-lg" id="adresse" name="adresse" type="text"
+                       th:value="${kunde.getAdresse()}">
+                <label for="postnummer">postnummer: </label>
+                <input class="form-control form-control-lg" id="postnummer" name="postnummer" type="text"
+                       th:value="${kunde.getPostnummer()}">
+                <label for="by">by: </label>
+                <input class="form-control form-control-lg" id="by" name="by" type="text" th:value="${kunde.getBy()}">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Opdater kunde</button>
+                <button class="btn btn-primary btn-lg btn-black" id="tilbage" type="button"
+                        onclick="java:history.back()">
+                    Tilbage
+                </button>
+            </form>
+        </div>
     </div>
-
 </div>
 </body>
 </html>

@@ -8,31 +8,33 @@
     <title>Se skadesrapport</title>
 </head>
 <body>
-
-<div>
-    <table>
-        <thead>
-        <tr>
-            <th>
-                Skadesrapport ID
-            </th>
-            <th>
-                Kunde ID
-            </th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="skadesrapport : ${skadesrapporter}">
-            <td th:text="${skadesrapport.getSkadesrapportId()}">
-            </td>
-            <td th:text="${skadesrapport.getKundeId()}">
-            </td>
-            <td>
-                <a class="btn btn-info" th:href="@{'/seskadesrapport/' + ${skadesrapport.getSkadesrapportId()}}" role="button">Se skadesrapport</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+<div th:if="${session.brugerRolle} == 'skadeogudbedring'">
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>
+                    Skadesrapport ID
+                </th>
+                <th>
+                    Kunde ID
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="skadesrapport : ${skadesrapporter}">
+                <td th:text="${skadesrapport.getSkadesrapportId()}">
+                </td>
+                <td th:text="${skadesrapport.getKundeId()}">
+                </td>
+                <td>
+                    <a class="btn btn-info" th:href="@{'/seskadesrapport/' + ${skadesrapport.getSkadesrapportId()}}"
+                       role="button">Se skadesrapport</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 </body>
 </html>

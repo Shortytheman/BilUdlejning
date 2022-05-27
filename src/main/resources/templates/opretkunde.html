@@ -9,6 +9,7 @@
     <title>Opret kunde</title>
 </head>
 <body>
+<div th:if="${session.brugerRolle} == 'dataregistrering'">
 <div class="position-absolute top-50 start-50 translate-middle">
     <div class="container py-5 h-100 w3-animate-zoom card">
         <form class="form" method="post">
@@ -45,6 +46,6 @@
         </form>
     </div>
 </div>
-
+</div>
 </body>
 </html>

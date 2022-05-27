@@ -5,44 +5,44 @@
     <title>Lejekontrakt</title>
 </head>
 <body>
+<div th:if="${session.brugerRolle} == 'dataregistrering'">
+    <div>
+        <h3>
+            Lejekontrakt
+        </h3>
+        <button type="button" onclick="java:history.back()"
+                class="btn btn-primary position-absolute top-0 end-0 buttonback">Back
+        </button>
+    </div>
 
-<div>
-    <h3>
-        Lejekontrakt
-    </h3>
-    <button type="button" onclick="java:history.back()"
-            class="btn btn-primary position-absolute top-0 end-0 buttonback">Back
-    </button>
+    <!-- Hentet fra: https://stackoverflow.com/questions/13405129/create-and-save-a-file-with-javascript -->
+    <div>
+        <textarea id="text-val" rows="19" style="width: 250px" th:text="${session.lejekontrakt}"></textarea><br/>
+        <input type="button" id="dwn-btn" value="Opret og gem til harddisken"/>
+    </div>
+    <script>
+        function download(filename, text) {
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+            element.setAttribute('download', filename);
+
+            element.style.display = 'none';
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
+        }
+
+        // Start file download.
+        document.getElementById("dwn-btn").addEventListener("click", function () {
+            // Generate download of hello.txt file with some content
+            var text = document.getElementById("text-val").value;
+            var filename = "Lejekontrakt.txt";
+
+            download(filename, text);
+        }, false);
+    </script>
 </div>
-
-<!-- Hentet fra: https://stackoverflow.com/questions/13405129/create-and-save-a-file-with-javascript -->
-<div>
-    <textarea id="text-val" rows="19" style="width: 250px" th:text="${session.lejekontrakt}" ></textarea><br/>
-    <input type="button" id="dwn-btn" value="Opret og gem til harddisken"/>
-</div>
-<script>
-    function download(filename, text) {
-        var element = document.createElement('a');
-        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-        element.setAttribute('download', filename);
-
-        element.style.display = 'none';
-        document.body.appendChild(element);
-
-        element.click();
-
-        document.body.removeChild(element);
-    }
-
-    // Start file download.
-    document.getElementById("dwn-btn").addEventListener("click", function(){
-        // Generate download of hello.txt file with some content
-        var text = document.getElementById("text-val").value;
-        var filename = "Lejekontrakt.txt";
-
-        download(filename, text);
-    }, false);
-</script>
-
 </body>
 </html>
