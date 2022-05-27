@@ -25,7 +25,7 @@ public class BilOgSkadeController {
   }
 
   @GetMapping("/fudvikler")
-  public String fudvikler(Model model, HttpSession httpSession) {
+  public String fudvikler(Model model) {
     model.addAttribute("biler", bilservice.seBiler());
     model.addAttribute("modelAntal", bilservice.modelAntal());
     model.addAttribute("enAfHverModel", bilservice.enAfHverModel());
@@ -88,7 +88,7 @@ public class BilOgSkadeController {
   public String tilføjPeugeot208(@RequestParam int vognnummer1, @RequestParam int stelnummer1){
     Bil bil = new Bil();
     bil.setModel("208");
-    bil.setMærke("peugeot");
+    bil.setMærke("Peugeot");
     bil.setStelnummer(stelnummer1);
     bil.setVognnummer(vognnummer1);
     bil.setUdstyrsNiveau("Active pack");

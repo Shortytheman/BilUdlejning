@@ -9,6 +9,7 @@
     <title>Lav skadesrapport</title>
 </head>
 <body>
+<div th:if="${session.brugerRolle} == 'skadeogudbedring'">
 <div class="position-absolute top-50 start-50 translate-middle">
     <div class="container py-5 h-100 w3-animate-zoom card">
         <form class="form" method="post">
@@ -55,7 +56,7 @@
             </div>
             <div>
                 <br>
-                <button class="btn btn-primary btn-lg btn-block" type="submit" onclick="myFunction()" >Lav skadesrapport</button>
+                <button class="btn btn-primary btn-lg btn-block" type="submit" >Lav skadesrapport</button>
                 <button class="btn btn-primary btn-lg btn-black" id="tilbage" type="button"
                         onclick="java:history.back()">
                     Tilbage
@@ -64,6 +65,6 @@
         </form>
     </div>
 </div>
-
+</div>
 </body>
 </html>

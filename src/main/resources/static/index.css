@@ -17,12 +17,12 @@ h6 {
 }
 
 .logo1 {
-    height: 80px;
-    width: 200px;
-    margin-top: 4%;
+    height: 20%;
+    width: 10%;
+    margin-top: 6%;
     position: absolute;
     cursor: pointer;
-
+    z-index: 2;
 }
 /* Ved ikke helt om der skal være en nyheds tekst på admin siden.
 .adminnyhed {
