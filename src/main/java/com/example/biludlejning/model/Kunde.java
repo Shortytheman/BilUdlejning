@@ -64,6 +64,7 @@ public class Kunde {
   public void setBy(String by) {
     this.by = by;
   }
+
   public void setKundeId(int kundeId) {
     this.kundeId = kundeId;
   }
