@@ -138,15 +138,14 @@ public class BilRepository {
         }
     }
 
-    public Bil findBilmedStelnummer(int vognnumer) {
+    public Bil findBilMedVognnummer(int vognnummer) {
         Bil bil = null;
-        String query = "SELECT stelnummer, mærke, model, udstyrsniveau, stålpris, regafgift, co2udledning, udlejet, udlejningsdato, erDS FROM biler WHERE vognnummer= " + vognnumer;
+        String query = "SELECT stelnummer, mærke, model, udstyrsniveau, stålpris, regafgift, co2udledning, udlejet, udlejningsdato, erDS FROM biler WHERE vognnummer= " + vognnummer;
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int vognnummer = resultSet.getInt("vognnummer");
                 int stelnummer = resultSet.getInt("stelnummer");
                 String mærke = resultSet.getString("mærke");
                 String model = resultSet.getString("model");
@@ -159,7 +158,7 @@ public class BilRepository {
                 boolean erDS = resultSet.getBoolean("erDS");
 
                 bil = new Bil();
-                bil.setVognnummer(vognnumer);
+                bil.setVognnummer(vognnummer);
                 bil.setStelnummer(stelnummer);
                 bil.setMærke(mærke);
                 bil.setModel(model);
@@ -193,7 +192,7 @@ public class BilRepository {
     public LinkedHashMap<Bil, Bildata> modelAntal() {
         LinkedHashMap<Bil, Bildata> modelAntal = new LinkedHashMap<>();
         ArrayList<Bil> tempBil = seBiler();
-        int counter = 0;
+        int counter;
         int udlejedeCounter = 0;
         int ikkeUdlejedeCounter = 0;
         for (int i = 0; i < tempBil.size(); i++) {
@@ -201,7 +200,7 @@ public class BilRepository {
             if (tempBil.get(i).isUdlejet()) {
                 udlejedeCounter = 1;
                 ikkeUdlejedeCounter = 0;
-            } else if (!tempBil.get(i).isUdlejet()) {
+            } else {
                 ikkeUdlejedeCounter = 1;
                 udlejedeCounter = 0;
             }
@@ -210,7 +209,7 @@ public class BilRepository {
                     counter++;
                     if (tempBil.get(j).isUdlejet()) {
                         udlejedeCounter++;
-                    } else if (!tempBil.get(j).isUdlejet()) {
+                    } else {
                         ikkeUdlejedeCounter++;
                     }
                     tempBil.remove(j);

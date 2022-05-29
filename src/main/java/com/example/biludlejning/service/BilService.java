@@ -45,4 +45,10 @@ public class BilService {
     return lejeAftaleRepository.slutAftaleAdvarsel();
   }
 
+  public Bil findBilMedVognnummer(int vognnummer) {
+    return bilRepository.findBilMedVognnummer(vognnummer);
+  }
+  public void sletBil(int vognnummer) {
+    bilRepository.sletBil(vognnummer);
+  }
 }

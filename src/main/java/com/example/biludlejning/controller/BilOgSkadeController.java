@@ -33,7 +33,16 @@ public class BilOgSkadeController {
     model.addAttribute("slutAftaleAdvarsel",bilservice.slutAftaleAdvarsel());
     return "fudvikler";
   }
-
+  @GetMapping("/biloverblik")
+  public String blikover(Model model) {
+    model.addAttribute("biler", bilservice.seBiler());
+    return "biloverblik";
+  }
+  @GetMapping("/sletbil/{vognnummer}")
+  public String sletBil(@PathVariable("vognnummer") int vognnummer){
+    bilservice.sletBil(vognnummer);
+    return "redirect:/biloverblik";
+  }
   @GetMapping("/seSkadesrapporter")
   public String seSkadesrapporter(Model model){
     model.addAttribute("skadesrapporter",skadeService.seSkadesrapporter());
