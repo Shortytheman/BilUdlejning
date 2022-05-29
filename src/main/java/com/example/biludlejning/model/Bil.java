@@ -121,6 +121,4 @@ public class  Bil {
     this.erDS = erDS;
   }
 
-//Klassen er abstrakt og kan derfor ikke instantieres.
-
 }

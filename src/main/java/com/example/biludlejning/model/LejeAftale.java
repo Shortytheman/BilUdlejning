@@ -11,7 +11,7 @@ public class LejeAftale {
   private String dato; // Formatet ddmmåå (f.eks. 070522)
   private double forskudsBetaling;
   private double månedligBetaling;
-  private String førsteBetalingsDato; // JOS LAV METODE TIL AT SÆTTE DEN TIL NÆSTKOMMENDE 1. DATO
+  private String førsteBetalingsDato;
   private int antalBetalinger;
   private double totalAfbetaling;
   private double betalesIalt;
@@ -42,7 +42,6 @@ public class LejeAftale {
     String måned = dato.substring(2,4);
     String år = dato.substring(4,6);
     String nyMåned;
-    String nytÅr;
     if (Integer.parseInt(måned) == 12) {
       nyMåned = "01";
       int nytIntÅr = (Integer.parseInt(år) + 1);
@@ -145,10 +144,5 @@ public class LejeAftale {
   public void setBetalesIalt(double betalesIalt) {
     this.betalesIalt = betalesIalt;
   }
-
-public void lavKontrakt(){
-
-}
-
 
 }

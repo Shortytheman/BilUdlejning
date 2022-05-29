@@ -15,71 +15,71 @@ import javax.servlet.http.HttpSession;
 public class HomeController {
 
   BrugerService brugerservice;
-  String fejlmeddelse = "";
 
+  /*Dependency Injection - Controller er afhængig af Brugerservice og ved DI, slipper controller for
+  selv at skulle oprette objekter af denne klasse. */
   public HomeController(BrugerService brugerservice) {
     this.brugerservice = brugerservice;
   }
 
-    @GetMapping("/sletbrugere")
-    public String sletbrugere(HttpSession httpSession, Model model) {
-        model.addAttribute("brugerRolle", httpSession.getAttribute("brugerRolle"));
-        model.addAttribute("brugere", brugerservice.seBrugere());
-        return "/sletbrugere";
-    }
+  @GetMapping("/sletbrugere")
+  public String sletbrugere(HttpSession httpSession, Model model) {
+    model.addAttribute("brugerRolle", httpSession.getAttribute("brugerRolle"));
+    model.addAttribute("brugere", brugerservice.seBrugere());
+    return "/sletbrugere";
+  }
 
-    @GetMapping("/slet/{brugernavn}")
-    public String sletBruger(@PathVariable("brugernavn") String brugernavn) {
-        brugerservice.sletBruger(brugernavn);
-        return "redirect:/sletbrugere";
-    }
+  @GetMapping("/slet/{brugernavn}")
+  public String sletBruger(@PathVariable("brugernavn") String brugernavn) {
+    brugerservice.sletBruger(brugernavn);
+    return "redirect:/sletbrugere";
+  }
 
-    @GetMapping("/opretbruger")
-    public String visBrugerOprettelse() {
-        return "opretbruger";
-    }
+  @GetMapping("/opretbruger")
+  public String visBrugerOprettelse() {
+    return "opretbruger";
+  }
 
-    @PostMapping("/opretbruger")
-    public String opretBruger(@RequestParam String brugernavn, @RequestParam String rolle, @RequestParam String kodeord) {
-        brugerservice.opretBruger(new Bruger(brugernavn, rolle, kodeord));
-        return "redirect:/";
-    }
+  @PostMapping("/opretbruger")
+  public String opretBruger(@RequestParam String brugernavn, @RequestParam String rolle, @RequestParam String kodeord) {
+    //Opretter en bruger i DB - kun admin har rettighed til dette.
+    brugerservice.opretBruger(new Bruger(brugernavn, rolle, kodeord));
+    return "redirect:/";
+  }
 
-    @GetMapping("/")
-    public String visLogin(HttpSession httpSession, Model model) {
-            model.addAttribute("brugerRolle", httpSession.getAttribute("brugerRolle"));
-            model.addAttribute("brugere", brugerservice.seBrugere());
-        httpSession.getAttribute("fejlmeddelse");
-        return "index";
-    }
+  @GetMapping("/")
+  public String visLogin(HttpSession httpSession, Model model) {
+    model.addAttribute("brugerRolle", httpSession.getAttribute("brugerRolle"));
+    model.addAttribute("brugere", brugerservice.seBrugere());
+    httpSession.getAttribute("fejlmeddelse");
+    return "index";
+  }
 
-    @GetMapping("/logud")
-    public String logud(HttpSession httpSession) {
-        httpSession.setAttribute("brugerRolle", null);
-        httpSession.setAttribute("fejlmeddelse","");
-        //Virker branch?
-        return "redirect:/";
-    }
+  @GetMapping("/logud")
+  public String logud(HttpSession httpSession) {
+    httpSession.setAttribute("brugerRolle", null);
+    httpSession.setAttribute("fejlmeddelse", "");
+    return "redirect:/";
+  }
 
-    @PostMapping("/")
-    public String login(@RequestParam String brugernavn, @RequestParam String kodeord,
-                        HttpSession httpSession) {
-        String returnStatement = "redirect:/";
-        if (brugernavn.equalsIgnoreCase("admin") && kodeord.equalsIgnoreCase("admin")) {
-            Bruger admin = new Bruger(brugernavn, "admin", kodeord);
-            httpSession.setAttribute("brugerRolle", admin.getRolle());
-            httpSession.setAttribute("bruger", admin);
-        } else {
-            Bruger bruger = brugerservice.findBruger(brugernavn);
-            //Tjekker om brugernavn og kodeord hører sammen, derefter smider den brugeren ind på indexsiden til den tilhørende rolle.
-            //Session bliver også oprettet med brugeren som logger på.
-            if (brugerservice.korrektLogin(brugernavn, kodeord, bruger)) {
-                httpSession.setAttribute("brugerRolle", bruger.getRolle());
-                httpSession.setAttribute("bruger", bruger);
-            } else returnStatement = "redirect:/";
-            //Hvis brugeren ikke findes, bliver der redirected, og her kan vi tilgå en model attribute "fejlmeddelse" der viser hvorfor.
-            httpSession.setAttribute("fejlmeddelse", fejlmeddelse = brugerservice.loginFejl(bruger, kodeord));
-        }
-        return returnStatement;
+  @PostMapping("/")
+  public String login(@RequestParam String brugernavn, @RequestParam String kodeord,
+                      HttpSession httpSession) {
+    if (brugernavn.equalsIgnoreCase("admin") && kodeord.equalsIgnoreCase("admin")) {
+      Bruger admin = new Bruger(brugernavn, "admin", kodeord);
+      httpSession.setAttribute("brugerRolle", admin.getRolle());
+      httpSession.setAttribute("bruger", admin);
+    } else {
+      Bruger bruger = brugerservice.findBruger(brugernavn);
+      //Tjekker om brugernavn og kodeord hører sammen, derefter smider den brugeren ind på indexsiden til den tilhørende rolle.
+      //Session bliver også oprettet med brugeren som logger på.
+      if (brugerservice.korrektLogin(brugernavn, kodeord, bruger)) {
+        httpSession.setAttribute("brugerRolle", bruger.getRolle());
+        httpSession.setAttribute("bruger", bruger);
+      }
+      //Hvis brugeren ikke findes, bliver der redirected, og her kan vi tilgå en model-attribute "fejlmeddelse" der viser hvorfor.
+      httpSession.setAttribute("fejlmeddelse", brugerservice.loginFejl(bruger, kodeord));
     }
+    return "redirect:/";
+  }
 }

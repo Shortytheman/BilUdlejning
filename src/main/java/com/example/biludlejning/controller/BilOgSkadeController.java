@@ -19,6 +19,9 @@ public class BilOgSkadeController {
   BilService bilservice;
   SkadeService skadeService;
 
+  /*Dependency Injection - Controller er afhængig af både Bilservice og Skadeservice og ved DI, slipper controller for
+  selv at skulle oprette objekter af disse klasser. */
+
   public BilOgSkadeController(BilService bilservice, SkadeService skadeService){
     this.skadeService = skadeService;
     this.bilservice = bilservice;
@@ -26,6 +29,7 @@ public class BilOgSkadeController {
 
   @GetMapping("/fudvikler")
   public String fudvikler(Model model) {
+    //Vi bruger Model til at sende informationer fra vores Controller til vores view.
     model.addAttribute("biler", bilservice.seBiler());
     model.addAttribute("modelAntal", bilservice.modelAntal());
     model.addAttribute("enAfHverModel", bilservice.enAfHverModel());
@@ -67,12 +71,14 @@ public class BilOgSkadeController {
     skadesrapport.setMedarbejderEmail(medarbejderemail);
     skadesrapport.setVognnummer(vognnummer);
     LinkedHashMap<String,Double> skader = new LinkedHashMap<>();
+    //Vi tager imod 0 til 3 skader ved hver skadesrapport der oprettes, derfor er hver enkelt skade markeret som "Required = false".
     skader.put(skade1,pris1);
     skader.put(skade2,pris2);
     skader.put(skade3,pris3);
     skadesrapport.setSkader(skader);
     skadesrapport.setKundeId(kundeid);
     skadeService.lavSkadesrapport(skadesrapport);
+    //Denne sender en meddelse til viewet om hvilket skadesrapport ID der lige er blevet oprettet.
     httpSession.setAttribute("meddelse", "Skadesrapport oprettet med skadesrapportID: " +
         skadeService.findSkadesrapportMedVognnummer(vognnummer).getSkadesrapportId());
     return "redirect:/";
@@ -82,6 +88,7 @@ public class BilOgSkadeController {
   public String seskadesrapport(@PathVariable("skadesrapportid") int skadesrapportId, Model model, HttpSession httpSession){
     model.addAttribute("skadesrapport",skadeService.findSkadesrapport(skadesrapportId));
     model.addAttribute("totalskadepris",skadeService.findTotalSkadePris(skadesrapportId));
+    //Denne tømmer "meddelse"s attributten så når der ikke LIGE er lavet en rapport, står der intet.
     httpSession.setAttribute("meddelse", "");
     return "seskadesrapport";
   }
@@ -91,7 +98,7 @@ public class BilOgSkadeController {
     return "tilføjbil";
   }
 
-
+//Da oprettelse af de individuelle biler med vores opsætning ikke rigtig kunne lade sig gøre med en enkelt metode, oprettede vi en for hver slags bil.
   //<editor-fold desc="Her oprettes alle de individuelle biler - OBS 9 ret ens metoder.">
   @PostMapping("/tilføjpeugeot208")
   public String tilføjPeugeot208(@RequestParam int vognnummer1, @RequestParam int stelnummer1){

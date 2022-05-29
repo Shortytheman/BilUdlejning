@@ -17,6 +17,10 @@ public class  KundeOgLejeaftaleController {
 
   KundeOgLejeaftaleService kundeOgLejeaftaleService;
 
+
+  /*Dependency Injection - Controller er afhængig af KundeOgLejeaftaleService og ved DI, slipper controller for
+  selv at skulle oprette objekter af denne klasse. */
+
   public KundeOgLejeaftaleController(KundeOgLejeaftaleService kundeOgLejeaftaleService) {
     this.kundeOgLejeaftaleService = kundeOgLejeaftaleService;
   }

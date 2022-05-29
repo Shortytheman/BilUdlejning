@@ -1,5 +1,7 @@
 package com.example.biludlejning.model;
 
+
+//Brugerklassen refererer til brugeren af programmet.
 public class Bruger {
 
     String brugernavn;
