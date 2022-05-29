@@ -34,8 +34,8 @@ public class BilRepository {
             preparedStatement.setString(3, bil.getMaerke());
             preparedStatement.setString(4, bil.getModel());
             preparedStatement.setString(5, bil.getUdstyrsNiveau());
-            preparedStatement.setInt(6,bil.getStålpris());
-            preparedStatement.setInt(7,bil.getRegAfgift());
+            preparedStatement.setInt(6, bil.getStålpris());
+            preparedStatement.setInt(7, bil.getRegAfgift());
             preparedStatement.setInt(8, bil.getCo2Udledning());
             preparedStatement.setBoolean(9, bil.isUdlejet());
             preparedStatement.setString(10, bil.getUdlejningsdato());
@@ -43,7 +43,7 @@ public class BilRepository {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Fejl i oprettelse af bil: "+ e);
+            System.out.println("Fejl i oprettelse af bil: " + e);
         }
     }
 
@@ -178,10 +178,15 @@ public class BilRepository {
         return bil;
     }
 
+    /*
+    Metoden tjekker bilerne i databasen igennem, hvis den string der modtages som parameter matcher en bil, bliver denne bil tilføjet en seperat arrayliste som til sidst returneres.
+    Man ender således med en arrayliste kun indeholdende den efterspurgte bilmodel.
+    - Johannes
+     */
     public ArrayList<Bil> returnerBilEfterModel(String model) {
         ArrayList<Bil> biler = seBiler();
         ArrayList<Bil> bilerEfterModel = new ArrayList<>();
-        for (int i=0; i < biler.size(); i++) {
+        for (int i = 0; i < biler.size(); i++) {
             if (biler.get(i).getModel().equalsIgnoreCase(model)) {
                 bilerEfterModel.add(biler.get(i));
             }
@@ -189,6 +194,13 @@ public class BilRepository {
         return bilerEfterModel;
     }
 
+    /*
+    Metoden er specifikt beskrevet i rapporten under afsnittet Uddrag af koden -> Forklaring af metoden modelAntal.
+    Overordnet forklaret er det en metode der finder antallet af en specifik bilmodel, samt antallet af udlejede og
+    ikke-udlejede eksemplarer af modellen og sætter disse værdier i et objekt i en LinkedHashMap.
+    Denne information vises i en tabel til forretningsudvikleren.
+    - Johannes
+    */
     public LinkedHashMap<Bil, Bildata> modelAntal() {
         LinkedHashMap<Bil, Bildata> modelAntal = new LinkedHashMap<>();
         ArrayList<Bil> tempBil = seBiler();
@@ -222,6 +234,42 @@ public class BilRepository {
         return modelAntal;
     }
 
+    /*
+    Denne metoder finder først det resterende antal måneder tilbage af lejeaftalen.
+    Dernæst udregner den den resterende betaling for en konkret lejeaftale ved at gange den månedlige betaling med antallet af resterende måneder.
+    - Johannes
+    */
+    public double manglendeBetalingPerLejeaftale(double månedligBetaling, String slutLejeDato) {
+        String dagsDatoString;
+        DateTimeFormatter datoenIdag = DateTimeFormatter.ofPattern("ddMMyy");
+        LocalDateTime nu = LocalDateTime.now();
+        dagsDatoString = datoenIdag.format(nu);
+        int dagsDatoMåned = Integer.parseInt(dagsDatoString.substring(2, 4));
+        int dagsDatoÅr = Integer.parseInt(dagsDatoString.substring(4, 6));
+        int slutDatoMåned = Integer.parseInt(slutLejeDato.substring(2, 4));
+        int slutDatoÅr = Integer.parseInt(slutLejeDato.substring(4, 6));
+
+        int månedCounter;
+        int årCounter;
+        double resterendeBetaling = 0;
+        if (dagsDatoÅr == slutDatoÅr) {
+            månedCounter = slutDatoMåned - dagsDatoMåned;
+            resterendeBetaling = månedligBetaling * månedCounter;
+        } else {
+            årCounter = slutDatoÅr - dagsDatoÅr;
+            månedCounter = årCounter * 12;
+            månedCounter += slutDatoMåned - dagsDatoMåned;
+
+            resterendeBetaling = månedligBetaling * månedCounter;
+        }
+        return resterendeBetaling;
+    }
+
+    /*
+    Denne metode anvender et dobbelt for-loop til at fjerne gengangere af samme model fra en arrayliste af biler der til sidst kun vil indeholde et eksemplar af hver model.
+    Metoden finder anvendelse i den senere metode resterendeBetalingPerModel.
+    - Johannes
+    */
     public ArrayList<Bil> enAfHverModel() {
         ArrayList<Bil> enAfHverModel = seBiler();
         for (int i = 0; i < enAfHverModel.size(); i++) {
@@ -235,34 +283,10 @@ public class BilRepository {
         return enAfHverModel;
     }
 
-    public double manglendeBetalingPerLejeaftale(double månedligBetaling, String slutLejeDato) {
-        String dagsDatoString;
-        DateTimeFormatter datoenIdag = DateTimeFormatter.ofPattern("ddMMyy");
-        LocalDateTime nu = LocalDateTime.now();
-        dagsDatoString = datoenIdag.format(nu);
-        //int dagsDatoDag = Integer.parseInt(dagsDatoString.substring(0, 2));
-        int dagsDatoMåned = Integer.parseInt(dagsDatoString.substring(2, 4));
-        int dagsDatoÅr = Integer.parseInt(dagsDatoString.substring(4, 6));
-        //int slutDatoDag = Integer.parseInt(slutLejeDato.substring(0,2));
-        int slutDatoMåned = Integer.parseInt(slutLejeDato.substring(2, 4));
-        int slutDatoÅr = Integer.parseInt(slutLejeDato.substring(4, 6));
-
-        int månedCounter;
-        int årCounter;
-        double resterendeBetaling = 0;
-        if (dagsDatoÅr == slutDatoÅr) {
-            månedCounter = slutDatoMåned - dagsDatoMåned;
-            resterendeBetaling = månedligBetaling * månedCounter;
-        } else {
-            årCounter = slutDatoÅr - dagsDatoÅr;
-            månedCounter = årCounter*12;
-            månedCounter += slutDatoMåned - dagsDatoMåned;
-
-            resterendeBetaling = månedligBetaling * månedCounter;
-        }
-        return resterendeBetaling;
-    }
-
+    /*
+    Udregner den resterende indkommende betaling for alle udlejede biler af en bestemt bilmodel.
+    - Johannes
+    */
     public LinkedHashMap<String, Double> resterendeBetalingPerModel() {
         LinkedHashMap<String, Double> modelPris = new LinkedHashMap<>();
 

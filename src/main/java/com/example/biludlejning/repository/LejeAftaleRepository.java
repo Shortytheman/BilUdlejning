@@ -246,7 +246,10 @@ public class LejeAftaleRepository {
 
         return lejeKontrakt;
     }
-
+    /*
+    Denne metoder tjekker alle de eksisterende lejeaftaler for om de er tæt på at udløbe.
+    - Johannes
+    */
     public ArrayList<LejeAftale> slutAftaleAdvarsel() {
         ArrayList<LejeAftale> udløberSnart = new ArrayList<>();
         String dagsDatoString;
