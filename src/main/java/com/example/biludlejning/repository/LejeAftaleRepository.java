@@ -180,9 +180,14 @@ public class LejeAftaleRepository {
         return lejeAftale;
     }
 
+
+    //Metoden opretter en String og konkatenerer den så den ligner en reel lejekontrakt som kunden får når de har
+    //godkendt en leasing aftale.
     public String lavLejeKontrakt(LejeAftale lejeAftale) {
         String query = "SELECT navn FROM kunder WHERE kunde_id = " + lejeAftale.getKundeId();
         String kundenavn = "";
+
+        //Vi har lavet to DB kald, et som finder en bil og giver os et resultset og en query som updater bilen til udlejet.
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -232,6 +237,28 @@ public class LejeAftaleRepository {
             hentHosDs = "nej";
         }
 
+        String dagsDatoString;
+        DateTimeFormatter datoenIdag = DateTimeFormatter.ofPattern("ddMMyy");
+        LocalDateTime nu = LocalDateTime.now();
+        dagsDatoString = datoenIdag.format(nu);
+        int dagsDatoMåned = Integer.parseInt(dagsDatoString.substring(2, 4));
+        int dagsDatoÅr = Integer.parseInt(dagsDatoString.substring(4, 6));
+        int slutDatoMåned = Integer.parseInt(lejeAftale.getSlutLejeDato().substring(2, 4));
+        int slutDatoÅr = Integer.parseInt(lejeAftale.getSlutLejeDato().substring(4, 6));
+
+        int månedCounter;
+        int årCounter;
+        double resterendeBetaling = 0;
+        if (dagsDatoÅr == slutDatoÅr) {
+            månedCounter = slutDatoMåned - dagsDatoMåned;
+            resterendeBetaling = lejeAftale.getMånedligBetaling() * månedCounter;
+        } else {
+            årCounter = slutDatoÅr - dagsDatoÅr;
+            månedCounter = årCounter * 12;
+            månedCounter += slutDatoMåned - dagsDatoMåned;
+            resterendeBetaling = lejeAftale.getMånedligBetaling() * månedCounter;
+        }
+
         String lejeKontrakt;
         lejeAftale.findFørsteBetalingsdato();
 
@@ -240,22 +267,22 @@ public class LejeAftaleRepository {
                 + "\nLejer: " + kundenavn + "\n\nForskudsbetaling: " + lejeAftale.getForskudsBetaling() +
                 "\nMånedlig betaling: " + lejeAftale.getMånedligBetaling() + "\nFørste betaling den: " +
                 lejeAftale.getFørsteBetalingsDato() + "\nAfbetaling ialt: " +
-                lejeAftale.getTotalAfbetaling() + "\nTil betaling ialt: " + lejeAftale.getBetalesIalt() +
+                resterendeBetaling + "\nTil betaling ialt: " + (resterendeBetaling + lejeAftale.getForskudsBetaling()) +
                 "\n\nBil" + "\nMærke: " + mærke + "\nModel: " + model + "\nUdstyrsniveau: " + udstyrsNiveau +
                 "\nStelnummer: " + stelnummer + "\nCo2 udledning: " + co2Udledning + " g/km" + "\nAfhentes hos DS forhandler: " + hentHosDs;
 
         return lejeKontrakt;
     }
     /*
-    Denne metoder tjekker alle de eksisterende lejeaftaler for om de er tæt på at udløbe.
+    Denne metoder tjekker alle de eksisterende lejeaftaler for om de er tæt på at udløbe. Som udgangspunkt giver den besked
+    når kontrakten er 5 dage fra udløb med mindre det er i en fremtidig måned, så kan den give besked op til 11 dage før.
     - Johannes
     */
     public ArrayList<LejeAftale> slutAftaleAdvarsel() {
         ArrayList<LejeAftale> udløberSnart = new ArrayList<>();
-        String dagsDatoString;
         DateTimeFormatter datoenIdag = DateTimeFormatter.ofPattern("ddMMyy");
         LocalDateTime nu = LocalDateTime.now();
-        dagsDatoString = datoenIdag.format(nu);
+        String dagsDatoString = datoenIdag.format(nu);
         int dagsDatoDag = Integer.parseInt(dagsDatoString.substring(0, 2));
         int dagsDatoMåned = Integer.parseInt(dagsDatoString.substring(2, 4));
         int dagsDatoÅr = Integer.parseInt(dagsDatoString.substring(4, 6));
@@ -272,9 +299,9 @@ public class LejeAftaleRepository {
                 }
             }
             if (årMatcher && månedMatcher) {
-                if (dagsDatoDag < 5) {
+                if (slutDatoDag < 6) {
                     udløberSnart.add(seLejeAftaler().get(i));
-                } else if (slutDatoDag - 5 < dagsDatoDag) {
+                } else if (slutDatoDag - 6 < dagsDatoDag) {
                     udløberSnart.add(seLejeAftaler().get(i));
                 }
             }
