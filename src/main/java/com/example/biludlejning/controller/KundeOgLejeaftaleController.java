@@ -90,6 +90,6 @@ public class  KundeOgLejeaftaleController {
   @GetMapping("/vislejekontrakt")
   public String vislejekontrakt(HttpSession httpSession) {
     httpSession.getAttribute("lejekontrakt");
-    return "/vislejekontrakt";
+    return "vislejekontrakt";
   }
 }
