@@ -28,8 +28,6 @@ public class LejeAftale {
     this.forskudsBetaling = forskudsBetaling;
     this.månedligBetaling = månedligBetaling;
     this.førsteBetalingsDato = findFørsteBetalingsdato();
-    //this.totalAfbetaling = antalBetalinger * månedligBetaling;
-    //this.betalesIalt = (antalBetalinger * månedligBetaling) + forskudsBetaling;
     this.slutLejeDato = slutLejeDato;
   }
 
