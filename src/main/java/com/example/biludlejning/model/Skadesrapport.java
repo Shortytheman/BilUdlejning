@@ -7,8 +7,6 @@ import java.util.LinkedHashMap;
 public class
 Skadesrapport {
 
-  //https://www.sampleforms.com/damage-report-forms.html for inspiration
-
   private int skadesrapportId;
   private String medarbejderNavn;
   private String medarbejderEmail;
