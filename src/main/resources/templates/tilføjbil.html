@@ -11,8 +11,9 @@
 <body>
 <div th:if="${session.brugerRolle} == 'dataregistrering'">
     <div>
-        <button type="button" onclick="java:history.back()"
-                class="btn btn-primary position-absolute top-0 end-0 buttonback">Back
+        <button class="tilbage btn btn-primary btn-lg btn-black" id="tilbage" type="button"
+                onclick="java:history.back()">
+            Tilbage
         </button>
     </div>
     <div class="container">

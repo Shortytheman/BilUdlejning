@@ -24,15 +24,6 @@ h6 {
     cursor: pointer;
     z-index: 2;
 }
-/* Ved ikke helt om der skal være en nyheds tekst på admin siden.
-.adminnyhed {
-    font-weight: bold;
-    text-align: center;
-    justify-content: center;
-    position: absolute;
-    margin-top: 20%;
-    font-family: arial, sans-serif;
-*/
 
 button1 {
     height: 50px;
@@ -145,8 +136,6 @@ button2 {
 /* SLETBRUGERE SLUT */
 
 /* DATAREGISTRERING START*/
-
-
 
 /* DATAREGISTRERING SLUT */
 

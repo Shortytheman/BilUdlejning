@@ -17,8 +17,7 @@ table {
     overflow: hidden;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 }
-th,
-td {
+th, td {
     padding: 15px;
     background-color: rgba(255, 255, 255, 0.2);
     color: black;
@@ -45,17 +44,6 @@ tbody td:hover:before {
     background-color: rgba(255, 255, 255, 0.2);
     z-index: -1;
 }
-.btn3 {
-    height: 50px;
-    width: 150px;
-    cursor: pointer;
-    margin-top: 2%;
-    margin-left: 90%;
-    position: absolute;
-    color: white;
-    text-align: center;
-    justify-content: center;
-    align-content: center;
-    background-color: #04AA6D;
-    font-size: 20px;
+.tilbage {
+    margin: 1% 0 0 1%;
 }
