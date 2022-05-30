@@ -10,8 +10,7 @@
 <body>
 <div th:if="${session.brugerRolle} == 'dataregistrering'">
     <div>
-        <button class="tilbage btn btn-primary btn-lg btn-black" id="tilbage" type="button"
-                href="/">
+        <button th:href="@{'/'}" class="tilbage btn btn-primary btn-lg btn-black" id="tilbage" type="button">
             Tilbage
         </button>
     </div>

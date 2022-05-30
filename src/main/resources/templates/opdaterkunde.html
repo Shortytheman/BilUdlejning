@@ -30,7 +30,7 @@
                 <input class="form-control form-control-lg" id="by" name="by" type="text" th:value="${kunde.getBy()}">
                 <button class="btn btn-primary btn-lg btn-block" type="submit">Opdater kunde</button>
                 <button class="btn btn-primary btn-lg btn-black" id="tilbage" type="button"
-                        href="/kundeoverblik">
+                        onclick="java:history.back()">
                     Tilbage
                 </button>
             </form>
