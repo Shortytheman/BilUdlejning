@@ -26,7 +26,7 @@ public class HomeController {
   public String sletbrugere(HttpSession httpSession, Model model) {
     model.addAttribute("brugerRolle", httpSession.getAttribute("brugerRolle"));
     model.addAttribute("brugere", brugerservice.seBrugere());
-    return "/sletbrugere";
+    return "sletbrugere";
   }
 
   @GetMapping("/slet/{brugernavn}")
