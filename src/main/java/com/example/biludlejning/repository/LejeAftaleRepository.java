@@ -238,11 +238,11 @@ public class LejeAftaleRepository {
         lejeKontrakt = "-----------Lejekontrakt-----------\n" + "Kontrakt dato: " + lejeAftale.getDato() +
                 "\nUdlejer: Bilabonnement"
                 + "\nLejer: " + kundenavn + "\n\nForskudsbetaling: " + lejeAftale.getForskudsBetaling() +
-                "\nMånedlig betaling: " + lejeAftale.getMånedligBetaling() + "\nførste betaling den: " +
+                "\nMånedlig betaling: " + lejeAftale.getMånedligBetaling() + "\nFørste betaling den: " +
                 lejeAftale.getFørsteBetalingsDato() + "\nAfbetaling ialt: " +
                 lejeAftale.getTotalAfbetaling() + "\nTil betaling ialt: " + lejeAftale.getBetalesIalt() +
                 "\n\nBil" + "\nMærke: " + mærke + "\nModel: " + model + "\nUdstyrsniveau: " + udstyrsNiveau +
-                "\nStelnummer: " + stelnummer + "\nco2 udledning: " + co2Udledning + " g/km" + "\nAfhentes hos DS forhandler: " + hentHosDs;
+                "\nStelnummer: " + stelnummer + "\nCo2 udledning: " + co2Udledning + " g/km" + "\nAfhentes hos DS forhandler: " + hentHosDs;
 
         return lejeKontrakt;
     }
