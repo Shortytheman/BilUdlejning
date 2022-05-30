@@ -19,13 +19,9 @@
         <div th:case="'admin'">
             <div>
                 <a th:href="@{'/logud'}">
-                    <button3 class="btn3 btn-lg btn-block">Log ud</button3>
+                    <button3 class="btn3 btn-danger btn-lg btn-block">Log ud</button3>
                 </a>
             </div>
-            <!--<div>
-                <header class="adminnyhed position-absolute top-0 start-50 translate-middle">
-                </header>
-            </div>-->
             <form method="post">
                 <section class="vh-100">
                     <div class="container py-5 h-100 w3-animate-zoom">
@@ -33,18 +29,20 @@
                             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                                 <div class="card shadow-2-strong ramme1">
                                     <div class="card-body p-5 text-center">
-                                        <h3 class="mb-4">Menu</h3>
+                                        <h3 class="menuhead mb-4">Menu</h3>
                                         <h6 class="mb-4">Administrator</h6>
                                         <div class="mb-4">
                                             <div class="form-outline mb-4">
                                                 <a href="/opretbruger">
-                                                    <button class="btn btn-primary btn-lg indexknap" type="button">Opret bruger
+                                                    <button class="btn btn-primary btn-lg indexknap" type="button">Opret
+                                                        bruger
                                                     </button>
                                                 </a>
                                             </div>
                                             <div class="form-outline mb-4">
                                                 <a href="/sletbrugere">
-                                                    <button class="btn btn-primary btn-lg indexknap" type="button">Slet brugere
+                                                    <button class="btn btn-primary btn-lg indexknap" type="button">Slet
+                                                        brugere
                                                     </button>
                                                 </a>
                                             </div>
@@ -60,7 +58,7 @@
         <div th:case="'dataregistrering'">
             <div>
                 <a th:href="@{'/logud'}">
-                    <button3 class="btn3 btn-lg btn-block">Log ud</button3>
+                    <button3 class="btn3 btn-danger btn-lg btn-block">Log ud</button3>
                 </a>
             </div>
             <form method="post">
@@ -70,7 +68,7 @@
                             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                                 <div class="card shadow-2-strong">
                                     <div class="card-body p-5 text-center">
-                                        <h3 class="mb-4">Menu</h3>
+                                        <h3 class="menuhead mb-4">Menu</h3>
                                         <h6 class="mb-4">Dataregistrering</h6>
                                         <div class="mb-4">
                                             <div class="form-outline mb-4">
@@ -89,12 +87,16 @@
                                             </div>
                                             <div class="form-outline mb-4">
                                                 <a href="/tilføjbil">
-                                                    <button class="btn btn-primary btn-lg indexknap" type="button">Tilføj Bil</button>
+                                                    <button class="btn btn-primary btn-lg indexknap" type="button">
+                                                        Tilføj Bil
+                                                    </button>
                                                 </a>
                                             </div>
                                             <div class="form-outline mb-4">
                                                 <a href="/kundeoverblik">
-                                                    <button class="btn btn-primary btn-lg indexknap" type="button">Kundeoverblik</button>
+                                                    <button class="btn btn-primary btn-lg indexknap" type="button">
+                                                        Kundeoverblik
+                                                    </button>
                                                 </a>
                                             </div>
                                             <div class="form-outline mb-4">
@@ -117,7 +119,7 @@
         <div th:case="'skadeogudbedring'">
             <div>
                 <a th:href="@{'/logud'}">
-                    <button3 class="btn3 btn-lg btn-block">Log ud</button3>
+                    <button3 class="btn3 btn-danger btn-lg btn-block">Log ud</button3>
                 </a>
             </div>
             <form method="post">
@@ -127,7 +129,7 @@
                             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                                 <div class="card shadow-2-strong">
                                     <div class="card-body p-5 text-center">
-                                        <h3 class="mb-4">Menu</h3>
+                                        <h3 class="menuhead mb-4">Menu</h3>
                                         <h6 class="mb-4">Skade og udbedring</h6>
                                         <div class="mb-4">
                                             <div class="form-outline mb-4">

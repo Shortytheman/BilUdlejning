@@ -50,6 +50,8 @@ tbody td:hover:before {
     text-align: center;
     justify-content: center;
     align-content: center;
-    background-color: #04AA6D;
     font-size: 20px;
+}
+.btn3:hover {
+    background-color: darkred;
 }

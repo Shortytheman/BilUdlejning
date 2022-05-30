@@ -12,44 +12,52 @@
     <title>Title</title>
 </head>
 <body>
-<div th:if="${session.brugerRolle} == 'admin'">
-    <div class="position-absolute top-50 start-50 translate-middle">
-        <div class="container py-5 h-100 w3-animate-zoom card sletbrugeretable">
-            <h2 class="mb-4">Slet brugere</h2>
-            <div>
-                <table>
-                    <thead>
-                    <tr>
-                        <th>
-                            Brugernavn
-                        </th>
-                        <th>
-                            Rolle
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="bruger : ${brugere}">
-                        <td th:text="${bruger.getBrugernavn()}">
-                        </td>
-                        <td th:text="${bruger.rolle}">
-                        </td>
-                        <td>
-                            <a class="btn btn-danger" th:href="@{'/slet/' + ${bruger.getBrugernavn()}}" role="button">Slet
-                                bruger</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div>
-                <button class="btn btn-primary btn-lg btn-black" id="tilbage" type="button"
-                        onclick="java:history.back()">
-                    Tilbage
-                </button>
-            </div>
+<div class="position-absolute top-50 start-50 translate-middle">
+    <div class="container py-5 h-100 w3-animate-zoom card sletbrugeretable">
+        <div class="text-center">
+        <h2 class="mb-5">Slet brugere</h2>
+        </div>
+        <div>
+            <table>
+                <thead>
+                <tr>
+                    <th>
+                        Brugernavn
+                    </th>
+                    <th>
+                        Rolle
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="bruger : ${brugere}">
+                    <td th:text="${bruger.getBrugernavn()}">
+                    </td>
+                    <td th:text="${bruger.rolle}">
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" th:href="@{'/slet/' + ${bruger.getBrugernavn()}}" role="button">Slet
+                            bruger</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <button class="btn btn-primary btn-lg btn-black" id="tilbage" type="button"
+                    onclick="java:history.back()">
+                Tilbage
+            </button>
         </div>
     </div>
 </div>
+<!--<div class="dropdown">
+        <button class="dropbtn" style="border-radius: 2rem;">Admin menu</button>
+        <div class="dropdown-content">
+            <a href="opretbruger">Opret bruger</a>
+            <a href="sletbrugere">Slet brugere</a>
+            <a href="#">Link 3</a>
+        </div>
+    </div>-->
 </body>
 </html>

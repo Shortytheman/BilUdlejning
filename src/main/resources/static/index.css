@@ -24,6 +24,10 @@ h6 {
     cursor: pointer;
     z-index: 2;
 }
+.menuhead{
+    font-size: 25px;
+    font-weight: bold;
+}
 
 button1 {
     height: 50px;
@@ -61,12 +65,11 @@ button2 {
     text-align: center;
     justify-content: center;
     align-content: center;
-    background-color: #04AA6D;
     font-size: 20px;
 }
 
 .btn3:hover {
-    background-color: #3e8e41;
+    background-color: darkred;
 }
 
 .billede1 {
@@ -136,6 +139,8 @@ button2 {
 /* SLETBRUGERE SLUT */
 
 /* DATAREGISTRERING START*/
+
+
 
 /* DATAREGISTRERING SLUT */
 
@@ -263,6 +268,23 @@ span.detaljer {
 
 .btn5:hover {
     background-color: rgba(10, 136, 43, 0.5);
+}
+
+/* Skadesrapport */
+.lavskadesrapport {
+    top: 20%;
+    left: 30%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+
+}
+
+.seskadesrapport {
+    top: 20%;
+    left: 70%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+
 }
 
 /* NULL SLUT */
