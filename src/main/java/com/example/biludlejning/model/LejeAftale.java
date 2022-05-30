@@ -12,12 +12,11 @@ public class LejeAftale {
   private double forskudsBetaling;
   private double månedligBetaling;
   private String førsteBetalingsDato;
-  private int antalBetalinger;
   private double totalAfbetaling;
   private double betalesIalt;
   private String slutLejeDato;
 
-  public LejeAftale(int kundeID, int vognnummer, double forskudsBetaling, double månedligBetaling, int antalBetalinger,
+  public LejeAftale(int kundeID, int vognnummer, double forskudsBetaling, double månedligBetaling,
                     String slutLejeDato){
     this.kundeID = kundeID;
     this.vognnummer = vognnummer;
@@ -29,9 +28,8 @@ public class LejeAftale {
     this.forskudsBetaling = forskudsBetaling;
     this.månedligBetaling = månedligBetaling;
     this.førsteBetalingsDato = findFørsteBetalingsdato();
-    this.antalBetalinger = antalBetalinger;
-    this.totalAfbetaling = antalBetalinger * månedligBetaling;
-    this.betalesIalt = (antalBetalinger * månedligBetaling) + forskudsBetaling;
+    //this.totalAfbetaling = antalBetalinger * månedligBetaling;
+    //this.betalesIalt = (antalBetalinger * månedligBetaling) + forskudsBetaling;
     this.slutLejeDato = slutLejeDato;
   }
 
@@ -122,13 +120,13 @@ public class LejeAftale {
     this.førsteBetalingsDato = førsteBetalingsDato;
   }
 
-  public int getAntalBetalinger() {
+  /*public int getAntalBetalinger() {
     return antalBetalinger;
-  }
+  }*/
 
-  public void setAntalBetalinger(int antalBetalinger) {
+  /*public void setAntalBetalinger(int antalBetalinger) {
     this.antalBetalinger = antalBetalinger;
-  }
+  }*/
 
   public double getTotalAfbetaling() {
     return totalAfbetaling;

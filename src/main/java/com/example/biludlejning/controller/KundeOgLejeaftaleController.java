@@ -79,9 +79,9 @@ public class  KundeOgLejeaftaleController {
 
   @PostMapping("/opretlejeaftale")
   public String opretLejekontrakt(@RequestParam int kundeid, @RequestParam int vognnummer, @RequestParam double forskudsbetaling,
-                                  @RequestParam double månedligbetaling, @RequestParam int antalbetalinger,
+                                  @RequestParam double månedligbetaling,
                                   @RequestParam String slutlejedato, HttpSession httpSession) {
-    LejeAftale lejeAftale = new LejeAftale(kundeid, vognnummer, forskudsbetaling, månedligbetaling, antalbetalinger, slutlejedato);
+    LejeAftale lejeAftale = new LejeAftale(kundeid, vognnummer, forskudsbetaling, månedligbetaling, slutlejedato);
     httpSession.setAttribute("lejekontrakt", kundeOgLejeaftaleService.lavLejeKontrakt(lejeAftale));
     kundeOgLejeaftaleService.lavLejeaftale(lejeAftale);
     return "redirect:/vislejekontrakt";
