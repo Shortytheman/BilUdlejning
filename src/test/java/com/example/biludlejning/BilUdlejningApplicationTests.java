@@ -73,13 +73,13 @@ class BilUdlejningApplicationTests {
 
   @Test
   void findSkadesRapportMedVognnummerTest(){
-    var skadesrep = new SkadesrapportRepository();
+    SkadesrapportRepository skadesrep = new SkadesrapportRepository();
     assertThat(skadesrep.findSkadesrapportMedVognnummer(2).getKundeId(), is(6));
   }
 
   @Test
   void findlejeAftaleEfterKundeId(){
-    var lejeaftalerep = new LejeAftaleRepository();
+    LejeAftaleRepository lejeaftalerep = new LejeAftaleRepository();
     assertThat(lejeaftalerep.findlejeAftaleEfterKundeId(32).getVognnummer(),is(567));
   }
 
