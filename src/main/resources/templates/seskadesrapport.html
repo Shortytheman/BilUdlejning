@@ -10,10 +10,6 @@
 </head>
 <body>
 <div class="position-absolute top-50 start-50 translate-middle">
-    <button class="btn btn-primary btn-lg btn-black" id="tilbage" type="button"
-            onclick="java:history.back()">
-        Tilbage
-    </button>
     <div class="container py-5 h-100 card">
         <h1>Skadesrapport</h1>
         <h3>Oprettet af medarbejder:</h3>
@@ -45,6 +41,12 @@
         <div>
             <h4>Total skadepris:</h4>
             <div th:text="${totalskadepris}"></div>
+        </div><br>
+        <div>
+            <button class="btn btn-primary btn-lg btn-black" id="tilbage" type="button"
+                    onclick="java:history.back()">
+                Tilbage
+            </button>
         </div>
     </div>
 </div>
