@@ -28,7 +28,7 @@ public class LejeAftaleRepository {
             preparedStatement.setDouble(4, lejeAftale.getForskudsBetaling());
             preparedStatement.setDouble(5, lejeAftale.getMånedligBetaling());
             preparedStatement.setString(6, lejeAftale.getFørsteBetalingsDato());
-            preparedStatement.setInt(7, lejeAftale.getAntalBetalinger());
+            //preparedStatement.setInt(7, lejeAftale.getAntalBetalinger());
             preparedStatement.setString(8, lejeAftale.getSlutLejeDato());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -63,7 +63,7 @@ public class LejeAftaleRepository {
                 lejeAftale.setForskudsBetaling(forskudsBetaling);
                 lejeAftale.setMånedligBetaling(månedligBetaling);
                 lejeAftale.setFørsteBetalingsDato(førsteBetalingsDato);
-                lejeAftale.setAntalBetalinger(antalBetalinger);
+                //lejeAftale.setAntalBetalinger(antalBetalinger);
                 lejeAftale.setSlutLejeDato(slutLejeDato);
                 lejeAftaler.add(lejeAftale);
             }
@@ -85,7 +85,7 @@ public class LejeAftaleRepository {
             preparedStatement.setDouble(4, lejeAftale.getForskudsBetaling());
             preparedStatement.setDouble(5, lejeAftale.getMånedligBetaling());
             preparedStatement.setString(6, lejeAftale.getFørsteBetalingsDato());
-            preparedStatement.setInt(7, lejeAftale.getAntalBetalinger());
+            //preparedStatement.setInt(7, lejeAftale.getAntalBetalinger());
             preparedStatement.setString(8, lejeAftale.getSlutLejeDato());
             preparedStatement.executeUpdate();
 
@@ -135,7 +135,7 @@ public class LejeAftaleRepository {
                 lejeAftale.setForskudsBetaling(forskudsBetaling);
                 lejeAftale.setMånedligBetaling(månedligBetaling);
                 lejeAftale.setFørsteBetalingsDato(førsteBetalingsDato);
-                lejeAftale.setAntalBetalinger(antalBetalinger);
+                //lejeAftale.setAntalBetalinger(antalBetalinger);
                 lejeAftale.setSlutLejeDato(slutlejedato);
             }
         } catch (SQLException e) {
@@ -170,7 +170,7 @@ public class LejeAftaleRepository {
                 lejeAftale.setForskudsBetaling(forskudsBetaling);
                 lejeAftale.setMånedligBetaling(månedligBetaling);
                 lejeAftale.setFørsteBetalingsDato(førsteBetalingsDato);
-                lejeAftale.setAntalBetalinger(antalBetalinger);
+                //lejeAftale.setAntalBetalinger(antalBetalinger);
                 lejeAftale.setSlutLejeDato(slutlejedato);
             }
         } catch (SQLException e) {
