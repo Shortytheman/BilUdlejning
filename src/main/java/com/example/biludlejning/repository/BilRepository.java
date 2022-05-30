@@ -314,7 +314,7 @@ public class BilRepository {
                 lejeAftale.setForskudsBetaling(forskudsBetaling);
                 lejeAftale.setMånedligBetaling(månedligBetaling);
                 lejeAftale.setFørsteBetalingsDato(førsteBetalingsDato);
-                lejeAftale.setAntalBetalinger(antalBetalinger);
+                //lejeAftale.setAntalBetalinger(antalBetalinger);
                 lejeAftale.setSlutLejeDato(slutLejeDato);
                 lejeAftaler.add(lejeAftale);
             }
