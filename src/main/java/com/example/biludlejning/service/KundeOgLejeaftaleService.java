@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
+//Skrevet af alle i gruppen
+
 @Service
 public class KundeOgLejeaftaleService {
 

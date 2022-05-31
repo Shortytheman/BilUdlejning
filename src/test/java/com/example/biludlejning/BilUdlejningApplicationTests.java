@@ -18,6 +18,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+//Skrevet af Johannes og Niklas og reviewet af hele gruppen
+
 @SpringBootTest
 class BilUdlejningApplicationTests {
 

@@ -2,6 +2,7 @@ package com.example.biludlejning.model;
 
 
 //Midlertidig modelklasse som bruge ifm. et LinkedHashMap i Bilrepository
+//Hovedsageligt skrevet af Johannes
 public class Bildata {
   private String maerke;
   private String model;

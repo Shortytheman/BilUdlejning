@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Set;
 
+//Skrevet af alle gruppens medlemmer
+
 @Repository
 public class BilRepository {
 

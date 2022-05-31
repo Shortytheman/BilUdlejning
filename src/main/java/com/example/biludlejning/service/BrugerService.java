@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
+//Hovedsageligt skrevet af Niklas
+
 @Service
 public class BrugerService {
 

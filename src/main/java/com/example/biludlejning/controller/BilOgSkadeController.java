@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpSession;
 import java.util.LinkedHashMap;
 
+
+//Hovedsageligt skrevet af Niklas
+
 @Controller
 public class BilOgSkadeController {
   BilService bilservice;
@@ -27,6 +30,7 @@ public class BilOgSkadeController {
     this.bilservice = bilservice;
   }
 
+  //Skrevet af Johannes
   @GetMapping("/fudvikler")
   public String fudvikler(Model model) {
     //Vi bruger Model til at sende informationer fra vores Controller til vores view.
