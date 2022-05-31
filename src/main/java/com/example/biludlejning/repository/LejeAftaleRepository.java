@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+//Skrevet af alle i gruppen
+
 @Repository
 public class LejeAftaleRepository {
 

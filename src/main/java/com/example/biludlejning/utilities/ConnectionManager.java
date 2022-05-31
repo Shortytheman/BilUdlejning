@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
-//Drivermanager hentet fra sidste projekt
+//Drivermanager hentet fra sidste projekt - hvor den samme samme gruppe arbejdede sammen om at udabejde den.
 public class ConnectionManager {
 
   private static Connection connection;

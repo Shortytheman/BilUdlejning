@@ -3,6 +3,8 @@ package com.example.biludlejning.model;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+//Hovedsageligt skrevet af Niklas
+
 public class LejeAftale {
 
   private int lejeaftaleID;
@@ -35,6 +37,7 @@ public class LejeAftale {
   }
 
   //Sætter første betalingsdato til første dag i næstkommende måned fra dato;
+  //Skrevet af Johannes
   public String findFørsteBetalingsdato () {
     String måned = dato.substring(2,4);
     String år = dato.substring(4,6);

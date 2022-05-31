@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedHashMap;
 
+//Hovedsageligt skrevet af Niklas
+
 public class
 Skadesrapport {
 

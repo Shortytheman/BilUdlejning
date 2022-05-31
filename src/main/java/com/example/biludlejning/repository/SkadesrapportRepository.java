@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Set;
 
+//Hovedsageligt skrevet af Niklas
+
 @Repository
 public class SkadesrapportRepository {
 

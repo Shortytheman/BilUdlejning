@@ -2,6 +2,7 @@ package com.example.biludlejning.model;
 
 
 //Brugerklassen refererer til brugeren af programmet.
+//Hovedsageligt skrevet af Niklas
 public class Bruger {
 
     String brugernavn;
