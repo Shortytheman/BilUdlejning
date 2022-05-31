@@ -19,7 +19,7 @@ public class LejeAftaleRepository {
     }
 
     public void tilføjLejeAftale(LejeAftale lejeAftale) {
-        String query = "INSERT INTO lejeaftaler(kunde_id, vognnummer, dato, forskudsbetaling, månedligbetaling, førstebetalingsdato, antalbetalinger, slutlejedato) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
+        String query = "INSERT INTO lejeaftaler(kunde_id, vognnummer, dato, forskudsbetaling, månedligbetaling, førstebetalingsdato, slutlejedato) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, lejeAftale.getKundeId());
@@ -28,7 +28,6 @@ public class LejeAftaleRepository {
             preparedStatement.setDouble(4, lejeAftale.getForskudsBetaling());
             preparedStatement.setDouble(5, lejeAftale.getMånedligBetaling());
             preparedStatement.setString(6, lejeAftale.getFørsteBetalingsDato());
-            //preparedStatement.setInt(7, lejeAftale.getAntalBetalinger());
             preparedStatement.setString(8, lejeAftale.getSlutLejeDato());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
