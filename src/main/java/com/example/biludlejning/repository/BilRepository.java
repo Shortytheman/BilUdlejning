@@ -248,10 +248,9 @@ public class BilRepository {
         int dagsDatoÅr = Integer.parseInt(dagsDatoString.substring(4, 6));
         int slutDatoMåned = Integer.parseInt(slutLejeDato.substring(2, 4));
         int slutDatoÅr = Integer.parseInt(slutLejeDato.substring(4, 6));
-
         int månedCounter;
         int årCounter;
-        double resterendeBetaling = 0;
+        double resterendeBetaling;
         if (dagsDatoÅr == slutDatoÅr) {
             månedCounter = slutDatoMåned - dagsDatoMåned;
             resterendeBetaling = månedligBetaling * månedCounter;
@@ -259,7 +258,6 @@ public class BilRepository {
             årCounter = slutDatoÅr - dagsDatoÅr;
             månedCounter = årCounter * 12;
             månedCounter += slutDatoMåned - dagsDatoMåned;
-
             resterendeBetaling = månedligBetaling * månedCounter;
         }
         return resterendeBetaling;
@@ -304,7 +302,6 @@ public class BilRepository {
                 double forskudsBetaling = resultSet.getDouble("forskudsbetaling");
                 double månedligBetaling = resultSet.getDouble("månedligbetaling");
                 String førsteBetalingsDato = resultSet.getString("førstebetalingsdato");
-                int antalBetalinger = resultSet.getInt("antalbetalinger");
                 String slutLejeDato = resultSet.getString("slutlejedato");
 
                 LejeAftale lejeAftale = new LejeAftale();
