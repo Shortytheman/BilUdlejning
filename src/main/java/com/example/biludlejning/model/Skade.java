@@ -1,5 +1,7 @@
 package com.example.biludlejning.model;
 
+//Hovedsageligt skrevet af Niklas
+
 public class Skade {
 
   private int skade_id;

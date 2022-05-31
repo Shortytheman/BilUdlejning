@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
+//Hovedsageligt skrevet af Niklas
+
 @Controller
 public class HomeController {
 
@@ -26,7 +28,7 @@ public class HomeController {
   public String sletbrugere(HttpSession httpSession, Model model) {
     model.addAttribute("brugerRolle", httpSession.getAttribute("brugerRolle"));
     model.addAttribute("brugere", brugerservice.seBrugere());
-    return "/sletbrugere";
+    return "sletbrugere";
   }
 
   @GetMapping("/slet/{brugernavn}")
@@ -47,6 +49,7 @@ public class HomeController {
     return "redirect:/";
   }
 
+  //Skrevet af Frederik
   @GetMapping("/")
   public String visLogin(HttpSession httpSession, Model model) {
     model.addAttribute("brugerRolle", httpSession.getAttribute("brugerRolle"));

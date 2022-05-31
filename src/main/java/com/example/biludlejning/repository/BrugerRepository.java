@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import java.sql.*;
 import java.util.ArrayList;
 
+//Skrevet af alle gruppens medlemmer.
+
 @Repository
 public class BrugerRepository {
 

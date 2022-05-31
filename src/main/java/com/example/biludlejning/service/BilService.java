@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
+//Skrevet af Johannes og Niklas
+
 @Service
 public class BilService {
 
@@ -44,7 +46,6 @@ public class BilService {
   public ArrayList<LejeAftale> slutAftaleAdvarsel(){
     return lejeAftaleRepository.slutAftaleAdvarsel();
   }
-
   public Bil findBilMedVognnummer(int vognnummer) {
     return bilRepository.findBilMedVognnummer(vognnummer);
   }

@@ -3,6 +3,8 @@ package com.example.biludlejning.model;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+//Hovedsageligt skrevet af Niklas
+
 public class LejeAftale {
 
   private int lejeaftaleID;
@@ -12,12 +14,11 @@ public class LejeAftale {
   private double forskudsBetaling;
   private double månedligBetaling;
   private String førsteBetalingsDato;
-  private int antalBetalinger;
   private double totalAfbetaling;
   private double betalesIalt;
   private String slutLejeDato;
 
-  public LejeAftale(int kundeID, int vognnummer, double forskudsBetaling, double månedligBetaling, int antalBetalinger,
+  public LejeAftale(int kundeID, int vognnummer, double forskudsBetaling, double månedligBetaling,
                     String slutLejeDato){
     this.kundeID = kundeID;
     this.vognnummer = vognnummer;
@@ -29,9 +30,6 @@ public class LejeAftale {
     this.forskudsBetaling = forskudsBetaling;
     this.månedligBetaling = månedligBetaling;
     this.førsteBetalingsDato = findFørsteBetalingsdato();
-    this.antalBetalinger = antalBetalinger;
-    this.totalAfbetaling = antalBetalinger * månedligBetaling;
-    this.betalesIalt = (antalBetalinger * månedligBetaling) + forskudsBetaling;
     this.slutLejeDato = slutLejeDato;
   }
 
@@ -39,6 +37,7 @@ public class LejeAftale {
   }
 
   //Sætter første betalingsdato til første dag i næstkommende måned fra dato;
+  //Skrevet af Johannes
   public String findFørsteBetalingsdato () {
     String måned = dato.substring(2,4);
     String år = dato.substring(4,6);
@@ -122,13 +121,13 @@ public class LejeAftale {
     this.førsteBetalingsDato = førsteBetalingsDato;
   }
 
-  public int getAntalBetalinger() {
+  /*public int getAntalBetalinger() {
     return antalBetalinger;
-  }
+  }*/
 
-  public void setAntalBetalinger(int antalBetalinger) {
+  /*public void setAntalBetalinger(int antalBetalinger) {
     this.antalBetalinger = antalBetalinger;
-  }
+  }*/
 
   public double getTotalAfbetaling() {
     return totalAfbetaling;

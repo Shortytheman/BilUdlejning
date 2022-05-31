@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 import java.sql.*;
 import java.util.ArrayList;
 
+//Skrevet af alle  i gruppen.
+
 @Repository
 public class KundeRepository {
 
@@ -16,8 +18,6 @@ public class KundeRepository {
     public KundeRepository() {
         connection = ConnectionManager.connectToSql();
     }
-
-    //CRUD!
 
     //Mikkel
     public void opretKunde(Kunde kunde) {

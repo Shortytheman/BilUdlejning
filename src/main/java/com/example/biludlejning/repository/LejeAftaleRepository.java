@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+//Skrevet af alle i gruppen
+
 @Repository
 public class LejeAftaleRepository {
 
@@ -19,7 +21,7 @@ public class LejeAftaleRepository {
     }
 
     public void tilføjLejeAftale(LejeAftale lejeAftale) {
-        String query = "INSERT INTO lejeaftaler(kunde_id, vognnummer, dato, forskudsbetaling, månedligbetaling, førstebetalingsdato, antalbetalinger, slutlejedato) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
+        String query = "INSERT INTO lejeaftaler(kunde_id, vognnummer, dato, forskudsbetaling, månedligbetaling, førstebetalingsdato, slutlejedato) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, lejeAftale.getKundeId());
@@ -28,7 +30,6 @@ public class LejeAftaleRepository {
             preparedStatement.setDouble(4, lejeAftale.getForskudsBetaling());
             preparedStatement.setDouble(5, lejeAftale.getMånedligBetaling());
             preparedStatement.setString(6, lejeAftale.getFørsteBetalingsDato());
-            preparedStatement.setInt(7, lejeAftale.getAntalBetalinger());
             preparedStatement.setString(8, lejeAftale.getSlutLejeDato());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -63,7 +64,7 @@ public class LejeAftaleRepository {
                 lejeAftale.setForskudsBetaling(forskudsBetaling);
                 lejeAftale.setMånedligBetaling(månedligBetaling);
                 lejeAftale.setFørsteBetalingsDato(førsteBetalingsDato);
-                lejeAftale.setAntalBetalinger(antalBetalinger);
+                //lejeAftale.setAntalBetalinger(antalBetalinger);
                 lejeAftale.setSlutLejeDato(slutLejeDato);
                 lejeAftaler.add(lejeAftale);
             }
@@ -85,7 +86,7 @@ public class LejeAftaleRepository {
             preparedStatement.setDouble(4, lejeAftale.getForskudsBetaling());
             preparedStatement.setDouble(5, lejeAftale.getMånedligBetaling());
             preparedStatement.setString(6, lejeAftale.getFørsteBetalingsDato());
-            preparedStatement.setInt(7, lejeAftale.getAntalBetalinger());
+            //preparedStatement.setInt(7, lejeAftale.getAntalBetalinger());
             preparedStatement.setString(8, lejeAftale.getSlutLejeDato());
             preparedStatement.executeUpdate();
 
@@ -135,7 +136,7 @@ public class LejeAftaleRepository {
                 lejeAftale.setForskudsBetaling(forskudsBetaling);
                 lejeAftale.setMånedligBetaling(månedligBetaling);
                 lejeAftale.setFørsteBetalingsDato(førsteBetalingsDato);
-                lejeAftale.setAntalBetalinger(antalBetalinger);
+                //lejeAftale.setAntalBetalinger(antalBetalinger);
                 lejeAftale.setSlutLejeDato(slutlejedato);
             }
         } catch (SQLException e) {
@@ -170,7 +171,7 @@ public class LejeAftaleRepository {
                 lejeAftale.setForskudsBetaling(forskudsBetaling);
                 lejeAftale.setMånedligBetaling(månedligBetaling);
                 lejeAftale.setFørsteBetalingsDato(førsteBetalingsDato);
-                lejeAftale.setAntalBetalinger(antalBetalinger);
+                //lejeAftale.setAntalBetalinger(antalBetalinger);
                 lejeAftale.setSlutLejeDato(slutlejedato);
             }
         } catch (SQLException e) {
@@ -180,9 +181,15 @@ public class LejeAftaleRepository {
         return lejeAftale;
     }
 
+
+    //Metoden opretter en String og konkatenerer den så den ligner en reel lejekontrakt som kunden får når de har
+    //godkendt en leasing aftale.
+    //Skrevet af Niklas
     public String lavLejeKontrakt(LejeAftale lejeAftale) {
         String query = "SELECT navn FROM kunder WHERE kunde_id = " + lejeAftale.getKundeId();
         String kundenavn = "";
+
+        //Vi har lavet to DB kald, et som finder en bil og giver os et resultset og en query som updater bilen til udlejet.
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -232,30 +239,52 @@ public class LejeAftaleRepository {
             hentHosDs = "nej";
         }
 
+        String dagsDatoString;
+        DateTimeFormatter datoenIdag = DateTimeFormatter.ofPattern("ddMMyy");
+        LocalDateTime nu = LocalDateTime.now();
+        dagsDatoString = datoenIdag.format(nu);
+        int dagsDatoMåned = Integer.parseInt(dagsDatoString.substring(2, 4));
+        int dagsDatoÅr = Integer.parseInt(dagsDatoString.substring(4, 6));
+        int slutDatoMåned = Integer.parseInt(lejeAftale.getSlutLejeDato().substring(2, 4));
+        int slutDatoÅr = Integer.parseInt(lejeAftale.getSlutLejeDato().substring(4, 6));
+
+        int månedCounter;
+        int årCounter;
+        double resterendeBetaling = 0;
+        if (dagsDatoÅr == slutDatoÅr) {
+            månedCounter = slutDatoMåned - dagsDatoMåned;
+            resterendeBetaling = lejeAftale.getMånedligBetaling() * månedCounter;
+        } else {
+            årCounter = slutDatoÅr - dagsDatoÅr;
+            månedCounter = årCounter * 12;
+            månedCounter += slutDatoMåned - dagsDatoMåned;
+            resterendeBetaling = lejeAftale.getMånedligBetaling() * månedCounter;
+        }
+
         String lejeKontrakt;
         lejeAftale.findFørsteBetalingsdato();
 
         lejeKontrakt = "-----------Lejekontrakt-----------\n" + "Kontrakt dato: " + lejeAftale.getDato() +
                 "\nUdlejer: Bilabonnement"
                 + "\nLejer: " + kundenavn + "\n\nForskudsbetaling: " + lejeAftale.getForskudsBetaling() +
-                "\nMånedlig betaling: " + lejeAftale.getMånedligBetaling() + "\nførste betaling den: " +
+                "\nMånedlig betaling: " + lejeAftale.getMånedligBetaling() + "\nFørste betaling den: " +
                 lejeAftale.getFørsteBetalingsDato() + "\nAfbetaling ialt: " +
-                lejeAftale.getTotalAfbetaling() + "\nTil betaling ialt: " + lejeAftale.getBetalesIalt() +
+                resterendeBetaling + "\nTil betaling ialt: " + (resterendeBetaling + lejeAftale.getForskudsBetaling()) +
                 "\n\nBil" + "\nMærke: " + mærke + "\nModel: " + model + "\nUdstyrsniveau: " + udstyrsNiveau +
-                "\nStelnummer: " + stelnummer + "\nco2 udledning: " + co2Udledning + " g/km" + "\nAfhentes hos DS forhandler: " + hentHosDs;
+                "\nStelnummer: " + stelnummer + "\nCo2 udledning: " + co2Udledning + " g/km" + "\nAfhentes hos DS forhandler: " + hentHosDs;
 
         return lejeKontrakt;
     }
     /*
-    Denne metoder tjekker alle de eksisterende lejeaftaler for om de er tæt på at udløbe.
-    - Johannes
+    Denne metoder tjekker alle de eksisterende lejeaftaler for om de er tæt på at udløbe. Som udgangspunkt giver den besked
+    når kontrakten er 5 dage fra udløb med mindre det er i en fremtidig måned, så kan den give besked op til 11 dage før.
+    - Skrevet af Johannes
     */
     public ArrayList<LejeAftale> slutAftaleAdvarsel() {
         ArrayList<LejeAftale> udløberSnart = new ArrayList<>();
-        String dagsDatoString;
         DateTimeFormatter datoenIdag = DateTimeFormatter.ofPattern("ddMMyy");
         LocalDateTime nu = LocalDateTime.now();
-        dagsDatoString = datoenIdag.format(nu);
+        String dagsDatoString = datoenIdag.format(nu);
         int dagsDatoDag = Integer.parseInt(dagsDatoString.substring(0, 2));
         int dagsDatoMåned = Integer.parseInt(dagsDatoString.substring(2, 4));
         int dagsDatoÅr = Integer.parseInt(dagsDatoString.substring(4, 6));
@@ -272,9 +301,9 @@ public class LejeAftaleRepository {
                 }
             }
             if (årMatcher && månedMatcher) {
-                if (dagsDatoDag < 5) {
+                if (slutDatoDag < 6) {
                     udløberSnart.add(seLejeAftaler().get(i));
-                } else if (slutDatoDag - 5 < dagsDatoDag) {
+                } else if (slutDatoDag - 6 < dagsDatoDag) {
                     udløberSnart.add(seLejeAftaler().get(i));
                 }
             }
