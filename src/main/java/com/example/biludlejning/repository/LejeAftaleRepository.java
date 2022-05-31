@@ -184,6 +184,7 @@ public class LejeAftaleRepository {
 
     //Metoden opretter en String og konkatenerer den så den ligner en reel lejekontrakt som kunden får når de har
     //godkendt en leasing aftale.
+    //Skrevet af Niklas
     public String lavLejeKontrakt(LejeAftale lejeAftale) {
         String query = "SELECT navn FROM kunder WHERE kunde_id = " + lejeAftale.getKundeId();
         String kundenavn = "";
@@ -277,7 +278,7 @@ public class LejeAftaleRepository {
     /*
     Denne metoder tjekker alle de eksisterende lejeaftaler for om de er tæt på at udløbe. Som udgangspunkt giver den besked
     når kontrakten er 5 dage fra udløb med mindre det er i en fremtidig måned, så kan den give besked op til 11 dage før.
-    - Johannes
+    - Skrevet af Johannes
     */
     public ArrayList<LejeAftale> slutAftaleAdvarsel() {
         ArrayList<LejeAftale> udløberSnart = new ArrayList<>();

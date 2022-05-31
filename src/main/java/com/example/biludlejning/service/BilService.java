@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
-//Skrevet af alle i gruppen
+//Skrevet af Johannes og Niklas
 
 @Service
 public class BilService {

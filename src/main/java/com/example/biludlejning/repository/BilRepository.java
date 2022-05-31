@@ -25,7 +25,7 @@ public class BilRepository {
         connection = ConnectionManager.connectToSql();
     }
 
-    //Mikkel
+    //Skrevet af Mikkel
     public void tilføjBil(Bil bil) {
         String query = "INSERT INTO biler (vognnummer, stelnummer, mærke, model, udstyrsNiveau, stålpris, regAfgift, co2Udledning, udlejet, udlejningsdato, erDS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -49,7 +49,7 @@ public class BilRepository {
         }
     }
 
-    //Mikkel
+    //Skrevet af Mikkel
     public ArrayList<Bil> seBiler() {
         ArrayList<Bil> biler = new ArrayList<>();
         String query = "SELECT * FROM biler";
@@ -90,7 +90,7 @@ public class BilRepository {
         }
         return biler;
     }
-
+    //Skrevet af Johannes
     public ArrayList<Bil> seIkkeUdlejedeBiler() {
         ArrayList<Bil> ikkeUdlejedeBiler = new ArrayList<>();
         ArrayList<Bil> alleBiler = seBiler();
@@ -102,7 +102,7 @@ public class BilRepository {
         return ikkeUdlejedeBiler;
     }
 
-    //Mikkel
+    //Skrevet af Mikkel
     public void opdaterBil(Bil bil) {
         String query = "UPDATE biler SET stelnummer=?, mærke=?, model=?, udstyrsniveau=?, stålpris=?, regafgift=?, co2udledning=?, udlejet=?, udlejningsdato=?, erDS=? WHERE vognnummer=?";
 
@@ -126,7 +126,7 @@ public class BilRepository {
         }
     }
 
-    //Mikkel
+    //Skrevet af Mikkel
     public void sletBil(int vognnummer) {
         String query = "DELETE FROM biler WHERE vognnummer=?";
 
@@ -139,7 +139,7 @@ public class BilRepository {
             System.out.println("Fejl i sletning af bil: " + e);
         }
     }
-
+    //Skrevet af Mikkel
     public Bil findBilMedVognnummer(int vognnummer) {
         Bil bil = null;
         String query = "SELECT stelnummer, mærke, model, udstyrsniveau, stålpris, regafgift, co2udledning, udlejet, udlejningsdato, erDS FROM biler WHERE vognnummer= " + vognnummer;
@@ -183,7 +183,7 @@ public class BilRepository {
     /*
     Metoden tjekker bilerne i databasen igennem, hvis den string der modtages som parameter matcher en bil, bliver denne bil tilføjet en seperat arrayliste som til sidst returneres.
     Man ender således med en arrayliste kun indeholdende den efterspurgte bilmodel.
-    - Johannes
+    - Skrevet af Johannes
      */
     public ArrayList<Bil> returnerBilEfterModel(String model) {
         ArrayList<Bil> biler = seBiler();
@@ -201,7 +201,7 @@ public class BilRepository {
     Overordnet forklaret er det en metode der finder antallet af en specifik bilmodel, samt antallet af udlejede og
     ikke-udlejede eksemplarer af modellen og sætter disse værdier i et objekt i en LinkedHashMap.
     Denne information vises i en tabel til forretningsudvikleren.
-    - Johannes
+    - Skrevet af Johannes og Niklas
     */
     public LinkedHashMap<Bil, Bildata> modelAntal() {
         LinkedHashMap<Bil, Bildata> modelAntal = new LinkedHashMap<>();
@@ -239,7 +239,7 @@ public class BilRepository {
     /*
     Denne metoder finder først det resterende antal måneder tilbage af lejeaftalen.
     Dernæst udregner den den resterende betaling for en konkret lejeaftale ved at gange den månedlige betaling med antallet af resterende måneder.
-    - Johannes
+    - Skrevet af Johannes
     */
     public double manglendeBetalingPerLejeaftale(double månedligBetaling, String slutLejeDato) {
         String dagsDatoString;
@@ -268,7 +268,7 @@ public class BilRepository {
     /*
     Denne metode anvender et dobbelt for-loop til at fjerne gengangere af samme model fra en arrayliste af biler der til sidst kun vil indeholde et eksemplar af hver model.
     Metoden finder anvendelse i den senere metode resterendeBetalingPerModel.
-    - Johannes
+    - Skrevet af Johannes
     */
     public ArrayList<Bil> enAfHverModel() {
         ArrayList<Bil> enAfHverModel = seBiler();
@@ -285,7 +285,7 @@ public class BilRepository {
 
     /*
     Udregner den resterende indkommende betaling for alle udlejede biler af en bestemt bilmodel.
-    - Johannes
+    - Skrevet af Johannes
     */
     public LinkedHashMap<String, Double> resterendeBetalingPerModel() {
         LinkedHashMap<String, Double> modelPris = new LinkedHashMap<>();
