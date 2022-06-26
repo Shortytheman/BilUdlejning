@@ -6,7 +6,6 @@ import com.example.biludlejning.model.Skadesrapport;
 import com.example.biludlejning.repository.BilRepository;
 import com.example.biludlejning.repository.LejeAftaleRepository;
 import com.example.biludlejning.repository.SkadesrapportRepository;
-import org.hamcrest.collection.IsMapContaining;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

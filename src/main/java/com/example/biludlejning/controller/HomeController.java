@@ -26,7 +26,6 @@ public class HomeController {
 
   @GetMapping("/sletbrugere")
   public String sletbrugere(HttpSession httpSession, Model model) {
-    model.addAttribute("brugerRolle", httpSession.getAttribute("brugerRolle"));
     model.addAttribute("brugere", brugerservice.seBrugere());
     return "sletbrugere";
   }
@@ -52,7 +51,6 @@ public class HomeController {
   //Skrevet af Frederik
   @GetMapping("/")
   public String visLogin(HttpSession httpSession, Model model) {
-    model.addAttribute("brugerRolle", httpSession.getAttribute("brugerRolle"));
     model.addAttribute("brugere", brugerservice.seBrugere());
     httpSession.getAttribute("fejlmeddelse");
     return "index";
@@ -71,14 +69,12 @@ public class HomeController {
     if (brugernavn.equalsIgnoreCase("admin") && kodeord.equalsIgnoreCase("admin")) {
       Bruger admin = new Bruger(brugernavn, "admin", kodeord);
       httpSession.setAttribute("brugerRolle", admin.getRolle());
-      httpSession.setAttribute("bruger", admin);
     } else {
       Bruger bruger = brugerservice.findBruger(brugernavn);
       //Tjekker om brugernavn og kodeord hører sammen, derefter smider den brugeren ind på indexsiden til den tilhørende rolle.
       //Session bliver også oprettet med brugeren som logger på.
       if (brugerservice.korrektLogin(brugernavn, kodeord, bruger)) {
         httpSession.setAttribute("brugerRolle", bruger.getRolle());
-        httpSession.setAttribute("bruger", bruger);
       }
       //Hvis brugeren ikke findes, bliver der redirected, og her kan vi tilgå en model-attribute "fejlmeddelse" der viser hvorfor.
       httpSession.setAttribute("fejlmeddelse", brugerservice.loginFejl(bruger, kodeord));

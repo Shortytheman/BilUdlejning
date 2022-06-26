@@ -34,9 +34,7 @@ public class BilOgSkadeController {
   @GetMapping("/fudvikler")
   public String fudvikler(Model model) {
     //Vi bruger Model til at sende informationer fra vores Controller til vores view.
-    model.addAttribute("biler", bilservice.seBiler());
     model.addAttribute("modelAntal", bilservice.modelAntal());
-    model.addAttribute("enAfHverModel", bilservice.enAfHverModel());
     model.addAttribute("resterendeBetalingPerModel",bilservice.resterendeBetalingPerModel());
     model.addAttribute("slutAftaleAdvarsel",bilservice.slutAftaleAdvarsel());
     return "fudvikler";

@@ -10,8 +10,6 @@ public class ConnectionManager {
 
   private static Connection connection;
 
-
-
   public static Connection connectToSql() {
     if (connection == null) {
       try {

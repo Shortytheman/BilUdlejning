@@ -96,7 +96,7 @@ public class BrugerRepository {
         Bruger bruger = null;
         try {
             String query = "SELECT * FROM brugere WHERE brugernavn = '" + brugerNavn + "'";
-            Statement statement = connection.createStatement();
+            Statement statement  = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()) {
                 String rolle = resultSet.getString("rolle");

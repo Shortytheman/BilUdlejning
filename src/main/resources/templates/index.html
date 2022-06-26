@@ -17,7 +17,7 @@
 </head>
 <body>
 <div>
-    <div th:switch="${brugerRolle}">
+    <div th:switch="${session.brugerRolle}">
         <div th:case="'admin'">
             <div>
                 <a th:href="@{'/logud'}">
