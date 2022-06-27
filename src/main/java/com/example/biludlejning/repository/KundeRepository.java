@@ -19,8 +19,6 @@ public class KundeRepository {
         connection = ConnectionManager.connectToSql();
     }
 
-    //CRUD!
-
     //Mikkel
     public void opretKunde(Kunde kunde) {
         String query = "INSERT INTO kunder(navn, email, adresse, postnummer, byen) VALUES (?, ?, ?, ?, ?)";
