@@ -21,7 +21,7 @@ public class LejeAftaleRepository {
     }
 
     public void tilføjLejeAftale(LejeAftale lejeAftale) {
-        String query = "INSERT INTO lejeaftaler(kunde_id, vognnummer, dato, forskudsbetaling, månedligbetaling, førstebetalingsdato, slutlejedato) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO lejeaftaler(kunde_id, vognnummer, dato, forskudsbetaling, månedligbetaling, førstebetalingsdato, slutlejedato) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, lejeAftale.getKundeId());
@@ -30,7 +30,7 @@ public class LejeAftaleRepository {
             preparedStatement.setDouble(4, lejeAftale.getForskudsBetaling());
             preparedStatement.setDouble(5, lejeAftale.getMånedligBetaling());
             preparedStatement.setString(6, lejeAftale.getFørsteBetalingsDato());
-            preparedStatement.setString(8, lejeAftale.getSlutLejeDato());
+            preparedStatement.setString(7, lejeAftale.getSlutLejeDato());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -53,7 +53,6 @@ public class LejeAftaleRepository {
                 double forskudsBetaling = resultSet.getDouble("forskudsbetaling");
                 double månedligBetaling = resultSet.getDouble("månedligbetaling");
                 String førsteBetalingsDato = resultSet.getString("førstebetalingsdato");
-                int antalBetalinger = resultSet.getInt("antalbetalinger");
                 String slutLejeDato = resultSet.getString("slutlejedato");
 
                 LejeAftale lejeAftale = new LejeAftale();
@@ -293,24 +292,28 @@ public class LejeAftaleRepository {
             int slutDatoDag = Integer.parseInt(seLejeAftaler().get(i).getSlutLejeDato().substring(0, 2));
             int slutDatoMåned = Integer.parseInt(seLejeAftaler().get(i).getSlutLejeDato().substring(2, 4));
             int slutDatoÅr = Integer.parseInt(seLejeAftaler().get(i).getSlutLejeDato().substring(4, 6));
-            if (slutDatoÅr == dagsDatoÅr) {
-                årMatcher = true;
-                if (slutDatoMåned == dagsDatoMåned) {
-                    månedMatcher = true;
+
+            if (dagsDatoÅr < slutDatoÅr || (dagsDatoÅr == slutDatoÅr && dagsDatoMåned < slutDatoMåned) ||
+                (dagsDatoÅr == slutDatoÅr && slutDatoMåned == dagsDatoMåned && dagsDatoDag < slutDatoDag)) {
+                if (slutDatoÅr == dagsDatoÅr) {
+                    årMatcher = true;
+                    if (slutDatoMåned == dagsDatoMåned) {
+                        månedMatcher = true;
+                    }
                 }
-            }
-            if (årMatcher && månedMatcher) {
-                if (slutDatoDag < 6) {
-                    udløberSnart.add(seLejeAftaler().get(i));
-                } else if (slutDatoDag - 6 < dagsDatoDag) {
+                if (årMatcher && månedMatcher) {
+                    if (slutDatoDag < 6) {
+                        udløberSnart.add(seLejeAftaler().get(i));
+                    } else if (slutDatoDag - 6 < dagsDatoDag) {
+                        udløberSnart.add(seLejeAftaler().get(i));
+                    }
+                }
+                if (slutDatoÅr - 1 == dagsDatoÅr && slutDatoDag < 6 && dagsDatoMåned == 12 && dagsDatoDag > 24) {
                     udløberSnart.add(seLejeAftaler().get(i));
                 }
-            }
-            if (slutDatoÅr - 1 == dagsDatoÅr && slutDatoDag < 6 && dagsDatoMåned == 12 && dagsDatoDag > 24) {
-                udløberSnart.add(seLejeAftaler().get(i));
-            }
-            if (årMatcher && !månedMatcher && dagsDatoMåned == slutDatoMåned - 1 && slutDatoDag < 6 && dagsDatoDag > 24) {
-                udløberSnart.add(seLejeAftaler().get(i));
+                if (årMatcher && !månedMatcher && dagsDatoMåned == slutDatoMåned - 1 && slutDatoDag < 6 && dagsDatoDag > 24) {
+                    udløberSnart.add(seLejeAftaler().get(i));
+                }
             }
         }
         return udløberSnart;
