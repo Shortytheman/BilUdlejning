@@ -19,36 +19,36 @@ import java.util.LinkedHashMap;
 
 @Controller
 public class BilOgSkadeController {
-  BilService bilservice;
+  BilService bilService;
   SkadeService skadeService;
 
   /*Dependency Injection - Controller er afhængig af både Bilservice og Skadeservice og ved DI, slipper controller for
   selv at skulle oprette objekter af disse klasser. */
 
-  public BilOgSkadeController(BilService bilservice, SkadeService skadeService){
+  public BilOgSkadeController(BilService bilService, SkadeService skadeService){
     this.skadeService = skadeService;
-    this.bilservice = bilservice;
+    this.bilService = bilService;
   }
 
   //Skrevet af Johannes
   @GetMapping("/fudvikler")
   public String fudvikler(Model model) {
     //Vi bruger Model til at sende informationer fra vores Controller til vores view.
-    model.addAttribute("modelAntal", bilservice.modelAntal());
-    model.addAttribute("resterendeBetalingPerModel",bilservice.resterendeBetalingPerModel());
-    model.addAttribute("slutAftaleAdvarsel",bilservice.slutAftaleAdvarsel());
+    model.addAttribute("modelAntal", bilService.modelAntal());
+    model.addAttribute("resterendeBetalingPerModel", bilService.resterendeBetalingPerModel());
+    model.addAttribute("slutAftaleAdvarsel", bilService.slutAftaleAdvarsel());
     return "fudvikler";
   }
   //Skrevet
   @GetMapping("/biloverblik")
   public String blikover(Model model) {
-    model.addAttribute("biler", bilservice.seBiler());
+    model.addAttribute("biler", bilService.seBiler());
     return "biloverblik";
   }
   //Skrevet af Johannes
   @GetMapping("/sletbil/{vognnummer}")
   public String sletBil(@PathVariable("vognnummer") int vognnummer){
-    bilservice.sletBil(vognnummer);
+    bilService.sletBil(vognnummer);
     return "redirect:/biloverblik";
   }
   @GetMapping("/seSkadesrapporter")
@@ -57,19 +57,19 @@ public class BilOgSkadeController {
     return "seSkadesrapporter";
   }
 
-  @GetMapping("/lavSkadesrapport")
-  public String lavSkadesrapport(){
-    return "lavSkadesrapport";
+  @GetMapping("/opretSkadesrapport")
+  public String opretSkadesrapport(){
+    return "opretSkadesrapport";
   }
 
-  @PostMapping("/lavSkadesrapport")
-  public String lavSkadesrapporten(@RequestParam(name = "medarbejdernavn") String medarbejdernavn,
-                                   @RequestParam(name = "medarbejderemail") String medarbejderemail,
-                                   @RequestParam(name = "vognnummer") int vognnummer,
-                                   @RequestParam(required = false, name = "skade1") String skade1, @RequestParam(required = false, name = "pris1") Double pris1,
-                                   @RequestParam(required = false, name = "skade2") String skade2, @RequestParam(required = false, name = "pris2") Double pris2,
-                                   @RequestParam(required = false, name = "skade3") String skade3, @RequestParam(required = false, name = "pris3") Double pris3,
-                                   @RequestParam(name = "kundeid") int kundeid, HttpSession httpSession){
+  @PostMapping("/opretSkadesrapport")
+  public String opretSkadesrapporten(@RequestParam(name = "medarbejdernavn") String medarbejdernavn,
+                                     @RequestParam(name = "medarbejderemail") String medarbejderemail,
+                                     @RequestParam(name = "vognnummer") int vognnummer,
+                                     @RequestParam(required = false, name = "skade1") String skade1, @RequestParam(required = false, name = "pris1") Double pris1,
+                                     @RequestParam(required = false, name = "skade2") String skade2, @RequestParam(required = false, name = "pris2") Double pris2,
+                                     @RequestParam(required = false, name = "skade3") String skade3, @RequestParam(required = false, name = "pris3") Double pris3,
+                                     @RequestParam(name = "kundeid") int kundeid, HttpSession httpSession){
     Skadesrapport skadesrapport = new Skadesrapport();
     skadesrapport.setMedarbejderNavn(medarbejdernavn);
     skadesrapport.setMedarbejderEmail(medarbejderemail);
@@ -81,7 +81,7 @@ public class BilOgSkadeController {
     skader.put(skade3,pris3);
     skadesrapport.setSkader(skader);
     skadesrapport.setKundeId(kundeid);
-    skadeService.lavSkadesrapport(skadesrapport);
+    skadeService.opretSkadesrapport(skadesrapport);
     //Denne sender en meddelse til viewet om hvilket skadesrapport ID der lige er blevet oprettet.
     httpSession.setAttribute("meddelse", "Skadesrapport oprettet med skadesrapportID: " +
         skadeService.findSkadesrapportMedVognnummer(vognnummer).getSkadesrapportId());
@@ -98,7 +98,7 @@ public class BilOgSkadeController {
   }
 
   @GetMapping("/tilføjbil")
-  public String tilføjBil(){
+  public String opretBil(){
     return "tilføjbil";
   }
 
@@ -113,7 +113,7 @@ public class BilOgSkadeController {
     bil.setVognnummer(vognnummer1);
     bil.setUdstyrsNiveau("Active pack");
     bil.setCo2Udledning(122);
-    bilservice.tilføjBil(bil);
+    bilService.tilføjBil(bil);
     return "redirect:/";
   }
 
@@ -126,7 +126,7 @@ public class BilOgSkadeController {
     bil.setVognnummer(vognnummer2);
     bil.setUdstyrsNiveau("Spacetourer cool");
     bil.setCo2Udledning(144);
-    bilservice.tilføjBil(bil);
+    bilService.tilføjBil(bil);
     return "redirect:/";
   }
 
@@ -139,7 +139,7 @@ public class BilOgSkadeController {
     bil.setVognnummer(vognnummer3);
     bil.setUdstyrsNiveau("Allure Pack AUT.");
     bil.setCo2Udledning(136);
-    bilservice.tilføjBil(bil);
+    bilService.tilføjBil(bil);
     return "redirect:/";
   }
 
@@ -152,7 +152,7 @@ public class BilOgSkadeController {
     bil.setVognnummer(vognnummer4);
     bil.setUdstyrsNiveau("Selection Sport");
     bil.setCo2Udledning(127);
-    bilservice.tilføjBil(bil);
+    bilService.tilføjBil(bil);
     return "redirect:/";
   }
 
@@ -165,7 +165,7 @@ public class BilOgSkadeController {
     bil.setVognnummer(vognnummer5);
     bil.setUdstyrsNiveau("Allure Pack EAT8.");
     bil.setCo2Udledning(125);
-    bilservice.tilføjBil(bil);
+    bilService.tilføjBil(bil);
     return "redirect:/";
   }
 
@@ -178,7 +178,7 @@ public class BilOgSkadeController {
     bil.setVognnummer(vognnummer6);
     bil.setUdstyrsNiveau("Sport ltd.");
     bil.setCo2Udledning(120);
-    bilservice.tilføjBil(bil);
+    bilService.tilføjBil(bil);
     return "redirect:/";
   }
 
@@ -191,7 +191,7 @@ public class BilOgSkadeController {
     bil.setVognnummer(vognnummer7);
     bil.setUdstyrsNiveau("Sport");
     bil.setCo2Udledning(147);
-    bilservice.tilføjBil(bil);
+    bilService.tilføjBil(bil);
     return "redirect:/";
   }
 
@@ -204,7 +204,7 @@ public class BilOgSkadeController {
     bil.setVognnummer(vognnummer8);
     bil.setUdstyrsNiveau("Allure Pack AUT");
     bil.setCo2Udledning(135);
-    bilservice.tilføjBil(bil);
+    bilService.tilføjBil(bil);
     return "redirect:/";
   }
 
@@ -218,7 +218,7 @@ public class BilOgSkadeController {
     bil.setUdstyrsNiveau("Performance Line Pack");
     bil.setCo2Udledning(138);
     bil.setErDS(true);
-    bilservice.tilføjBil(bil);
+    bilService.tilføjBil(bil);
     return "redirect:/";
   }
   //</editor-fold>

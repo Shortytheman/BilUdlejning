@@ -27,11 +27,11 @@ public class KundeOgLejeaftaleService {
 
   //Lejeaftale metoder
 
-  public String lavLejeKontrakt(LejeAftale lejeAftale) {
-    return lejeAftaleRepository.lavLejeKontrakt(lejeAftale);
+  public String opretLejekontrakt(LejeAftale lejeAftale) {
+    return lejeAftaleRepository.opretLejekontrakt(lejeAftale);
   }
 
-  public void lavLejeaftale(LejeAftale lejeAftale){
+  public void opretLejeaftale(LejeAftale lejeAftale){
     lejeAftaleRepository.tilføjLejeAftale(lejeAftale);
   }
 

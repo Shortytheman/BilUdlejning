@@ -182,7 +182,7 @@ public class LejeAftaleRepository {
 
     //Metoden opretter en String og konkatenerer den så den ligner en reel lejekontrakt som kunden får når de har
     //godkendt en leasing aftale.
-    public String lavLejeKontrakt(LejeAftale lejeAftale) {
+    public String opretLejekontrakt(LejeAftale lejeAftale) {
         String query = "SELECT navn FROM kunder WHERE kunde_id = " + lejeAftale.getKundeId();
         String kundenavn = "";
 

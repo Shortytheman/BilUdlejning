@@ -31,7 +31,7 @@ public class SkadeService {
     return skadesrapportRepository.findSkadesrapportMedVognnummer(vognnummer);
   }
 
-  public void lavSkadesrapport(Skadesrapport skadesrapport){
+  public void opretSkadesrapport(Skadesrapport skadesrapport){
     skadesrapportRepository.tilføjSkadesrapport(skadesrapport);
   }
 
