@@ -19,13 +19,13 @@ public class KundeOgLejeaftaleService {
   LejeAftaleRepository lejeAftaleRepository;
   BilRepository bilRepository;
 
-
-  //Lejeaftale metoder
   public KundeOgLejeaftaleService(KundeRepository kundeRepository, LejeAftaleRepository lejeAftaleRepository, BilRepository bilRepository) {
     this.kundeRepository = kundeRepository;
     this.lejeAftaleRepository = lejeAftaleRepository;
     this.bilRepository = bilRepository;
   }
+
+  //Lejeaftale metoder
 
   public String lavLejeKontrakt(LejeAftale lejeAftale) {
     return lejeAftaleRepository.lavLejeKontrakt(lejeAftale);
@@ -33,10 +33,6 @@ public class KundeOgLejeaftaleService {
 
   public void lavLejeaftale(LejeAftale lejeAftale){
     lejeAftaleRepository.tilføjLejeAftale(lejeAftale);
-  }
-
-  public LejeAftale lejeAftaleEfterKundeId(int kundeId){
-    return lejeAftaleRepository.findlejeAftaleEfterKundeId(kundeId);
   }
 
   //Kunde metoder

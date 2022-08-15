@@ -1,15 +1,9 @@
 package com.example.biludlejning;
-import com.example.biludlejning.model.Bil;
-import com.example.biludlejning.model.Bildata;
 import com.example.biludlejning.model.LejeAftale;
-import com.example.biludlejning.model.Skadesrapport;
-import com.example.biludlejning.repository.BilRepository;
 import com.example.biludlejning.repository.LejeAftaleRepository;
 import com.example.biludlejning.repository.SkadesrapportRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.LinkedHashMap;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import java.time.LocalDateTime;

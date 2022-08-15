@@ -148,7 +148,7 @@ public class LejeAftaleRepository {
     public LejeAftale findlejeAftaleEfterKundeId(int kundeId) {
         LejeAftale lejeAftale = null;
         String query = "SELECT vognnummer, dato, forskudsbetaling, månedligbetaling, førstebetalingsdato," +
-                " antalbetalinger, slutlejedato FROM lejeaftaler WHERE kunde_id=?";
+                " slutlejedato FROM lejeaftaler WHERE kunde_id=?";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -160,7 +160,6 @@ public class LejeAftaleRepository {
                 double forskudsBetaling = resultSet.getDouble("forskudsbetaling");
                 double månedligBetaling = resultSet.getDouble("månedligbetaling");
                 String førsteBetalingsDato = resultSet.getString("førstebetalingsdato");
-                int antalBetalinger = resultSet.getInt("antalbetalinger");
                 String slutlejedato = resultSet.getString("slutlejedato");
 
                 lejeAftale = new LejeAftale();
