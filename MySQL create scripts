@@ -1,0 +1,88 @@
+MySQL Create statements
+
+
+Create statement for biler:
+
+CREATE TABLE `biler` (
+  `vognnummer` int NOT NULL,
+  `stelnummer` int NOT NULL,
+  `mærke` varchar(10) NOT NULL,
+  `model` varchar(100) NOT NULL,
+  `udstyrsniveau` varchar(100) DEFAULT NULL,
+  `stålpris` int DEFAULT NULL,
+  `regAfgift` int DEFAULT NULL,
+  `co2Udledning` int DEFAULT NULL,
+  `udlejet` tinyint DEFAULT NULL,
+  `udlejningsdato` varchar(45) DEFAULT NULL,
+  `erDS` tinyint DEFAULT NULL,
+  PRIMARY KEY (`vognnummer`),
+  UNIQUE KEY `vognnummer_UNIQUE` (`vognnummer`),
+  UNIQUE KEY `stelnummer_UNIQUE` (`stelnummer`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+Create statement for brugere:
+
+CREATE TABLE `brugere` (
+  `brugernavn` varchar(100) NOT NULL,
+  `kodeord` varchar(100) NOT NULL,
+  `rolle` varchar(45) NOT NULL,
+  PRIMARY KEY (`brugernavn`),
+  UNIQUE KEY `brugernavn_UNIQUE` (`brugernavn`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+Create statement for kunder:
+
+CREATE TABLE `kunder` (
+  `kunde_id` int NOT NULL AUTO_INCREMENT,
+  `navn` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `adresse` varchar(100) DEFAULT NULL,
+  `postnummer` int DEFAULT NULL,
+  `byen` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`kunde_id`),
+  UNIQUE KEY `kunde_id_UNIQUE` (`kunde_id`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+Create statement for lejeaftaler:
+
+CREATE TABLE `lejeaftaler` (
+  `lejeaftale_id` int NOT NULL AUTO_INCREMENT,
+  `kunde_id` int NOT NULL,
+  `vognnummer` int NOT NULL,
+  `dato` varchar(45) NOT NULL,
+  `forskudsbetaling` double NOT NULL,
+  `månedligbetaling` double NOT NULL,
+  `førstebetalingsdato` varchar(45) NOT NULL,
+  `slutlejedato` varchar(45) NOT NULL,
+  PRIMARY KEY (`lejeaftale_id`),
+  UNIQUE KEY `lejeaftale_id_UNIQUE` (`lejeaftale_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+Create statement for skader:
+
+CREATE TABLE `skader` (
+  `skade_id` int NOT NULL AUTO_INCREMENT,
+  `skadebeskrivelse` varchar(250) DEFAULT NULL,
+  `pris` double DEFAULT NULL,
+  `skadesrapport_id` int DEFAULT NULL,
+  PRIMARY KEY (`skade_id`),
+  UNIQUE KEY `skade_id_UNIQUE` (`skade_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+Create statement for skadesrapporter:
+
+CREATE TABLE `skadesrapporter` (
+  `skadesrapport_id` int NOT NULL AUTO_INCREMENT,
+  `medarbejdernavn` varchar(90) NOT NULL,
+  `medarbejderemail` varchar(100) NOT NULL,
+  `datoforudfyldelse` varchar(10) NOT NULL,
+  `vognnummer` int NOT NULL,
+  `kunde_id` int NOT NULL,
+  PRIMARY KEY (`skadesrapport_id`),
+  UNIQUE KEY `skadesrapport_id_UNIQUE` (`skadesrapport_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
