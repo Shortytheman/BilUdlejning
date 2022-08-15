@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
-//Hovedsageligt skrevet af Niklas
+//Hovedsageligt skrevet af Mikkel
 
 @Controller
 public class  KundeOgLejeaftaleController {
