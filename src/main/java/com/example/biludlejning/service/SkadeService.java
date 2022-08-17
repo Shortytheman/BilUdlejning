@@ -4,8 +4,6 @@ import com.example.biludlejning.model.Skadesrapport;
 import com.example.biludlejning.repository.SkadesrapportRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 //Skrevet af alle i gruppen
@@ -32,7 +30,7 @@ public class SkadeService {
   }
 
   public void opretSkadesrapport(Skadesrapport skadesrapport){
-    skadesrapportRepository.tilføjSkadesrapport(skadesrapport);
+    skadesrapportRepository.opretSkadesrapport(skadesrapport);
   }
 
   public double findTotalSkadePris(int skadesrapportId){

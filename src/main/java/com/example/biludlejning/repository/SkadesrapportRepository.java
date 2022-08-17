@@ -27,7 +27,7 @@ public class SkadesrapportRepository {
     connection = ConnectionManager.connectToSql();
   }
 
-  public void tilføjSkadesrapport(Skadesrapport skadesrapport) {
+  public void opretSkadesrapport(Skadesrapport skadesrapport) {
 
     DateTimeFormatter datoenIdag = DateTimeFormatter.ofPattern("ddMMyy");
     LocalDateTime nu = LocalDateTime.now();
@@ -47,10 +47,12 @@ public class SkadesrapportRepository {
       System.out.println("Fejl i oprettelse af skadesrapport: " + e);
     }
 
-    Set<String> Keys = skadesrapport.getSkader().keySet();
-    for (String key : Keys){
-      if (skadesrapport.getSkader().get(key) != null) {
-        tilføjSkade(new Skade(key, skadesrapport.getSkader().get(key), findSkadesrapportMedVognnummer(skadesrapport.getVognnummer()).getSkadesrapportId()));
+    if (skadesrapport.getSkader() != null) {
+      Set<String> Keys = skadesrapport.getSkader().keySet();
+      for (String key : Keys) {
+        if (skadesrapport.getSkader().get(key) != null) {
+          tilføjSkade(new Skade(key, skadesrapport.getSkader().get(key), findSkadesrapportMedVognnummer(skadesrapport.getVognnummer()).getSkadesrapportId()));
+        }
       }
     }
 

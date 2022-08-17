@@ -32,7 +32,7 @@ public class KundeOgLejeaftaleService {
   }
 
   public void opretLejeaftale(LejeAftale lejeAftale){
-    lejeAftaleRepository.tilføjLejeAftale(lejeAftale);
+    lejeAftaleRepository.opretLejeaftale(lejeAftale);
   }
 
   //Kunde metoder

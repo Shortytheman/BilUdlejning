@@ -45,6 +45,7 @@ public class BilService {
   }
   public ArrayList<LejeAftale> slutAftaleAdvarsel(){
     return lejeAftaleRepository.slutAftaleAdvarsel();
+
   }
   public Bil findBilMedVognnummer(int vognnummer) {
     return bilRepository.findBilMedVognnummer(vognnummer);

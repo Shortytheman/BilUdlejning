@@ -20,7 +20,7 @@ public class LejeAftaleRepository {
         connection = ConnectionManager.connectToSql();
     }
 
-    public void tilføjLejeAftale(LejeAftale lejeAftale) {
+    public void opretLejeaftale(LejeAftale lejeAftale) {
         String query = "INSERT INTO lejeaftaler(kunde_id, vognnummer, dato, forskudsbetaling, månedligbetaling, førstebetalingsdato, slutlejedato) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -102,6 +102,19 @@ public class LejeAftaleRepository {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, lejeaftaleID);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Fejl i sletning af lejeaftaler: " + e);
+        }
+    }
+
+    public void sletLejeAftaleEfterKundeId(int kundeId) {
+        String query = "DELETE FROM lejeaftaler WHERE kunde_id=?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, kundeId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -244,7 +257,6 @@ public class LejeAftaleRepository {
         int dagsDatoÅr = Integer.parseInt(dagsDatoString.substring(4, 6));
         int slutDatoMåned = Integer.parseInt(lejeAftale.getSlutLejeDato().substring(2, 4));
         int slutDatoÅr = Integer.parseInt(lejeAftale.getSlutLejeDato().substring(4, 6));
-
         int månedCounter;
         int årCounter;
         double resterendeBetaling = 0;
@@ -257,7 +269,6 @@ public class LejeAftaleRepository {
             månedCounter += slutDatoMåned - dagsDatoMåned;
             resterendeBetaling = lejeAftale.getMånedligBetaling() * månedCounter;
         }
-
         String lejeKontrakt;
         lejeAftale.findFørsteBetalingsdato();
 
@@ -285,6 +296,7 @@ public class LejeAftaleRepository {
         int dagsDatoDag = Integer.parseInt(dagsDatoString.substring(0, 2));
         int dagsDatoMåned = Integer.parseInt(dagsDatoString.substring(2, 4));
         int dagsDatoÅr = Integer.parseInt(dagsDatoString.substring(4, 6));
+
         for (int i = 0; i < seLejeAftaler().size(); i++) {
             boolean årMatcher = false;
             boolean månedMatcher = false;
@@ -312,6 +324,18 @@ public class LejeAftaleRepository {
                 }
                 if (årMatcher && !månedMatcher && dagsDatoMåned == slutDatoMåned - 1 && slutDatoDag < 6 && dagsDatoDag > 24) {
                     udløberSnart.add(seLejeAftaler().get(i));
+                }
+            }
+
+            if (slutDatoÅr == dagsDatoÅr && slutDatoMåned == dagsDatoMåned && dagsDatoDag == slutDatoDag){
+                udløberSnart.remove(seLejeAftaler().get(i));
+                try {
+                    String query = "UPDATE biler SET udlejet=0 WHERE vognnummer = ?";
+                    PreparedStatement preparedStatement = connection.prepareStatement(query);
+                    preparedStatement.setInt(1, seLejeAftaler().get(i).getVognnummer());
+                    preparedStatement.executeUpdate();
+                } catch (SQLException e) {
+                    System.out.println("Fejl når vi sætter biler til ikke længere udlejede" + e);
                 }
             }
         }
