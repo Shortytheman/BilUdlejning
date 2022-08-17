@@ -41,7 +41,7 @@ public class BilOgSkadeController {
   }
   //Skrevet
   @GetMapping("/biloverblik")
-  public String blikover(Model model) {
+  public String overblik(Model model) {
     model.addAttribute("biler", bilService.seBiler());
     return "biloverblik";
   }
