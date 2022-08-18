@@ -31,12 +31,6 @@ public class BilService {
   public LinkedHashMap<Bil, Bildata> modelAntal() {
     return bilRepository.modelAntal();
   }
-  public ArrayList<Integer> antalBilAfModel() {
-    return new ArrayList<>();
-  }
-  public ArrayList<Bil> enAfHverModel() {
-    return bilRepository.enAfHverModel();
-  }
   public LinkedHashMap<String, Double> resterendeBetalingPerModel() {
     return bilRepository.resterendeBetalingPerModel();
   }
@@ -46,9 +40,6 @@ public class BilService {
   public ArrayList<LejeAftale> slutAftaleAdvarsel(){
     return lejeAftaleRepository.slutAftaleAdvarsel();
 
-  }
-  public Bil findBilMedVognnummer(int vognnummer) {
-    return bilRepository.findBilMedVognnummer(vognnummer);
   }
   public void sletBil(int vognnummer) {
     bilRepository.sletBil(vognnummer);

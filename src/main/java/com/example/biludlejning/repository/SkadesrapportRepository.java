@@ -101,29 +101,6 @@ public class SkadesrapportRepository {
     return skadesrapporter;
   }
 
-  public void sletSkadesrapport(int skadesrapportId) {
-    String query = "DELETE FROM skadesrapporter WHERE skadesrapport_id=?";
-    try {
-      PreparedStatement preparedStatement = connection.prepareStatement(query);
-      preparedStatement.setInt(1, skadesrapportId);
-      preparedStatement.executeUpdate();
-    } catch (SQLException e) {
-      e.printStackTrace();
-      System.out.println("Fejl i sletning af skadesrapport: " + e);
-    }
-
-    String query1 = "DELETE FROM skader WHERE skadesrapport_id=?";
-    try {
-      PreparedStatement preparedStatement = connection.prepareStatement(query1);
-      preparedStatement.setInt(1, skadesrapportId);
-      preparedStatement.executeUpdate();
-    } catch (SQLException e) {
-      e.printStackTrace();
-      System.out.println("Fejl i sletning af skader: " + e);
-    }
-
-  }
-
   public Skadesrapport findSkadesrapport(int skadesrapportId) {
     Skadesrapport skadesrapport = new Skadesrapport();
     String query = "SELECT medarbejdernavn, medarbejderemail, datoforudfyldelse, vognnummer, kunde_id FROM skadesrapporter WHERE skadesrapport_id=?";

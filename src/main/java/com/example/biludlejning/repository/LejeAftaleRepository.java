@@ -74,41 +74,6 @@ public class LejeAftaleRepository {
         return lejeAftaler;
     }
 
-    public void opdaterLejeAftale(LejeAftale lejeAftale) {
-        String query = "UPDATE lejeaftaler SET kundeid=?, vognnummer=?, dato=?, forskudsbetaling=?, månedligbetaling=?, førstegangsbetaling=?, antalbetalinger=?, slutlejedato=? WHERE lejeaftaleid=?";
-
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, lejeAftale.getKundeId());
-            preparedStatement.setInt(2, lejeAftale.getVognnummer());
-            preparedStatement.setString(3, lejeAftale.getDato());
-            preparedStatement.setDouble(4, lejeAftale.getForskudsBetaling());
-            preparedStatement.setDouble(5, lejeAftale.getMånedligBetaling());
-            preparedStatement.setString(6, lejeAftale.getFørsteBetalingsDato());
-            //preparedStatement.setInt(7, lejeAftale.getAntalBetalinger());
-            preparedStatement.setString(8, lejeAftale.getSlutLejeDato());
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Fejl i opdatering af lejeaftale: " + e);
-        }
-
-    }
-
-    public void sletLejeAftale(int lejeaftaleID) {
-        String query = "DELETE FROM lejeaftaler WHERE lejeaftaleID=?";
-
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, lejeaftaleID);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Fejl i sletning af lejeaftaler: " + e);
-        }
-    }
-
     public void sletLejeAftaleEfterKundeId(int kundeId) {
         String query = "DELETE FROM lejeaftaler WHERE kunde_id=?";
 
@@ -120,42 +85,6 @@ public class LejeAftaleRepository {
             e.printStackTrace();
             System.out.println("Fejl i sletning af lejeaftaler: " + e);
         }
-    }
-
-    public LejeAftale findLejeaftale(int lejeaftaleID) {
-        LejeAftale lejeAftale = new LejeAftale();
-        String query = "SELECT kundeid, vognnummer, dato, forskudsbetaling, månedligbetaling, førstebetalingsdato," +
-                " antalbetalinger, slutlejedato FROM lejeaftaler WHERE lejeaftaleid=?";
-
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, lejeaftaleID);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                int kundeID = resultSet.getInt("kundeid");
-                int vognnummer = resultSet.getInt("vognnummer");
-                String dato = resultSet.getString("dato");
-                double forskudsBetaling = resultSet.getDouble("forskudsbetaling");
-                double månedligBetaling = resultSet.getDouble("månedligbetaling");
-                String førsteBetalingsDato = resultSet.getString("førstebetalingsdato");
-                int antalBetalinger = resultSet.getInt("antalbetalinger");
-                String slutlejedato = resultSet.getString("slutlejedato");
-
-                lejeAftale = new LejeAftale();
-                lejeAftale.setKunde(kundeID);
-                lejeAftale.setVognnummer(vognnummer);
-                lejeAftale.setDato(dato);
-                lejeAftale.setForskudsBetaling(forskudsBetaling);
-                lejeAftale.setMånedligBetaling(månedligBetaling);
-                lejeAftale.setFørsteBetalingsDato(førsteBetalingsDato);
-                //lejeAftale.setAntalBetalinger(antalBetalinger);
-                lejeAftale.setSlutLejeDato(slutlejedato);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Forkert lejeaftaleid. Prøv igen. " + e);
-        }
-        return lejeAftale;
     }
 
     public LejeAftale findlejeAftaleEfterKundeId(int kundeId) {

@@ -19,23 +19,12 @@ public class Skade {
     return skadesrapport_id;
   }
 
-  public void setSkadesrapport_id(int skadesrapport_id) {
-    this.skadesrapport_id = skadesrapport_id;
-  }
-
   public String getSkadeBeskrivelse() {
     return skadeBeskrivelse;
-  }
-
-  public void setSkadeBeskrivelse(String skadeBeskrivelse) {
-    this.skadeBeskrivelse = skadeBeskrivelse;
   }
 
   public double getPris() {
     return pris;
   }
 
-  public void setPris(int pris) {
-    this.pris = pris;
-  }
 }

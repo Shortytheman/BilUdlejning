@@ -61,23 +61,6 @@ public class BrugerRepository {
     }
 
     //Mikkel
-    public void opdaterBruger(Bruger bruger) {
-        String query = "UPDATE brugere SET brugernavn=?, rolle=?, kodeord=? WHERE brugernavn=?";
-
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, bruger.getBrugernavn());
-            preparedStatement.setString(2, bruger.getRolle());
-            preparedStatement.setString(3, bruger.getKodeord());
-            preparedStatement.setString(4, bruger.getBrugernavn());
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Fejl i opdatering af bruger: " + e);
-        }
-    }
-
-    //Mikkel
     public void sletBruger(String brugernavn) {
         String query = "DELETE FROM brugere WHERE brugernavn=?";
 

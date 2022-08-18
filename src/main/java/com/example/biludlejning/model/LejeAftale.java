@@ -121,28 +121,4 @@ public class LejeAftale {
     this.førsteBetalingsDato = førsteBetalingsDato;
   }
 
-  /*public int getAntalBetalinger() {
-    return antalBetalinger;
-  }*/
-
-  /*public void setAntalBetalinger(int antalBetalinger) {
-    this.antalBetalinger = antalBetalinger;
-  }*/
-
-  public double getTotalAfbetaling() {
-    return totalAfbetaling;
-  }
-
-  public void setTotalAfbetaling(double totalAfbetaling) {
-    this.totalAfbetaling = totalAfbetaling;
-  }
-
-  public double getBetalesIalt() {
-    return betalesIalt;
-  }
-
-  public void setBetalesIalt(double betalesIalt) {
-    this.betalesIalt = betalesIalt;
-  }
-
 }

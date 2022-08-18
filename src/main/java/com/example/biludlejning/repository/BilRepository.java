@@ -103,30 +103,6 @@ public class BilRepository {
     }
 
     //Skrevet af Mikkel
-    public void opdaterBil(Bil bil) {
-        String query = "UPDATE biler SET stelnummer=?, mærke=?, model=?, udstyrsniveau=?, stålpris=?, regafgift=?, co2udledning=?, udlejet=?, udlejningsdato=?, erDS=? WHERE vognnummer=?";
-
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, bil.getStelnummer());
-            preparedStatement.setString(2, bil.getMaerke());
-            preparedStatement.setString(3, bil.getModel());
-            preparedStatement.setString(4, bil.getUdstyrsNiveau());
-            preparedStatement.setInt(5, bil.getStålpris());
-            preparedStatement.setInt(6, bil.getRegAfgift());
-            preparedStatement.setInt(7, bil.getCo2Udledning());
-            preparedStatement.setBoolean(8, bil.isUdlejet());
-            preparedStatement.setString(9, bil.getUdlejningsdato());
-            preparedStatement.setBoolean(10, bil.isErDS());
-            preparedStatement.setInt(11, bil.getVognnummer());
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Fejl i opdatering af bil: " + e);
-        }
-    }
-
-    //Skrevet af Mikkel
     public void sletBil(int vognnummer) {
         String query = "DELETE FROM biler WHERE vognnummer=?";
 
@@ -140,61 +116,6 @@ public class BilRepository {
         }
     }
     //Skrevet af Mikkel
-    public Bil findBilMedVognnummer(int vognnummer) {
-        Bil bil = null;
-        String query = "SELECT stelnummer, mærke, model, udstyrsniveau, stålpris, regafgift, co2udledning, udlejet, udlejningsdato, erDS FROM biler WHERE vognnummer= " + vognnummer;
-
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                int stelnummer = resultSet.getInt("stelnummer");
-                String mærke = resultSet.getString("mærke");
-                String model = resultSet.getString("model");
-                String udstyrsNiveau = resultSet.getString("udstyrsNiveau");
-                int stålpris = resultSet.getInt("stålpris");
-                int regAfgift = resultSet.getInt("regAfgift");
-                int co2Udledning = resultSet.getInt("co2Udlejning");
-                boolean udlejet = resultSet.getBoolean("udlejet");
-                String udlejningsdato = resultSet.getString("udlejningsdato");
-                boolean erDS = resultSet.getBoolean("erDS");
-
-                bil = new Bil();
-                bil.setVognnummer(vognnummer);
-                bil.setStelnummer(stelnummer);
-                bil.setMærke(mærke);
-                bil.setModel(model);
-                bil.setUdstyrsNiveau(udstyrsNiveau);
-                bil.setStålpris(stålpris);
-                bil.setRegAfgift(regAfgift);
-                bil.setCo2Udledning(co2Udledning);
-                bil.setUdlejet(udlejet);
-                bil.setUdlejningsdato(udlejningsdato);
-                bil.setErDS(erDS);
-
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Bil kunne ikke findes. Prøv igen: " + e);
-        }
-        return bil;
-    }
-
-    /*
-    Metoden tjekker bilerne i databasen igennem, hvis den string der modtages som parameter matcher en bil, bliver denne bil tilføjet en seperat arrayliste som til sidst returneres.
-    Man ender således med en arrayliste kun indeholdende den efterspurgte bilmodel.
-    - Skrevet af Johannes
-     */
-    public ArrayList<Bil> returnerBilEfterModel(String model) {
-        ArrayList<Bil> biler = seBiler();
-        ArrayList<Bil> bilerEfterModel = new ArrayList<>();
-        for (int i = 0; i < biler.size(); i++) {
-            if (biler.get(i).getModel().equalsIgnoreCase(model)) {
-                bilerEfterModel.add(biler.get(i));
-            }
-        }
-        return bilerEfterModel;
-    }
 
     /*
     Metoden er specifikt beskrevet i rapporten under afsnittet Uddrag af koden -> Forklaring af metoden modelAntal.

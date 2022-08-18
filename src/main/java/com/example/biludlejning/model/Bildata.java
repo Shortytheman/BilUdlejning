@@ -22,13 +22,6 @@ public class Bildata {
     this.antalUdlejede = antalUdlejede;
     this.antalIkkeUdlejede = antalIkkeUdlejede;
   }
-  public double getResterendeBetaling() {
-    return resterendeBetaling;
-  }
-
-  public void setResterendeBetaling(double resterendeBetaling) {
-    this.resterendeBetaling = resterendeBetaling;
-  }
 
   public int getAntalUdlejede() {
     return antalUdlejede;
